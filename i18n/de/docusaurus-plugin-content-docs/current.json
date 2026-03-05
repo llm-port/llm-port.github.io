@@ -1,0 +1,22 @@
+{
+  "version.label": {
+    "message": "Aktuell",
+    "description": "The label for version current"
+  },
+  "sidebar.docsSidebar.category.Architecture": {
+    "message": "Architektur",
+    "description": "The label for category 'Architecture' in sidebar"
+  },
+  "sidebar.docsSidebar.category.Features": {
+    "message": "Funktionen",
+    "description": "The label for category 'Features' in sidebar"
+  },
+  "sidebar.docsSidebar.category.Platform": {
+    "message": "Plattform",
+    "description": "The label for category 'Platform' in sidebar"
+  },
+  "sidebar.docsSidebar.category.Community": {
+    "message": "Community",
+    "description": "The label for category 'Community' in sidebar"
+  }
+}

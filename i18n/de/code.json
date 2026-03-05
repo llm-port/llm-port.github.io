@@ -1,0 +1,185 @@
+{
+  "feature.gateway.title": {
+    "message": "Gateway & Routing"
+  },
+  "feature.gateway.description": {
+    "message": "OpenAI-kompatibler API-Endpunkt (/v1/*), der Anfragen an lokale Runtimes (vLLM, llama.cpp, Ollama, TGI) und Remote-Anbieter (OpenAI, Azure, …) weiterleitet. Alias-basierte Modellauflösung, SSE-Streaming mit TTFT-Extraktion und automatische Wiederholung."
+  },
+  "feature.security.title": {
+    "message": "Sicherheit & PII"
+  },
+  "feature.security.description": {
+    "message": "Vollständiges RBAC mit JWT-Authentifizierung, OAuth / SSO / OIDC, Redis-Rate-Limiting, Concurrency-Leasing und Fernet-verschlüsselten DB-Geheimnissen. Presidio-basierte PII-Erkennung mit mandantenspezifischen Richtlinien, konfigurierbaren Entitätstypen und Fail-Safe-Modi."
+  },
+  "feature.observability.title": {
+    "message": "Observability"
+  },
+  "feature.observability.description": {
+    "message": "Langfuse-Tracing mit Datenschutzmodi, Loki + Alloy zentralisiertes Logging, OpenTelemetry + Jaeger verteiltes Tracing und ein Dashboard mit eingebetteten Grafana-Panels. Jede Gateway-Anfrage und Admin-Aktion wird im Audit-Log erfasst."
+  },
+  "feature.rag.title": {
+    "message": "RAG-Pipeline"
+  },
+  "feature.rag.description": {
+    "message": "Mandantenfähiges Retrieval mit Vektor-, Stichwort- und Hybridsuche. Virtueller Container-Baum mit Entwurf-/Veröffentlichungs-Workflows, vorsignierte MinIO-Uploads, Collector-Plugins und asynchrone Verarbeitung über Taskiq + RabbitMQ."
+  },
+  "feature.ops.title": {
+    "message": "Ops-Konsole"
+  },
+  "feature.ops.description": {
+    "message": "Vollständiges Container-Lifecycle-Management, Image-Pulls mit SSE-Fortschritt, Compose-Stack-Deploy/Rollback mit Revisionen und Audit-Trail. Multi-Vendor-GPU-Erkennung (NVIDIA, AMD, Intel, Apple Metal)."
+  },
+  "feature.cli.title": {
+    "message": "CLI & Automatisierung"
+  },
+  "feature.cli.description": {
+    "message": "llmport up/down/status/logs, interaktiver Produktions-Installer mit GPU-Erkennung und TUI, dev init für vollständige Entwickler-Workspace-Einrichtung, doctor Gesundheitsprüfungen und .env-Generierung."
+  },
+  "hero.description": {
+    "message": "Leitet, sichert und überwacht den Datenverkehr zwischen lokalen LLM-Runtimes und Remote-Anbietern — und gibt Teams einen zentralen Ort zur Verwaltung von LLM-Diensten."
+  },
+  "hero.getStarted": {
+    "message": "Erste Schritte"
+  },
+  "section.features.title": {
+    "message": "Funktionen"
+  },
+  "section.why.title": {
+    "message": "Warum llm.Port"
+  },
+  "section.why.bold": {
+    "message": "Souveräne KI als Standard"
+  },
+  "section.why.text": {
+    "message": "Daten bei Bedarf lokal halten, Remote-Anbieter nutzen wenn erlaubt, ohne Apps zu ändern oder Governance und Observability zu verlieren. Eine Plattform ersetzt ein Flickwerk aus Proxies, Dashboards und Skripten."
+  },
+  "section.screenshots.title": {
+    "message": "Screenshots"
+  },
+  "section.enterprise.bold": {
+    "message": "Enterprise-Funktionen verfügbar"
+  },
+  "section.enterprise.text": {
+    "message": "für Teams, die SSO, erweiterte PII-Tokenisierung und Governance benötigen."
+  },
+  "section.enterprise.cta": {
+    "message": "Kontakt aufnehmen →"
+  },
+  "theme.ErrorPageContent.title": {
+    "message": "Diese Seite ist abgestürzt."
+  },
+  "theme.BackToTopButton.buttonAriaLabel": {
+    "message": "Zurück nach oben scrollen"
+  },
+  "theme.colorToggle.ariaLabel.mode.system": {
+    "message": "Systemmodus"
+  },
+  "theme.colorToggle.ariaLabel.mode.light": {
+    "message": "Heller Modus"
+  },
+  "theme.colorToggle.ariaLabel.mode.dark": {
+    "message": "Dunkler Modus"
+  },
+  "theme.colorToggle.ariaLabel": {
+    "message": "Zwischen dunklem und hellem Modus wechseln (aktuell {mode})"
+  },
+  "theme.docs.paginator.navAriaLabel": {
+    "message": "Dokumentationsseiten"
+  },
+  "theme.docs.paginator.previous": {
+    "message": "Zurück"
+  },
+  "theme.docs.paginator.next": {
+    "message": "Weiter"
+  },
+  "theme.docs.versionBadge.label": {
+    "message": "Version: {versionLabel}"
+  },
+  "theme.common.editThisPage": {
+    "message": "Diese Seite bearbeiten"
+  },
+  "theme.common.headingLinkTitle": {
+    "message": "Direktlink zu {heading}"
+  },
+  "theme.lastUpdated.atDate": {
+    "message": " am {date}"
+  },
+  "theme.lastUpdated.byUser": {
+    "message": " von {user}"
+  },
+  "theme.lastUpdated.lastUpdatedAtBy": {
+    "message": "Zuletzt aktualisiert{atDate}{byUser}"
+  },
+  "theme.NotFound.title": {
+    "message": "Seite nicht gefunden"
+  },
+  "theme.NotFound.p1": {
+    "message": "Wir konnten nicht finden, wonach Sie gesucht haben."
+  },
+  "theme.NotFound.p2": {
+    "message": "Bitte kontaktieren Sie den Betreiber der Seite, die Sie hierher verlinkt hat, und teilen Sie mit, dass der Link fehlerhaft ist."
+  },
+  "theme.admonition.caution": {
+    "message": "Vorsicht"
+  },
+  "theme.admonition.danger": {
+    "message": "Gefahr"
+  },
+  "theme.admonition.info": {
+    "message": "Info"
+  },
+  "theme.admonition.note": {
+    "message": "Hinweis"
+  },
+  "theme.admonition.tip": {
+    "message": "Tipp"
+  },
+  "theme.admonition.warning": {
+    "message": "Warnung"
+  },
+  "theme.CodeBlock.copy": {
+    "message": "Kopieren"
+  },
+  "theme.CodeBlock.copied": {
+    "message": "Kopiert"
+  },
+  "theme.CodeBlock.copyButtonAriaLabel": {
+    "message": "Code in die Zwischenablage kopieren"
+  },
+  "theme.docs.breadcrumbs.home": {
+    "message": "Startseite"
+  },
+  "theme.docs.sidebar.collapseButtonTitle": {
+    "message": "Seitenleiste einklappen"
+  },
+  "theme.docs.sidebar.collapseButtonAriaLabel": {
+    "message": "Seitenleiste einklappen"
+  },
+  "theme.docs.sidebar.expandButtonTitle": {
+    "message": "Seitenleiste aufklappen"
+  },
+  "theme.docs.sidebar.expandButtonAriaLabel": {
+    "message": "Seitenleiste aufklappen"
+  },
+  "theme.docs.sidebar.navAriaLabel": {
+    "message": "Dokumentations-Seitenleiste"
+  },
+  "theme.navbar.mobileLanguageDropdown.label": {
+    "message": "Sprachen"
+  },
+  "theme.TOCCollapsible.toggleButtonLabel": {
+    "message": "Auf dieser Seite"
+  },
+  "theme.navbar.mobileSidebarSecondaryMenu.backButtonLabel": {
+    "message": "← Zurück zum Hauptmenü"
+  },
+  "theme.common.skipToMainContent": {
+    "message": "Zum Hauptinhalt springen"
+  },
+  "theme.tags.tagsPageTitle": {
+    "message": "Tags"
+  },
+  "theme.ErrorPageContent.tryAgain": {
+    "message": "Erneut versuchen"
+  }
+}

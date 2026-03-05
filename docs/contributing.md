@@ -1,0 +1,94 @@
+---
+sidebar_position: 7
+---
+
+# Contributing
+
+Contributions to **llm.Port** are welcome! Here's how to get started.
+
+## Development Setup
+
+### Prerequisites
+
+- Python 3.12+
+- Node.js 20+
+- Docker Engine 24+ with Compose V2
+- Git
+
+### Clone and bootstrap
+
+The CLI provides a one-command developer setup:
+
+```bash
+pip install llmport-cli
+llmport dev init ~/projects/llm-port
+```
+
+This will:
+
+1. Clone all repositories
+2. Install Python and Node.js dependencies
+3. Start shared infrastructure (Postgres, Redis, etc.)
+4. Run database migrations
+
+### Manual setup
+
+```bash
+# Clone repos
+git clone https://github.com/llm-port/llm-port-backend.git
+git clone https://github.com/llm-port/llm-port-frontend.git
+git clone https://github.com/llm-port/llm-port-api.git
+# ... (see Repositories page for full list)
+
+# Start shared services
+cd llm-port-shared
+docker compose up -d
+
+# Backend
+cd ../llm-port-backend
+uv sync
+uv run alembic upgrade head
+uv run uvicorn llm_port_backend.main:app --reload
+
+# Frontend
+cd ../llm-port-frontend
+npm install
+npm run dev
+
+# Gateway
+cd ../llm-port-api
+uv sync
+uv run alembic upgrade head
+uv run uvicorn llm_port_api.main:app --reload --port 4000
+```
+
+## Code Style
+
+### Python
+
+- Formatter: `ruff format`
+- Linter: `ruff check`
+- Type checking: `pyright` (strict mode)
+- Tests: `pytest`
+
+### TypeScript / React
+
+- Formatter: Prettier
+- Linter: ESLint
+- Framework: React 19 + React Router + MUI + Tailwind
+
+## Submitting Changes
+
+1. Fork the relevant repository
+2. Create a feature branch from `main`
+3. Make your changes with tests
+4. Run the test suite: `pytest` (Python) or `npm test` (frontend)
+5. Open a pull request with a clear description
+
+## Reporting Issues
+
+Open an issue in the relevant repository, or use the [main org discussions](https://github.com/orgs/llm-port/discussions) for cross-cutting topics.
+
+## License
+
+By contributing, you agree that your contributions will be licensed under **Apache 2.0**.

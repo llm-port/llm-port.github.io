@@ -1,148 +1,132 @@
-import {themes as prismThemes} from 'prism-react-renderer';
-import type {Config} from '@docusaurus/types';
-import type * as Preset from '@docusaurus/preset-classic';
-
-// This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
+import { themes as prismThemes } from "prism-react-renderer";
+import type { Config } from "@docusaurus/types";
+import type * as Preset from "@docusaurus/preset-classic";
 
 const config: Config = {
-  title: 'My Site',
-  tagline: 'Dinosaurs are cool',
-  favicon: 'img/favicon.ico',
+  title: "llm.Port",
+  tagline: "Self-hosted all-in-one LLM platform",
+  favicon: "img/favicon.ico",
 
-  // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
-    v4: true, // Improve compatibility with the upcoming Docusaurus v4
+    v4: true,
   },
 
-  // Set the production url of your site here
-  url: 'https://your-docusaurus-site.example.com',
-  // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/',
+  url: "https://llm-port.github.io",
+  baseUrl: "/",
 
-  // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  organizationName: "llm-port",
+  projectName: "llm-port.github.io",
+  trailingSlash: false,
 
-  onBrokenLinks: 'throw',
+  onBrokenLinks: "throw",
 
-  // Even if you don't use internationalization, you can use this field to set
-  // useful metadata like html lang. For example, if your site is Chinese, you
-  // may want to replace "en" with "zh-Hans".
+  markdown: {
+    mermaid: true,
+  },
+
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
+    defaultLocale: "en",
+    locales: ["en", "de", "zh-Hans", "es"],
+    localeConfigs: {
+      en: { label: "English", htmlLang: "en-US" },
+      de: { label: "Deutsch", htmlLang: "de-DE" },
+      "zh-Hans": { label: "简体中文", htmlLang: "zh-Hans" },
+      es: { label: "Español", htmlLang: "es-ES" },
+    },
   },
 
   presets: [
     [
-      'classic',
+      "classic",
       {
         docs: {
-          sidebarPath: './sidebars.ts',
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          sidebarPath: "./sidebars.ts",
+          editUrl: "https://github.com/llm-port/llm-port.github.io/tree/main/",
         },
-        blog: {
-          showReadingTime: true,
-          feedOptions: {
-            type: ['rss', 'atom'],
-            xslt: true,
-          },
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-          // Useful options to enforce blogging best practices
-          onInlineTags: 'warn',
-          onInlineAuthors: 'warn',
-          onUntruncatedBlogPosts: 'warn',
-        },
+        blog: false,
         theme: {
-          customCss: './src/css/custom.css',
+          customCss: "./src/css/custom.css",
         },
       } satisfies Preset.Options,
     ],
   ],
 
+  themes: ["@docusaurus/theme-mermaid"],
+
   themeConfig: {
-    // Replace with your project's social card
-    image: 'img/docusaurus-social-card.jpg',
+    image: "img/social-card.png",
     colorMode: {
+      defaultMode: "dark",
       respectPrefersColorScheme: true,
     },
     navbar: {
-      title: 'My Site',
-      logo: {
-        alt: 'My Site Logo',
-        src: 'img/logo.svg',
-      },
+      title: "llm.Port",
+      logo: { alt: "llm.Port", src: "img/logo.png" },
       items: [
         {
-          type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
-          position: 'left',
-          label: 'Tutorial',
+          type: "docSidebar",
+          sidebarId: "docsSidebar",
+          position: "left",
+          label: "Docs",
         },
-        {to: '/blog', label: 'Blog', position: 'left'},
         {
-          href: 'https://github.com/facebook/docusaurus',
-          label: 'GitHub',
-          position: 'right',
+          to: "/docs/architecture",
+          label: "Architecture",
+          position: "left",
+        },
+        {
+          type: "localeDropdown",
+          position: "right",
+        },
+        {
+          href: "https://github.com/llm-port",
+          label: "GitHub",
+          position: "right",
         },
       ],
     },
     footer: {
-      style: 'dark',
+      style: "dark",
       links: [
         {
-          title: 'Docs',
+          title: "Documentation",
           items: [
-            {
-              label: 'Tutorial',
-              to: '/docs/intro',
-            },
+            { label: "Getting Started", to: "/docs/intro" },
+            { label: "Architecture", to: "/docs/architecture" },
+            { label: "Features", to: "/docs/features/gateway" },
           ],
         },
         {
-          title: 'Community',
+          title: "Platform",
           items: [
-            {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-            },
-            {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
-            },
-            {
-              label: 'X',
-              href: 'https://x.com/docusaurus',
-            },
+            { label: "Modules", to: "/docs/modules" },
+            { label: "Repositories", to: "/docs/repos" },
+            { label: "Third-Party Notices", to: "/docs/third-party" },
           ],
         },
         {
-          title: 'More',
+          title: "Community",
           items: [
             {
-              label: 'Blog',
-              to: '/blog',
+              label: "GitHub",
+              href: "https://github.com/llm-port",
             },
             {
-              label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
+              label: "Contributing",
+              to: "/docs/contributing",
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Emagin8 UG i.G. Licensed under Apache 2.0.`,
     },
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
+      additionalLanguages: ["bash", "python", "yaml", "json", "docker"],
+    },
+    mermaid: {
+      theme: { light: "neutral", dark: "dark" },
     },
   } satisfies Preset.ThemeConfig,
 };

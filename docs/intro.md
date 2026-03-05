@@ -1,47 +1,74 @@
 ---
 sidebar_position: 1
+slug: /intro
 ---
 
-# Tutorial Intro
+# Getting Started
 
-Let's discover **Docusaurus in less than 5 minutes**.
+**llm.Port** is a self-hosted all-in-one LLM platform that combines an OpenAI-compatible gateway, a control-plane for model servers, an internal RAG subsystem, and PII detection — all behind a single operations console.
 
-## Getting Started
+## Who is this for?
 
-Get started by **creating a new site**.
+- **Platform / MLOps teams** who need a governed, self-hosted gateway in front of local and remote LLMs
+- **Security-conscious organizations** that require on-prem inference with full audit logging and PII controls
+- **Developers** who want an OpenAI-compatible API without vendor lock-in
 
-Or **try Docusaurus immediately** with **[docusaurus.new](https://docusaurus.new)**.
+## Quick Start
 
-### What you'll need
+### Prerequisites
 
-- [Node.js](https://nodejs.org/en/download/) version 20.0 or above:
-  - When installing Node.js, you are recommended to check all checkboxes related to dependencies.
+- Docker Engine 24+ with Compose V2
+- 8 GB RAM (16 GB recommended for local model runtimes)
+- GPU (optional) — NVIDIA, AMD, or Intel for local inference
 
-## Generate a new site
-
-Generate a new Docusaurus site using the **classic template**.
-
-The classic template will automatically be added to your project after you run the command:
-
-```bash
-npm init docusaurus@latest my-website classic
-```
-
-You can type this command into Command Prompt, Powershell, Terminal, or any other integrated terminal of your code editor.
-
-The command also installs all necessary dependencies you need to run Docusaurus.
-
-## Start your site
-
-Run the development server:
+### 1. Install the CLI
 
 ```bash
-cd my-website
-npm run start
+pip install llmport-cli
 ```
 
-The `cd` command changes the directory you're working with. In order to work with your newly created Docusaurus site, you'll need to navigate the terminal there.
+### 2. Run the health check
 
-The `npm run start` command builds your website locally and serves it through a development server, ready for you to view at http://localhost:3000/.
+```bash
+llmport doctor
+```
 
-Open `docs/intro.md` (this page) and edit some lines: the site **reloads automatically** and displays your changes.
+This validates your OS, Docker, Compose, GPU drivers, RAM, disk, and port availability.
+
+### 3. Start shared services
+
+```bash
+llmport up
+```
+
+This brings up PostgreSQL, Redis, Grafana, Loki, and other infrastructure.
+
+### 4. Run the init wizard
+
+The backend includes a guided setup wizard that configures secrets, providers, and gateway settings on first run.
+
+### 5. Add providers and runtimes
+
+- **Remote providers**: OpenAI, Azure OpenAI, or any OpenAI-compatible API
+- **Local runtimes**: vLLM, llama.cpp, Ollama, TGI — with automatic GPU detection
+
+### 6. Point your apps at the gateway
+
+```bash
+curl http://localhost:4000/v1/chat/completions \
+  -H "Authorization: Bearer <your-token>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "my-alias",
+    "messages": [{"role": "user", "content": "Hello!"}]
+  }'
+```
+
+The gateway is fully OpenAI-compatible — any SDK or tool that speaks the OpenAI API works out of the box.
+
+## What's next?
+
+- [Architecture](/docs/architecture) — how the platform is structured
+- [Features](/docs/features/gateway) — detailed feature documentation
+- [Modules](/docs/modules) — enable/disable optional capabilities
+- [Repositories](/docs/repos) — the full codebase layout

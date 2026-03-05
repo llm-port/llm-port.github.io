@@ -1,23 +1,275 @@
-/**
- * CSS files with the .module.css suffix will be treated as CSS modules
- * and scoped locally.
- */
+/* ------------------------------------------------------------------ */
+/*  Hero                                                               */
+/* ------------------------------------------------------------------ */
 
-.heroBanner {
-  padding: 4rem 0;
-  text-align: center;
+.hero {
+  --hero-bg-opacity: 0.18; /* ← tweak this or use the slider */
+  --hero-overlay-opacity: 0.1; /* gradient overlay over the image */
+  --hero-blur: 2px; /* subtle blur on the bg image     */
+
   position: relative;
   overflow: hidden;
+  padding: 4rem 0;
+  text-align: center;
+  background: var(--ifm-background-color);
+  color: #fff;
 }
 
-@media screen and (max-width: 996px) {
-  .heroBanner {
-    padding: 2rem;
-  }
+/* dashboard screenshot layer */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("/img/screenshots/dashboard.png") center / cover no-repeat;
+  opacity: var(--hero-bg-opacity);
+  filter: blur(var(--hero-blur));
+  pointer-events: none;
+  z-index: 0;
 }
 
-.buttons {
+/* gradient overlay for text legibility */
+.hero::after {
+  content: none;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* keep all hero content above the pseudo-layers */
+.hero > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* ------------------------------------------------- */
+/*  Transparency control panel (dev helper)          */
+/* ------------------------------------------------- */
+
+.heroControls {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(8px);
+  padding: 0.6rem 0.85rem;
+  border-radius: 8px;
+  font-size: 0.72rem;
+  font-family: monospace;
+  color: rgba(255, 255, 255, 0.85);
+  user-select: none;
+  transition: opacity 0.2s;
+}
+
+.heroControls:hover {
+  opacity: 1 !important;
+}
+
+.controlRow {
   display: flex;
   align-items: center;
+  gap: 0.5rem;
+}
+
+.controlRow label {
+  min-width: 5.5rem;
+  text-align: right;
+}
+
+.controlRow input[type="range"] {
+  width: 100px;
+  accent-color: #60a5fa;
+}
+
+.controlRow span {
+  min-width: 2.5rem;
+  text-align: left;
+  font-variant-numeric: tabular-nums;
+}
+
+.heroTitle {
+  font-size: 3.5rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+}
+
+.heroSubtitle {
+  font-size: 1.5rem;
+  font-weight: 400;
+  opacity: 0.9;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
+}
+
+.heroDescription {
+  font-size: 1.1rem;
+  max-width: 640px;
+  margin: 0 auto 2rem;
+  opacity: 0.8;
+  line-height: 1.6;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.35);
+}
+
+.heroButtons {
+  display: flex;
+  gap: 1rem;
   justify-content: center;
+  flex-wrap: wrap;
+}
+
+.heroButtons .button--outline {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.heroButtons .button--outline:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: #fff;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Section headings                                                   */
+/* ------------------------------------------------------------------ */
+
+.sectionTitle {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Features                                                           */
+/* ------------------------------------------------------------------ */
+
+.features {
+  padding: 4rem 0;
+}
+
+.featureCard {
+  padding: 1.5rem;
+  border-radius: 8px;
+  height: 100%;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.featureCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.featureIcon {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.featureCard h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.featureCard p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  opacity: 0.85;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Why section                                                        */
+/* ------------------------------------------------------------------ */
+
+.whySection {
+  padding: 3rem 0;
+  background: var(--ifm-color-emphasis-100);
+}
+
+.whyText {
+  font-size: 1.15rem;
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+  line-height: 1.7;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Screenshots                                                        */
+/* ------------------------------------------------------------------ */
+
+.screenshots {
+  padding: 4rem 0;
+}
+
+.screenshotGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.screenshotCard {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.screenshotCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.screenshotCard img {
+  width: 100%;
+  display: block;
+}
+
+.screenshotLabel {
+  display: block;
+  text-align: center;
+  padding: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  opacity: 0.7;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Enterprise call-out                                                */
+/* ------------------------------------------------------------------ */
+
+.enterprise {
+  padding: 2rem 0 3rem;
+  text-align: center;
+}
+
+.enterpriseText {
+  font-size: 1.05rem;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  background: var(--ifm-color-emphasis-100);
+  display: inline-block;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Responsive                                                         */
+/* ------------------------------------------------------------------ */
+
+@media (max-width: 768px) {
+  .heroTitle {
+    font-size: 2.5rem;
+  }
+  .heroSubtitle {
+    font-size: 1.2rem;
+  }
+  .screenshotGrid {
+    grid-template-columns: 1fr;
+  }
 }
