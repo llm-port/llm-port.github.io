@@ -8,6 +8,8 @@ Diese Seite beschreibt die übergeordnete Architektur von **llm.Port** — die E
 
 ## Plattformüberblick
 
+<img src="/img/architecture.svg" alt="llm.Port Architekturdiagramm" />
+
 ```mermaid
 flowchart LR
     subgraph Users["Benutzer & Clients"]

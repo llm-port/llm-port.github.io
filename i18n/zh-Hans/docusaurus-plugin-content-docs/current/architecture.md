@@ -8,6 +8,8 @@ sidebar_position: 2
 
 ## 平台概览
 
+<img src="/img/architecture.svg" alt="llm.Port 架构图" />
+
 ```mermaid
 flowchart LR
     subgraph Users["用户 & 客户端"]

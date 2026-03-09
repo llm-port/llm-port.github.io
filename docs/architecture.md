@@ -8,6 +8,8 @@ This page describes the high-level architecture of **llm.Port** — the planes, 
 
 ## Platform Overview
 
+<img src="/img/architecture.svg" alt="llm.Port architecture diagram" />
+
 ```mermaid
 flowchart LR
     subgraph Users["Users & Clients"]

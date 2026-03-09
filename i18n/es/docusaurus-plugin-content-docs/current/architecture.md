@@ -8,6 +8,8 @@ Esta página describe la arquitectura de alto nivel de **llm.Port** — los plan
 
 ## Visión General de la Plataforma
 
+<img src="/img/architecture.svg" alt="Diagrama de arquitectura de llm.Port" />
+
 ```mermaid
 flowchart LR
     subgraph Users["Usuarios & Clientes"]
