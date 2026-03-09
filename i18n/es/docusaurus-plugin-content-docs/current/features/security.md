@@ -14,6 +14,12 @@ sidebar_position: 2
 - Claims con conciencia de tenant: `sub`, `tenant_id`, `roles`, `groups`
 - Expiración de token configurable y refresco
 
+### Autenticación por Cookie
+
+- **Cookies httponly seguras** (`fapiauth`) para sesiones de navegador
+- Conversión de cookie a JWT en la capa proxy del backend
+- Utilizada por la consola de administración y la UI de chat para autenticación transparente en el navegador
+
 ### OAuth / SSO
 
 - Gestión de proveedores **OIDC / OAuth2**

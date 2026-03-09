@@ -53,6 +53,19 @@ Der `doctor`-Befehl validiert:
 - RAM und Speicherplatz
 - Port-Verfügbarkeit für alle Services
 
+### Auto-Tune
+
+```bash
+llmport tune    # Host benchmarken und Ressourceneinstellungen auto-konfigurieren
+```
+
+Der `tune`-Befehl benchmarkt verfügbare CPU-, Speicher- und Festplattenressourcen und generiert optimale Konfiguration:
+
+- **Worker-Anzahlen** für Backend, Gateway und RAG-Services
+- **Datenbankpool-Größen** basierend auf verfügbarem Speicher
+- **Ressourcenlimits** für Docker-Container
+- Erzeugt einen Tuning-Bericht mit empfohlenen `.env`-Werten
+
 ### Entwickler-Workflow
 
 ```bash

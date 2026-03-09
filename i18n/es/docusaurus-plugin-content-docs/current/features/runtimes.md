@@ -49,6 +49,13 @@ Analiza automáticamente los artefactos del modelo:
 - **Descargas de modelos de HuggingFace** orquestadas con Docker
 - Seguimiento de la descarga con informes de progreso
 - Caché de artefactos y deduplicación
+- **Búsqueda en HuggingFace**: examinar y buscar modelos directamente desde la consola de administración
+
+## Reconciliación de Runtimes
+
+- Sincronización automática entre el registro de modelos de la plataforma y los runtimes en ejecución
+- **Sincronización con el gateway**: asegura que los mapeos de alias a proveedor se mantengan actualizados cuando cambian los runtimes
+- Planificador unificado para health checks y polling de estado en todos los runtimes registrados
 
 ## Grafo de Topología LLM
 

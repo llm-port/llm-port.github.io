@@ -5,7 +5,7 @@ slug: /intro
 
 # Getting Started
 
-**llm.Port** is a self-hosted all-in-one LLM platform that combines an OpenAI-compatible gateway, a control-plane for model servers, an internal RAG subsystem, and PII detection — all behind a single operations console.
+**llm.Port** is a self-hosted all-in-one LLM platform that combines an OpenAI-compatible gateway, a built-in chat console with sessions and memory, a control-plane for model servers, an internal RAG subsystem, PII detection, and notification delivery — all behind a single operations console.
 
 ## Who is this for?
 

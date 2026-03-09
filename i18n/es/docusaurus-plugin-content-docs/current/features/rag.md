@@ -73,4 +73,14 @@ Los recolectores se ejecutan en programas configurables vía Taskiq + RabbitMQ.
 - Workers en segundo plano para ingesta, publicación y operaciones programadas
 - Seguimiento de trabajos con eventos de estado e informes de progreso
 
+## RAG Lite
+
+Cuando el módulo RAG completo no está habilitado, el gateway proporciona un modo **RAG Lite** integrado:
+
+- **Recuperación basada en pgvector** directamente desde la base de datos del gateway
+- Búsqueda semántica sobre archivos adjuntos de sesión y documentos subidos
+- No requiere un servicio RAG separado — ideal para despliegues ligeros
+
+Ver también: [Gateway — RAG Lite](/docs/features/gateway#rag-lite)
+
 ![RAG Collectors](/img/screenshots/rag_collectors.png)

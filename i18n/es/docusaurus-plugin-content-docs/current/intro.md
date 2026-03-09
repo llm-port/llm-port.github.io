@@ -5,7 +5,7 @@ slug: /intro
 
 # Primeros Pasos
 
-**llm.Port** es una plataforma LLM todo-en-uno autoalojada que combina un gateway compatible con OpenAI, un plano de control para servidores de modelos, un subsistema RAG interno y detección de PII — todo detrás de una única consola de operaciones.
+**llm.Port** es una plataforma LLM todo-en-uno autoalojada que combina un gateway compatible con OpenAI, una consola de chat integrada con sesiones y memoria, un plano de control para servidores de modelos, un subsistema RAG interno, detección de PII y entrega de notificaciones — todo detrás de una única consola de operaciones.
 
 ## ¿Para quién es?
 

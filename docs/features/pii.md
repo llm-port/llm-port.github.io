@@ -8,7 +8,9 @@ The **PII module** (`llm_port_pii`) provides Presidio-based PII scanning, redact
 
 ## How It Works
 
-PII detection runs as a standalone FastAPI service that the gateway calls during request processing. When enabled, outbound requests can be scanned for personally identifiable information before they reach upstream providers.
+PII detection runs as a **stateless** FastAPI service that the gateway calls during request processing. When enabled, outbound requests can be scanned for personally identifiable information before they reach upstream providers.
+
+The PII service itself has no database — scan events are forwarded to the backend via HTTP and stored in the backend database for dashboards and audit.
 
 ## Entity Types
 
@@ -52,3 +54,11 @@ Each policy configures:
 - **Telemetry sanitization**: PII entities are redacted from Langfuse traces based on privacy mode
 - **Egress control**: outbound requests can be blocked or redacted before reaching remote providers
 - **Module-aware UI**: PII settings are hidden in the admin console when the module is disabled
+
+## Dashboard & Event Log
+
+PII scan events are forwarded from the PII service to the backend and stored in the `pii_scan_events` table. The admin console provides:
+
+- **PII dashboard**: overview of scan activity, entity type distribution, and policy hit rates
+- **Event log**: searchable history of all PII scan events with entity details and redaction actions
+- **Tenant policy admin**: configure per-tenant PII policies, entity types, and fail modes from the settings UI

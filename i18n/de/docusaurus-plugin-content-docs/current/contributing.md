@@ -89,6 +89,14 @@ uv run uvicorn llm_port_api.main:app --reload --port 4000
 
 Ein Issue im betreffenden Repository eröffnen oder die [Hauptdiskussionen der Organisation](https://github.com/orgs/llm-port/discussions) für übergreifende Themen nutzen.
 
+## Contributor License Agreement (CLA)
+
+Alle Beitragenden müssen eine **Contributor License Agreement (CLA)** unterzeichnen, bevor ihr Pull Request zusammengeführt werden kann. Die CLA stellt sicher, dass Beiträge ordnungsgemäß lizenziert sind und das Projekt weiterhin unter seiner Open-Source-Lizenz verteilt werden kann.
+
+- Ein CLA-Bot kommentiert automatisch Ihren ersten Pull Request mit Unterzeichnungsanweisungen
+- Die Unterzeichnung ist ein einmaliger Vorgang — nach der Unterzeichnung gilt sie für alle zukünftigen Beiträge
+- Die CLA deckt sowohl individuelle als auch Unternehmensbeiträge ab
+
 ## Lizenz
 
 Mit einem Beitrag stimmen Sie zu, dass Ihre Beiträge unter **Apache 2.0** lizenziert werden.

@@ -56,3 +56,13 @@ The admin console includes:
 - Token usage summaries per tenant, model, and time window
 
 ![Dashboard](/img/screenshots/dashboard.png)
+
+## Notifications & Alerts
+
+Event-driven notification pipeline for system alerts and user workflows:
+
+- **Outbox pattern**: persistent outbox with background dispatcher
+- **Email delivery**: dedicated mailer service with Jinja2-templated messages (password reset, admin alerts, invites)
+- **Alert deduplication**: fingerprint-based suppression with configurable cooldown window (30 min default)
+- **Retry with backoff**: exponential retry for transient delivery failures
+- **Grafana webhook integration**: system health alerts routed through the notification pipeline

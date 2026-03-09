@@ -72,6 +72,7 @@ llmport module enable pii     # PII 检测
 llmport module enable auth    # SSO / OIDC
 llmport module enable mailer  # 邮件通知
 llmport module enable docling # 文档处理
+llmport module enable sessions # 聊天会话与记忆
 ```
 
 ## Docker Compose

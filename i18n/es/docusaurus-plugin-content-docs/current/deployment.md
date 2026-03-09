@@ -72,6 +72,7 @@ llmport module enable pii     # Detección de PII
 llmport module enable auth    # SSO / OIDC
 llmport module enable mailer  # Notificaciones por correo
 llmport module enable docling # Procesamiento de documentos
+llmport module enable sessions # Sesiones de chat y memoria
 ```
 
 ## Docker Compose

@@ -451,3 +451,270 @@ sequenceDiagram
     W->>DB: Process operations and index changes
     W->>DB: Mark publish/job final status
 ```
+
+## 14. Konsolen-Chat-Completions
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant U as Admin
+    participant FE as Frontend (/chat)
+    participant BE as Backend
+    participant GW as Gateway
+    participant PII as PII-Service
+    participant LP as LLM-Anbieter
+
+    U->>FE: Chat-Nachricht senden (Projekt + Sitzung)
+    FE->>BE: POST /api/chat/completions (Cookie-Auth)
+    BE->>BE: Cookie → JWT-Konvertierung
+    BE->>GW: POST /v1/chat/completions (Bearer JWT, session_id, project_id)
+    GW->>GW: Gedächtnis-Fakten + Sitzungskontext in System-Prompt injizieren
+    GW->>GW: Modell-Alias → Anbieter auflösen
+    alt Cloud-Anbieter + PII-Richtlinie aktiv
+      GW->>PII: POST /api/pii/sanitize (redact/tokenize)
+      PII-->>GW: Bereinigte Payload
+    end
+    GW->>LP: Upstream-Chat-Anfrage (stream=true)
+    loop SSE-Chunks
+      LP-->>GW: data: {chunk}
+      alt PII-Tokenize-Modus
+        GW->>PII: POST /api/pii/detokenize (Antwort-Chunk)
+        PII-->>GW: Wiederhergestellter Text
+      end
+      GW-->>BE: data: {chunk}
+      BE-->>FE: data: {chunk}
+    end
+    LP-->>GW: data: [DONE]
+    GW->>GW: Nachricht in Sitzung + Audit-Log speichern
+    GW-->>BE: data: [DONE]
+    BE-->>FE: data: [DONE]
+    FE->>FE: Gestreamte Antwort rendern
+```
+
+## 15. Sitzungs- & Gedächtnis-Lebenszyklus
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant U as Admin / App Client
+    participant GW as Gateway
+    participant DB as Postgres (Gateway)
+
+    rect rgb(245,245,255)
+    Note over U,DB: Projekt + Sitzungs-CRUD
+    U->>GW: POST /v1/sessions/projects (Projekt erstellen)
+    GW->>DB: Projekt-Zeile einfügen
+    GW-->>U: project_id
+
+    U->>GW: POST /v1/sessions (Sitzung unter Projekt erstellen)
+    GW->>DB: Sitzungs-Zeile einfügen
+    GW-->>U: session_id
+
+    U->>GW: POST /v1/chat/completions (session_id im Body)
+    GW->>DB: Sitzungsnachrichten + Gedächtnis-Fakten laden
+    GW->>GW: Kontext erstellen (System-Prompt + Gedächtnis + Verlauf)
+    GW-->>U: Completion-Antwort
+    GW->>DB: Assistenten-Nachricht in Sitzung speichern
+
+    U->>GW: GET /v1/sessions/{id}/messages
+    GW->>DB: Nachrichten für Sitzung lesen
+    GW-->>U: Nachrichtenliste + Zusammenfassungen
+    end
+
+    rect rgb(245,255,245)
+    Note over U,DB: Gedächtnis-Fakten
+    U->>GW: POST /v1/memory/facts (scope: project|session, content)
+    GW->>DB: Gedächtnis-Fakt einfügen
+    GW-->>U: fact_id
+
+    U->>GW: GET /v1/memory/facts?scope=project&project_id=X
+    GW->>DB: Fakten nach Scope + Eigentümer abfragen
+    GW-->>U: Fakten-Liste
+
+    U->>GW: DELETE /v1/memory/facts/{id}
+    GW->>DB: Fakt entfernen
+    GW-->>U: 204
+    end
+```
+
+## 16. Dateianhang-Upload & Extraktion
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant U as Benutzer
+    participant GW as Gateway
+    participant FS as FileStore (MinIO / Lokal)
+    participant DOC as Docling-Service
+    participant DB as Postgres (Gateway)
+
+    U->>GW: POST /v1/sessions/{session_id}/attachments (Multipart-Datei)
+    GW->>FS: Rohdatei speichern
+    FS-->>GW: storage_key
+
+    alt Docling konfiguriert
+      GW->>DOC: POST /convert (Datei-Bytes, format=markdown)
+      DOC->>DOC: IBM Docling Pipeline (Seiten, Tabellen, Bilder)
+      DOC-->>GW: Extrahierter Text + geschätzte Token-Anzahl
+    else Lokaler Fallback
+      GW->>GW: Einfache Textextraktion
+    end
+
+    GW->>DB: Anhang-Datensatz einfügen (Datei-Metadaten + extrahierter Text)
+    GW-->>U: 201 attachment_id + Metadaten
+
+    Note over U,GW: Bei nächster Chat-Completion mit dieser Sitzung
+    U->>GW: POST /v1/chat/completions (session_id)
+    GW->>DB: Anhänge für Sitzung laden
+    GW->>GW: Extrahierten Text in Kontext injizieren
+    GW->>GW: Mit normalem Completion-Fluss fortfahren
+```
+
+## 17. PII-Screening-Pipeline
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant C as API Client
+    participant GW as Gateway
+    participant PII as PII-Service
+    participant LP as LLM-Anbieter
+    participant BE as Backend
+
+    C->>GW: POST /v1/chat/completions
+    GW->>GW: Anbieter auflösen (Cloud vs. Lokal)
+
+    alt Cloud-Anbieter + PII-Richtlinie aktiviert
+      rect rgb(255,245,245)
+      Note over GW,PII: Egress-PII-Screening
+      GW->>PII: POST /api/pii/sanitize (Nachrichten, mode=redact|tokenize)
+      PII->>PII: Presidio NER-Analyse (Namen, E-Mails, Telefonnummern, SSNs usw.)
+      PII->>BE: PII-Scan-Ereignis weiterleiten (HTTP POST)
+      PII-->>GW: Bereinigte Nachrichten + Token-Map (bei Tokenize-Modus)
+      end
+
+      GW->>LP: Bereinigte Anfrage weiterleiten
+      LP-->>GW: Antwort
+
+      alt Tokenize-Modus
+        rect rgb(245,255,245)
+        Note over GW,PII: Antwort-Detokenisierung
+        GW->>PII: POST /api/pii/detokenize (Antwort, token_map)
+        PII-->>GW: Wiederhergestellte Antwort mit Original-PII-Werten
+        end
+      end
+    else Lokaler Anbieter oder PII deaktiviert
+      GW->>LP: Anfrage unverändert weiterleiten
+      LP-->>GW: Antwort
+    end
+
+    GW-->>C: Completion-Antwort
+```
+
+## 18. SSO-Authentifizierungsablauf
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant U as Browser
+    participant FE as Frontend
+    participant AUTH as Auth-Service
+    participant IDP as Identity Provider (Google/GitHub/etc.)
+    participant BE as Backend
+
+    U->>FE: SSO-Login-Button klicken
+    FE->>AUTH: GET /login/{provider} (Redirect)
+    AUTH->>AUTH: OAuth-Authorize-URL erstellen (State + PKCE)
+    AUTH-->>U: 302 Redirect zum IdP
+
+    U->>IDP: Authentifizieren + Zustimmung
+    IDP-->>AUTH: GET /callback?code=XXX&state=YYY
+
+    AUTH->>IDP: POST /token (Code gegen access_token tauschen)
+    IDP-->>AUTH: access_token + id_token
+
+    AUTH->>IDP: GET /userinfo (Bearer access_token)
+    IDP-->>AUTH: E-Mail + Profil-Claims
+
+    AUTH->>AUTH: JWT signieren (E-Mail, account_id, exp=120s)
+    AUTH-->>U: 302 Redirect zum Backend /api/auth/callback?token=JWT
+
+    U->>BE: GET /api/auth/callback?token=JWT
+    BE->>BE: JWT-Signatur verifizieren
+    BE->>BE: Benutzerkonto finden oder erstellen
+    BE->>BE: httponly Cookie setzen (fapiauth)
+    BE-->>U: 302 Redirect zu /admin (authentifiziert)
+```
+
+## 19. Benachrichtigungs-Zustellungs-Pipeline
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant TRIGGER as Backend-Ereignis (Passwort-Reset / Alert / Einladung)
+    participant BE as Backend
+    participant DB as Postgres (notification_outbox)
+    participant DISP as Hintergrund-Dispatcher
+    participant MAILER as Mailer-Service
+    participant SMTP as SMTP-Anbieter
+
+    TRIGGER->>BE: Ereignis ausgelöst (z.B. Passwort-Reset-Anfrage)
+    BE->>DB: INSERT notification_outbox (type, payload, status=pending)
+
+    loop Dispatcher-Abfrageintervall
+      DISP->>DB: SELECT WHERE status=pending AND next_attempt_at <= now()
+      DB-->>DISP: Ausstehende Benachrichtigungen
+
+      loop Jede Benachrichtigung
+        DISP->>DISP: Dedup-Fingerprint + Cooldown prüfen (30 Min Standard)
+        alt Kein Duplikat
+          DISP->>MAILER: POST /internal/v1/messages/{type} (Bearer Service-Token)
+          MAILER->>MAILER: Vorlage rendern (Jinja2)
+          MAILER->>SMTP: E-Mail senden
+          SMTP-->>MAILER: Zustellungsergebnis
+          MAILER-->>DISP: 200 OK / Fehler
+
+          alt Erfolg
+            DISP->>DB: UPDATE status=sent
+          else Fehler
+            DISP->>DB: UPDATE status=retry, next_attempt_at += exponentielles Backoff
+          end
+        else Duplikat unterdrückt
+          DISP->>DB: UPDATE status=suppressed
+        end
+      end
+    end
+```
+
+## 20. Modul-Aktivierung / -Deaktivierung
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant U as Admin
+    participant FE as Frontend (Einstellungen)
+    participant BE as Backend
+    participant SET as Settings-Service
+    participant REG as Modul-Registry
+    participant DE as Docker Compose
+
+    U->>FE: Modul umschalten (z.B. PII) ein/aus
+    FE->>BE: PUT /api/admin/system/settings/values/{module_key}
+    BE->>SET: Validieren + Einstellung speichern
+
+    SET->>REG: Modul-Registry über Statusänderung benachrichtigen
+    REG->>REG: Modul-Sync-Callback ausführen (Bereinigung / Init)
+
+    alt Service-Lifecycle-Änderung erforderlich
+      SET->>DE: Docker-Service starten oder stoppen (Compose-Profil)
+      DE-->>SET: Service gestartet / gestoppt
+    end
+
+    SET-->>BE: Angewendet
+    BE-->>FE: 200 + aktualisierter Modul-Status
+
+    Note over FE: Frontend erkennt Modul-Status
+    FE->>BE: GET /api/v1/services (Health-Probe)
+    BE-->>FE: Modul-Verfügbarkeits-Map
+    FE->>FE: Modulabhängige UI-Bereiche anzeigen/verbergen
+```

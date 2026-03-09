@@ -451,3 +451,224 @@ sequenceDiagram
     W->>DB: Process operations and index changes
     W->>DB: Mark publish/job final status
 ```
+
+## 14. Chat Completions de Consola
+
+```mermaid
+sequenceDiagram
+    participant U as User (Browser)
+    participant FE as Frontend
+    participant API as API Gateway
+    participant BE as Backend
+    participant LLM as LLM Provider
+
+    U->>FE: Send chat message
+    FE->>API: POST /chat/completions (stream=true)
+    API->>BE: Forward with tenant context
+    BE->>BE: Resolve session & load memory
+    BE->>LLM: Stream completion request
+    loop SSE chunks
+        LLM-->>BE: Token chunk
+        BE-->>API: Forward SSE
+        API-->>FE: Forward SSE
+        FE-->>U: Render token
+    end
+    BE->>BE: Persist assistant message to session
+    BE-->>API: [DONE] sentinel
+    API-->>FE: Stream complete
+```
+
+## 15. Ciclo de Vida de Sesión y Memoria
+
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant FE as Frontend
+    participant API as API Gateway
+    participant BE as Backend
+    participant DB as Postgres
+
+    U->>FE: Open new chat
+    FE->>API: POST /sessions
+    API->>BE: Create session
+    BE->>DB: INSERT session row
+    DB-->>BE: session_id
+    BE-->>FE: { session_id }
+
+    U->>FE: Send message
+    FE->>API: POST /chat/completions { session_id }
+    API->>BE: Forward
+    BE->>DB: Load session messages (memory window)
+    BE->>BE: Build prompt with memory context
+    BE->>BE: Stream LLM & persist messages
+    BE-->>FE: SSE response
+
+    U->>FE: List sessions
+    FE->>API: GET /sessions
+    API->>BE: Query sessions
+    BE->>DB: SELECT sessions for user
+    BE-->>FE: Session list with previews
+```
+
+## 16. Subida y Extracción de Archivos Adjuntos
+
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant FE as Frontend
+    participant API as API Gateway
+    participant BE as Backend
+    participant DOC as Docling Service
+    participant DB as Postgres
+
+    U->>FE: Attach file to chat
+    FE->>API: POST /attachments (multipart)
+    API->>BE: Store file metadata
+    BE->>DB: INSERT attachment row
+    BE->>DOC: POST /extract { file }
+    DOC->>DOC: Parse PDF/DOCX/image
+    DOC-->>BE: { extracted_text, metadata }
+    BE->>DB: UPDATE attachment with extracted text
+    BE-->>FE: { attachment_id, status: ready }
+
+    U->>FE: Send message referencing attachment
+    FE->>API: POST /chat/completions { attachment_ids }
+    API->>BE: Forward
+    BE->>DB: Load attachment extracted text
+    BE->>BE: Inject text into prompt context
+    BE->>BE: Stream LLM response
+    BE-->>FE: SSE response
+```
+
+## 17. Pipeline de Screening PII
+
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant API as API Gateway
+    participant PII as PII Service
+    participant BE as Backend
+    participant DB as Postgres
+
+    U->>API: POST /chat/completions { message }
+    API->>PII: POST /scan { text, tenant_policy }
+    PII->>PII: Run detection engines
+    PII->>PII: Apply tenant redaction policy
+
+    alt PII detected & redaction enabled
+        PII-->>API: { redacted_text, findings[] }
+        PII->>BE: POST /pii/events { scan_event }
+        BE->>DB: INSERT pii_scan_events
+        API->>API: Replace original text with redacted
+    else No PII or passthrough policy
+        PII-->>API: { original_text, findings: [] }
+    end
+
+    API->>BE: Forward (possibly redacted) message
+    BE->>BE: Process chat completion
+    BE-->>U: SSE response
+```
+
+## 18. Flujo de Autenticación SSO
+
+```mermaid
+sequenceDiagram
+    participant U as User (Browser)
+    participant FE as Frontend
+    participant API as API Gateway
+    participant AUTH as Auth Service
+    participant IDP as Identity Provider
+    participant DB as Postgres
+
+    U->>FE: Click "Sign in with SSO"
+    FE->>API: GET /auth/sso/authorize
+    API->>AUTH: Initiate SSO flow
+    AUTH->>AUTH: Build SAML/OIDC request
+    AUTH-->>U: 302 Redirect to IdP
+
+    U->>IDP: Authenticate (credentials/MFA)
+    IDP-->>U: 302 Redirect with assertion/code
+    U->>API: GET /auth/sso/callback { code }
+    API->>AUTH: POST /sso/callback { code }
+    AUTH->>IDP: Exchange code for tokens
+    IDP-->>AUTH: { id_token, access_token }
+    AUTH->>AUTH: Map claims to tenant user
+    AUTH->>DB: Upsert user + assign roles
+    AUTH-->>API: { jwt, refresh_token }
+    API->>API: Set httponly cookies
+    API-->>FE: 302 Redirect to dashboard
+    FE->>API: Subsequent requests (cookie auth)
+    API->>API: Cookie-to-JWT extraction
+```
+
+## 19. Pipeline de Entrega de Notificaciones
+
+```mermaid
+sequenceDiagram
+    participant SVC as Any Service
+    participant BE as Backend
+    participant DB as Postgres
+    participant MAIL as Mailer Service
+    participant SMTP as SMTP Server
+    participant U as User (Browser)
+    participant FE as Frontend
+
+    SVC->>BE: POST /notifications { type, recipient, payload }
+    BE->>DB: INSERT notification (status=pending)
+    BE->>BE: Evaluate delivery channels
+
+    alt Email channel enabled
+        BE->>MAIL: POST /send { template, recipient, data }
+        MAIL->>MAIL: Render template
+        MAIL->>SMTP: Send email
+        SMTP-->>MAIL: Delivery confirmation
+        MAIL-->>BE: { status: sent }
+    end
+
+    BE->>DB: UPDATE notification status
+
+    U->>FE: Open application
+    FE->>BE: GET /notifications?unread=true
+    BE->>DB: SELECT unread notifications
+    BE-->>FE: Notification list
+    FE-->>U: Show notification bell + items
+    U->>FE: Mark as read
+    FE->>BE: PATCH /notifications/:id { read: true }
+    BE->>DB: UPDATE read status
+```
+
+## 20. Ciclo de Vida de Activación/Desactivación de Módulos
+
+```mermaid
+sequenceDiagram
+    participant ADM as Admin
+    participant CLI as CLI (llmport)
+    participant BE as Backend
+    participant DB as Postgres
+    participant MOD as Module Service
+    participant GW as API Gateway
+
+    ADM->>CLI: llmport module enable <name>
+    CLI->>BE: POST /modules/enable { name }
+    BE->>DB: Check module registry
+    BE->>BE: Validate dependencies
+
+    alt Dependencies met
+        BE->>DB: UPDATE module status = enabled
+        BE->>MOD: POST /health (verify reachable)
+        MOD-->>BE: 200 OK
+        BE->>GW: Reload route table
+        GW->>GW: Register module routes
+        BE-->>CLI: Module enabled successfully
+    else Missing dependencies
+        BE-->>CLI: Error: missing dependencies [list]
+    end
+
+    ADM->>CLI: llmport module disable <name>
+    CLI->>BE: POST /modules/disable { name }
+    BE->>DB: Check dependent modules
+    BE->>DB: UPDATE module status = disabled
+    BE->>GW: Reload route table
+    GW->>GW: Remove module routes
+    BE-->>CLI: Module disabled
+```

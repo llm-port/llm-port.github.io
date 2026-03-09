@@ -14,6 +14,12 @@ sidebar_position: 2
 - Tenant-bewusste Claims: `sub`, `tenant_id`, `roles`, `groups`
 - Konfigurierbare Token-Ablaufzeit und Erneuerung
 
+### Cookie-Authentifizierung
+
+- **Sichere httponly-Cookies** (`fapiauth`) für browser-basierte Sitzungen
+- Cookie-zu-JWT-Konvertierung in der Backend-Proxy-Schicht
+- Wird von der Admin-Konsole und der Chat-UI für nahtlose Browser-Authentifizierung verwendet
+
 ### OAuth / SSO
 
 - **OIDC / OAuth2** Provider-Verwaltung

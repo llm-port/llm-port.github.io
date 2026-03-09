@@ -12,7 +12,7 @@ The **llm.Port** platform is organized as a multi-repo codebase. Each service ha
 | -------------------------------------------------------------------- | ------------------------------------------------------------------------ | ------------------------------------- |
 | [`llm-port-frontend`](https://github.com/llm-port/llm-port-frontend) | React admin console UI                                                   | Vite + React Router + MUI + Tailwind  |
 | [`llm-port-backend`](https://github.com/llm-port/llm-port-backend)   | FastAPI control-plane: users, RBAC, LLM management, Docker orchestration | Python + FastAPI + SQLAlchemy         |
-| [`llm-port-api`](https://github.com/llm-port/llm-port-api)           | OpenAI-compatible `/v1/*` gateway                                        | Python + FastAPI                      |
+| [`llm-port-api`](https://github.com/llm-port/llm-port-api)           | OpenAI-compatible `/v1/*` gateway with sessions, memory, and attachments | Python + FastAPI                      |
 | [`llm-port-rag`](https://github.com/llm-port/llm-port-rag)           | RAG subsystem: ingestion, knowledge search, collector plugins            | Python + FastAPI + pgvector           |
 | [`llm-port-pii`](https://github.com/llm-port/llm-port-pii)           | PII detection and redaction service                                      | Python + FastAPI + Presidio           |
 | [`llm-port-cli`](https://github.com/llm-port/llm-port-cli)           | CLI installer and management tool                                        | Python + Click + Textual              |

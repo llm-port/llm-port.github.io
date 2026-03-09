@@ -27,6 +27,13 @@ flowchart LR
         API["llm_port_api (compatible OpenAI /v1/*)"]
     end
 
+    subgraph Modules["Módulos Opcionales"]
+        AUTH["llm_port_auth (SSO / OIDC)"]
+        PII["llm_port_pii (Presidio)"]
+        MAILER["llm_port_mailer (SMTP)"]
+        DOCLING["llm_port_docling (IBM Docling)"]
+    end
+
     subgraph RAG["Plano RAG (Interno)"]
         RAGAPI["llm_port_rag API (/api/internal/*)"]
         RAGW["Taskiq Worker"]
@@ -39,43 +46,59 @@ flowchart LR
     end
 
     subgraph Shared["Servicios Compartidos de Plataforma"]
-        PGMAIN["Postgres (backend + metadatos rag)"]
-        PGAPI["Postgres (metadatos/audit llm_api)"]
+        PGMAIN["Postgres (backend + auth + eventos PII)"]
+        PGAPI["Postgres (gateway / sesiones / memoria)"]
+        PGRAG["Postgres + pgvector (RAG)"]
         REDIS["Redis (rate limit / leases / cache)"]
         RMQ["RabbitMQ (broker Taskiq)"]
         MINIO["MinIO (snapshots/uploads)"]
         LANGFUSE["Langfuse (trazas)"]
-        LOKI["Loki + Promtail (logs)"]
+        LOKI["Loki + Alloy (logs)"]
         GRAF["Grafana (dashboards)"]
         DOCKER["Docker Engine / Compose"]
     end
 
     U1 --> FE
     FE -->|REST /api/*| BE
+    FE -->|/chat UI| API
     U2 -->|OpenAI API /v1/*| API
 
     BE -->|Admin gateway/proxy| API
     BE -->|Proxy RAG interno /api/internal/*| RAGAPI
+    BE -->|Proxy proveedor auth| AUTH
+    BE -->|Proxy config/stats PII| PII
+    BE -->|Entrega de notificaciones| MAILER
+    BE -->|Conversión de documentos| DOCLING
     BE -->|Acciones Ops| DOCKER
     BE --> PGMAIN
+    BE --> PGAPI
     BE --> LANGFUSE
     BE --> LOKI
 
     API -->|Enrutar chat/embeddings| LOCAL
     API -->|Enrutar chat/embeddings| REMOTE
+    API -->|Screening PII| PII
+    API -->|Extracción de adjuntos| DOCLING
     API --> PGAPI
     API --> REDIS
     API --> LANGFUSE
-    API --> LOKI
 
-    RAGAPI --> PGMAIN
+    AUTH -->|OAuth callback → JWT cookie| BE
+    AUTH --> PGMAIN
+
+    PII -->|Reenvío de eventos| BE
+    MAILER --> PGMAIN
+
+    RAGAPI --> PGRAG
     RAGAPI --> MINIO
+    RAGAPI --> DOCLING
     RAGAPI --> RMQ
     RAGW --> RMQ
-    RAGW --> PGMAIN
+    RAGW --> PGRAG
     RAGW --> MINIO
+    RAGW --> DOCLING
     RAGS --> RMQ
-    RAGS --> PGMAIN
+    RAGS --> PGRAG
 
     GRAF --> LOKI
     GRAF --> PGMAIN
@@ -107,6 +130,17 @@ El **gateway** expone una API compatible con OpenAI (`/v1/models`, `/v1/chat/com
 - Rate limiting y concurrency leasing basados en Redis
 - Streaming SSE con extracción de TTFT
 - Trazado Langfuse y registro de auditoría
+- Sesiones de chat, hechos de memoria y archivos adjuntos
+- Screening PII a través del módulo PII
+
+### Módulos Opcionales
+
+Servicios separados que se pueden habilitar o deshabilitar vía perfiles de Docker Compose:
+
+- **Auth** — Autenticación SSO / OIDC con adaptadores de proveedores OAuth
+- **PII** — Escaneo PII basado en Presidio, redacción y tokenización
+- **Mailer** — Notificaciones por correo con plantillas Jinja2
+- **Docling** — Procesamiento de documentos basado en IBM Docling para extracción de texto
 
 ### Plano RAG
 
@@ -121,23 +155,28 @@ El **subsistema RAG** es un servicio interno accesible solo a través del backen
 
 Contenedores de infraestructura gestionados vía Docker Compose:
 
-| Servicio      | Propósito                                                |
-| ------------- | -------------------------------------------------------- |
-| PostgreSQL    | Metadatos del backend, vectores RAG (pgvector), audit GW |
-| Redis         | Rate limiting, concurrency leases, caché                 |
-| RabbitMQ      | Broker de tareas asíncronas (Taskiq)                     |
-| MinIO         | Almacenamiento de objetos para uploads y snapshots       |
-| Langfuse      | Almacenamiento de trazas LLM y eventos de generación     |
-| Loki + Alloy  | Recopilación y consulta centralizada de logs             |
-| Grafana       | Dashboard y visualización                                |
-| Docker Engine | Orquestación de contenedores para runtimes               |
+| Servicio      | Propósito                                                                          |
+| ------------- | ---------------------------------------------------------------------------------- |
+| PostgreSQL    | Backend + metadatos auth + eventos PII, sesiones/memoria del gateway, vectores RAG |
+| Redis         | Rate limiting, concurrency leases, caché                                           |
+| RabbitMQ      | Broker de tareas asíncronas (Taskiq)                                               |
+| MinIO         | Almacenamiento de objetos para uploads y snapshots                                 |
+| Langfuse      | Almacenamiento de trazas LLM y eventos de generación                               |
+| Loki + Alloy  | Recopilación y consulta centralizada de logs                                       |
+| Grafana       | Dashboard y visualización                                                          |
+| Docker Engine | Orquestación de contenedores para runtimes                                         |
 
 ## Rutas de Llamada
 
 1. **Operaciones de admin** — `Navegador → Frontend → Backend → Docker / Settings / Proxy targets`
 2. **Inferencia de aplicaciones** — `App/SDK → Gateway → runtime local o proveedor remoto → respuesta`
-3. **Consulta RAG** — `Frontend → Backend /api/admin/rag/* → RAG /api/internal/knowledge/search`
-4. **Publicación RAG** — `Subida → MinIO → RabbitMQ → Worker → extraer/trocear/embeber/indexar`
-5. **Observabilidad** — `Backend + Gateway + RAG → Loki / Langfuse → dashboards Grafana`
+3. **Chat completions (consola)** — `Navegador → Frontend → Backend (cookie→JWT proxy) → Gateway /v1/chat/completions → proveedor → respuesta SSE`
+4. **Consulta RAG** — `Frontend → Backend /api/admin/rag/* → RAG /api/internal/knowledge/search`
+5. **Publicación RAG** — `Subida → MinIO → RabbitMQ → Worker → extracción Docling → trocear → embeber → índice pgvector`
+6. **Screening PII** — `Gateway (middleware pre-forward) → PII /analyze → redactar/marcar → continuar o rechazar`
+7. **Autenticación SSO** — `Navegador → Auth /login/<provider> → IdP → Auth /callback → JWT firmado → Backend (establecer cookie)`
+8. **Entrega de notificaciones** — `Backend (escritura outbox) → dispatcher → Mailer /send → proveedor SMTP`
+9. **Procesamiento de documentos** — `Subida de archivo → Docling /convert → pipeline IBM Docling → texto estructurado → llamador (worker RAG / gateway)`
+10. **Observabilidad** — `Backend + Gateway + RAG → Loki / Langfuse → dashboards Grafana`
 
 Para diagramas de secuencia detallados de cada flujo, consulta [Secuencias de Llamada](/docs/call-sequences).

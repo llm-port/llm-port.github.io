@@ -53,6 +53,19 @@ The `doctor` command validates:
 - RAM and disk space
 - Port availability for all services
 
+### Auto-Tune
+
+```bash
+llmport tune    # Benchmark host and auto-configure resource settings
+```
+
+The `tune` command benchmarks available CPU, memory, and disk resources and generates optimal configuration:
+
+- **Worker counts** for backend, gateway, and RAG services
+- **Database pool sizes** based on available memory
+- **Resource limits** for Docker containers
+- Produces a tuning report with recommended `.env` values
+
 ### Developer Workflow
 
 ```bash

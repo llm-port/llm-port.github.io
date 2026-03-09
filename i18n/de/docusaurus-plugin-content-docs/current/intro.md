@@ -5,7 +5,7 @@ slug: /intro
 
 # Erste Schritte
 
-**llm.Port** ist eine selbst-gehostete All-in-One-LLM-Plattform, die ein OpenAI-kompatibles Gateway, eine Steuerungsebene für Modell-Server, ein internes RAG-Subsystem und PII-Erkennung vereint — alles hinter einer einzigen Betriebskonsole.
+**llm.Port** ist eine selbst-gehostete All-in-One-LLM-Plattform, die ein OpenAI-kompatibles Gateway, eine integrierte Chat-Konsole mit Sitzungen und Gedächtnis, eine Steuerungsebene für Modell-Server, ein internes RAG-Subsystem, PII-Erkennung und Benachrichtigungszustellung vereint — alles hinter einer einzigen Betriebskonsole.
 
 ## Für wen ist das?
 

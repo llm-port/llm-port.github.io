@@ -14,6 +14,12 @@ sidebar_position: 2
 - Tenant-aware claims: `sub`, `tenant_id`, `roles`, `groups`
 - Configurable token expiration and refresh
 
+### Cookie Authentication
+
+- **Secure httponly cookies** (`fapiauth`) for browser-based sessions
+- Cookie-to-JWT conversion in the backend proxy layer
+- Used by the admin console and chat UI for seamless browser authentication
+
 ### OAuth / SSO
 
 - **OIDC / OAuth2** provider management
@@ -46,6 +52,12 @@ Permissions are evaluated per-request across both the admin API and the gateway.
 - All secrets (API keys, tokens, credentials) encrypted at rest in PostgreSQL
 - No secrets stored in environment variables or config files
 - Transparent encrypt/decrypt via the settings service
+
+### Column-Level Encryption
+
+- Sensitive model fields (API keys, tokens) are encrypted at rest via **per-field Fernet keys**
+- Encryption is applied transparently at the ORM layer
+- Ensures that even database-level access does not expose raw credentials
 
 ### Request Body Limits
 

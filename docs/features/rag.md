@@ -73,4 +73,14 @@ Collectors run on configurable schedules via Taskiq + RabbitMQ.
 - Background workers for ingestion, publishing, and scheduled operations
 - Job tracking with status events and progress reporting
 
+## RAG Lite
+
+When the full RAG module is not enabled, the gateway provides an embedded **RAG Lite** mode:
+
+- **pgvector-based retrieval** directly from the gateway database
+- Semantic search over session attachments and uploaded documents
+- No separate RAG service required — ideal for lightweight deployments
+
+See also: [Gateway — RAG Lite](/docs/features/gateway#rag-lite)
+
 ![RAG Collectors](/img/screenshots/rag_collectors.png)

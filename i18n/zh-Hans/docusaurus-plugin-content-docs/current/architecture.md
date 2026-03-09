@@ -27,6 +27,13 @@ flowchart LR
         API["llm_port_api（兼容 OpenAI /v1/*）"]
     end
 
+    subgraph Modules["模块（可选）"]
+        AUTH["llm_port_auth (SSO/OIDC)"]
+        PII["llm_port_pii (Presidio)"]
+        MAILER["llm_port_mailer (SMTP)"]
+        DOCLING["llm_port_docling (文档解析)"]
+    end
+
     subgraph RAG["RAG 层（内部）"]
         RAGAPI["llm_port_rag API (/api/internal/*)"]
         RAGW["Taskiq Worker"]
@@ -39,7 +46,7 @@ flowchart LR
     end
 
     subgraph Shared["共享平台服务"]
-        PGMAIN["Postgres（后端 + RAG 元数据）"]
+        PGMAIN["Postgres（后端 + 认证 + PII 事件）"]
         PGAPI["Postgres（llm_api 元数据/审计）"]
         REDIS["Redis（速率限制 / 租约 / 缓存）"]
         RMQ["RabbitMQ（Taskiq Broker）"]
@@ -52,6 +59,7 @@ flowchart LR
 
     U1 --> FE
     FE -->|REST /api/*| BE
+    FE -->|/v1/chat/completions| API
     U2 -->|OpenAI API /v1/*| API
 
     BE -->|网关管理/代理| API
@@ -61,12 +69,20 @@ flowchart LR
     BE --> LANGFUSE
     BE --> LOKI
 
+    API -->|PII 扫描| PII
     API -->|路由聊天/嵌入| LOCAL
     API -->|路由聊天/嵌入| REMOTE
     API --> PGAPI
     API --> REDIS
     API --> LANGFUSE
     API --> LOKI
+
+    PII -->|事件转发| BE
+
+    AUTH --> PGMAIN
+    BE -->|SSO 认证| AUTH
+    BE -->|发送邮件| MAILER
+    BE -->|文档解析| DOCLING
 
     RAGAPI --> PGMAIN
     RAGAPI --> MINIO
@@ -123,7 +139,7 @@ flowchart LR
 
 | 服务          | 用途                                       |
 | ------------- | ------------------------------------------ |
-| PostgreSQL    | 后端元数据、RAG 向量（pgvector）、网关审计 |
+| PostgreSQL    | 后端元数据、认证、PII 事件、RAG 向量（pgvector）、网关审计 |
 | Redis         | 速率限制、并发租约、缓存                   |
 | RabbitMQ      | 异步任务代理（Taskiq）                     |
 | MinIO         | 上传和快照的对象存储                       |
@@ -136,8 +152,13 @@ flowchart LR
 
 1. **管理员操作** — `浏览器 → 前端 → 后端 → Docker / 设置 / 代理目标`
 2. **应用推理** — `应用/SDK → 网关 → 本地运行时或远程提供商 → 响应`
-3. **RAG 查询** — `前端 → 后端 /api/admin/rag/* → RAG /api/internal/knowledge/search`
-4. **RAG 发布** — `上传 → MinIO → RabbitMQ → Worker → 提取/分块/嵌入/索引`
-5. **可观测性** — `后端 + 网关 + RAG → Loki / Langfuse → Grafana 仪表板`
+3. **控制台聊天** — `前端 → 网关 /v1/chat/completions → LLM → SSE 流式响应`
+4. **RAG 查询** — `前端 → 后端 /api/admin/rag/* → RAG /api/internal/knowledge/search`
+5. **RAG 发布** — `上传 → MinIO → RabbitMQ → Worker → 提取/分块/嵌入/索引`
+6. **PII 筛查** — `网关 → PII 服务 → 返回已脱敏文本 + 事件 → 后端存储`
+7. **SSO 认证** — `前端 → 后端 → Auth 服务 → IdP → JWT 颁发`
+8. **邮件通知** — `后端 → Mailer 服务 → SMTP`
+9. **文档解析** — `后端 → Docling 服务 → 结构化输出`
+10. **可观测性** — `后端 + 网关 + RAG → Loki / Langfuse → Grafana 仪表板`
 
 有关每个流的详细序列图，请参阅[调用序列](/docs/call-sequences)。

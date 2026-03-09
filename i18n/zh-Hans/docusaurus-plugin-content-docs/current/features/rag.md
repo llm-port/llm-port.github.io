@@ -67,6 +67,16 @@ sidebar_position: 5
 
 采集器通过 Taskiq + RabbitMQ 按可配置计划运行。
 
+## RAG Lite
+
+对于不需要完整 RAG 管道（RabbitMQ、MinIO、Worker）的部署，**RAG Lite** 提供轻量级替代：
+
+- 内嵌于 Gateway 进程的文档分块和嵌入
+- 直接 pgvector 存储，无需 MinIO
+- 同步处理，无需消息队列
+
+有关启用 RAG Lite 的详细信息，请参阅 [Gateway 文档](/docs/features/gateway)。
+
 ## 异步处理
 
 - **Taskiq** 任务运行器，以 RabbitMQ 为消息代理

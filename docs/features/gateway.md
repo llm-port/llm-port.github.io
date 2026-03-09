@@ -64,3 +64,36 @@ The gateway supports **SSE (Server-Sent Events) streaming** with:
 - Distributed **per-instance leasing** via Redis + Lua scripts
 - Prevents overloading individual provider instances
 - Leases are automatically released on request completion (including errors)
+
+## Chat & Sessions
+
+The gateway includes a built-in chat experience with persistent sessions and memory:
+
+### Chat Console
+
+- **Project-scoped conversations** with per-session message history
+- **Session management**: full CRUD for projects, sessions, and messages via API
+- Console chat is proxied through the backend (`Frontend → Backend → Gateway`) with cookie-to-JWT conversion
+
+### Memory System
+
+- **Persistent user-defined facts** at project or session scope
+- Memory facts are automatically **injected into context** at completion time
+- Full CRUD API: `POST /v1/memory/facts`, `GET /v1/memory/facts`, `DELETE /v1/memory/facts/{id}`
+
+### File Attachments
+
+- **Upload files** to sessions or projects with automatic text extraction
+- **IBM Docling integration** for rich extraction (tables, pages, images) with local fallback
+- Extracted text is assembled into chat context at completion time
+- API: `POST /v1/sessions/{id}/attachments`
+
+### RAG Lite
+
+- Embedded **pgvector-based retrieval** when the full RAG module is not enabled
+- Provides basic semantic search over session attachments directly from the gateway
+
+### Admin Oversight
+
+- Backend mirror routes for admin management of all chat activity
+- Full visibility into sessions, messages, and attachments across tenants

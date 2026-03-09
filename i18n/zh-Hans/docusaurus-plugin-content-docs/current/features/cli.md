@@ -81,3 +81,18 @@ llmport config env    # 为开发或生产环境生成 .env 文件
 - 随机生成的密钥（JWT 密钥、Fernet 密钥、数据库密码）
 - 来自注册表的服务 URL 和端口
 - 模块特定配置
+
+### Auto-Tune
+
+```bash
+llmport tune    # 对主机进行基准测试并生成推荐配置
+```
+
+`tune` 命令分析当前主机的 CPU、内存和磁盘，然后输出推荐配置：
+
+- Uvicorn Worker 数量
+- 数据库连接池大小
+- Docker 资源限制（CPU 配额、内存限制）
+- 最大并发量和批大小设置
+
+生成的值可以直接写入 `.env` 或通过 `llmport config set` 应用。

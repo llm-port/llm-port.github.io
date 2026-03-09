@@ -4,17 +4,18 @@ sidebar_position: 4
 
 # Modules
 
-**llm.Port** uses a modular architecture — optional capabilities can be enabled or disabled without changing the core platform. Modules are implemented as separate Docker Compose services with their own databases and APIs.
+**llm.Port** uses a modular architecture — optional capabilities can be enabled or disabled without changing the core platform. Modules are implemented as separate Docker Compose services with their own APIs.
 
 ## Available Modules
 
-| Module      | Description                                                        | Default  |
-| ----------- | ------------------------------------------------------------------ | -------- |
-| **rag**     | Retrieval-Augmented Generation — document ingestion, vector search | Enabled  |
-| **pii**     | PII detection and redaction (Presidio + spaCy)                     | Enabled  |
-| **auth**    | External authentication provider (SSO / OIDC)                      | Disabled |
-| **mailer**  | Email notifications and alerts                                     | Disabled |
-| **docling** | Advanced document parsing & conversion (IBM Docling)               | Disabled |
+| Module       | Description                                                        | Default  |
+| ------------ | ------------------------------------------------------------------ | -------- |
+| **rag**      | Retrieval-Augmented Generation — document ingestion, vector search | Enabled  |
+| **pii**      | PII detection and redaction (Presidio + spaCy)                     | Enabled  |
+| **sessions** | Chat sessions, memory facts, and file attachments                  | Enabled  |
+| **auth**     | External authentication provider (SSO / OIDC)                      | Disabled |
+| **mailer**   | Email notifications and alerts                                     | Disabled |
+| **docling**  | Advanced document parsing & conversion (IBM Docling)               | Disabled |
 
 ## Enabling / Disabling
 
@@ -66,6 +67,11 @@ Adding a module requires approximately **20 lines of configuration**:
 Each module:
 
 - Runs in its own container(s)
-- Has its own database (if needed)
 - Communicates with the backend via internal APIs
 - Can be started/stopped independently
+
+Some modules (RAG, gateway) use their own database schemas, while others (PII, mailer) are stateless or share the backend database.
+
+### Module Sync Callbacks
+
+When a module is enabled or disabled, the module registry runs **sync callbacks** to perform cleanup or initialization tasks. For example, disabling the PII module clears cached PII policies, while enabling the auth module triggers provider discovery.

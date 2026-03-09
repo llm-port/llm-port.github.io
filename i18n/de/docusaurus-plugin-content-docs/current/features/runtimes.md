@@ -49,6 +49,13 @@ Analysiert Modell-Artefakte automatisch:
 - Docker-orchestrierte **HuggingFace-Modell-Downloads**
 - Pull-Tracking mit Fortschrittsberichten
 - Artefakt-Caching und Deduplizierung
+- **HuggingFace-Suche**: Modelle direkt aus der Admin-Konsole durchsuchen
+
+## Runtime-Abgleich
+
+- Automatische Synchronisierung zwischen der Modell-Registry der Plattform und laufenden Runtimes
+- **Gateway-Sync**: stellt sicher, dass Alias-zu-Anbieter-Mappings aktuell bleiben, wenn sich Runtimes ändern
+- Einheitlicher Scheduler für Health-Checks und Status-Polling über alle registrierten Runtimes
 
 ## LLM-Topologie-Graph
 

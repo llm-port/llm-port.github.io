@@ -63,3 +63,12 @@ sidebar_position: 2
 - 通过 Redis + Lua 脚本实现分布式**每实例租约**
 - 防止单个提供商实例过载
 - 完成时（包括通过 `finally` 块的错误情况）自动释放租约
+
+## Cookie 认证
+
+管理控制台使用基于 **httponly cookie** 的会话管理：
+
+- 登录成功后设置安全的 httponly cookie
+- Gateway 中间件自动将 cookie 转换为 JWT 以供内部服务使用
+- 支持 SameSite 和 Secure cookie 属性
+- 配合 SSO 流程实现 302 重定向后无缝会话建立

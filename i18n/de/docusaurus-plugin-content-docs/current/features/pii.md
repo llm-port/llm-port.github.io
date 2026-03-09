@@ -8,7 +8,9 @@ Das **PII-Modul** (`llm_port_pii`) bietet Presidio-basiertes PII-Scanning, Anony
 
 ## Funktionsweise
 
-Die PII-Erkennung läuft als eigenständiger FastAPI-Service, den das Gateway während der Anfrageverarbeitung aufruft. Wenn aktiviert, können ausgehende Anfragen auf personenbezogene Daten gescannt werden, bevor sie Upstream-Anbieter erreichen.
+Die PII-Erkennung läuft als **zustandsloser** FastAPI-Service, den das Gateway während der Anfrageverarbeitung aufruft. Wenn aktiviert, können ausgehende Anfragen auf personenbezogene Daten gescannt werden, bevor sie Upstream-Anbieter erreichen.
+
+Der PII-Service selbst hat keine Datenbank — Scan-Ereignisse werden per HTTP an das Backend weitergeleitet und in der Backend-Datenbank für Dashboards und Audit gespeichert.
 
 ## Entity-Typen
 
@@ -52,3 +54,11 @@ Jede Richtlinie konfiguriert:
 - **Telemetrie-Bereinigung**: PII-Entities werden basierend auf dem Datenschutzmodus aus Langfuse-Traces entfernt
 - **Egress-Kontrolle**: Ausgehende Anfragen können blockiert oder anonymisiert werden, bevor sie Remote-Anbieter erreichen
 - **Modulbewusste UI**: PII-Einstellungen werden in der Admin-Konsole ausgeblendet, wenn das Modul deaktiviert ist
+
+## Dashboard & Ereignisprotokoll
+
+PII-Scan-Ereignisse werden vom PII-Service an das Backend weitergeleitet und in der `pii_scan_events`-Tabelle gespeichert. Die Admin-Konsole bietet:
+
+- **PII-Dashboard**: Überblick über Scan-Aktivitäten, Entity-Typ-Verteilung und Richtlinien-Trefferquoten
+- **Ereignisprotokoll**: Durchsuchbarer Verlauf aller PII-Scan-Ereignisse mit Entity-Details und Anonymisierungsaktionen
+- **Tenant-Richtlinien-Verwaltung**: Per-Tenant-PII-Richtlinien, Entity-Typen und Fail-Modi über die Einstellungs-UI konfigurieren

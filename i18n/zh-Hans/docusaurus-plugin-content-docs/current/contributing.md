@@ -89,6 +89,23 @@ uv run uvicorn llm_port_api.main:app --reload --port 4000
 
 在相关仓库中提交 Issue，或使用[组织主讨论区](https://github.com/orgs/llm-port/discussions)讨论跨模块问题。
 
+## 贡献者许可协议 (CLA)
+
+我们使用 **CLA Assistant** 来管理贡献者许可协议。当您首次提交 Pull Request 时：
+
+1. CLA bot 会自动添加评论并提供签署链接
+2. 通过 GitHub 账户签署 CLA（一次性操作）
+3. 签署后，您当前和未来的所有 PR 均自动通过检查
+
+提供**个人 CLA** 和**企业 CLA**：
+
+- **个人 CLA** — 以个人身份贡献
+- **企业 CLA** — 代表组织贡献（适合由雇主授权的贡献者）
+
+:::note
+CLA 签署是一次性要求。签署后即覆盖该 GitHub 账户的所有未来贡献。
+:::
+
 ## 许可证
 
 提交贡献即表示您同意您的贡献将以 **Apache 2.0** 许可证授权。

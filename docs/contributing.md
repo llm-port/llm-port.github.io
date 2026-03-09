@@ -89,6 +89,14 @@ uv run uvicorn llm_port_api.main:app --reload --port 4000
 
 Open an issue in the relevant repository, or use the [main org discussions](https://github.com/orgs/llm-port/discussions) for cross-cutting topics.
 
+## Contributor License Agreement (CLA)
+
+All contributors must sign a **Contributor License Agreement (CLA)** before their pull request can be merged. The CLA ensures that contributions are properly licensed and that the project can continue to be distributed under its open-source license.
+
+- A CLA bot will automatically comment on your first pull request with signing instructions
+- Signing is a one-time process — once signed, it applies to all future contributions
+- The CLA covers both individual and corporate contributions
+
 ## License
 
 By contributing, you agree that your contributions will be licensed under **Apache 2.0**.
