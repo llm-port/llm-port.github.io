@@ -8,14 +8,25 @@ sidebar_position: 4
 
 ## Available Modules
 
-| Module       | Description                                                        | Default  |
-| ------------ | ------------------------------------------------------------------ | -------- |
-| **rag**      | Retrieval-Augmented Generation — document ingestion, vector search | Enabled  |
-| **pii**      | PII detection and redaction (Presidio + spaCy)                     | Enabled  |
-| **sessions** | Chat sessions, memory facts, and file attachments                  | Enabled  |
-| **auth**     | External authentication provider (SSO / OIDC)                      | Disabled |
-| **mailer**   | Email notifications and alerts                                     | Disabled |
-| **docling**  | Advanced document parsing & conversion (IBM Docling)               | Disabled |
+### Core Modules (Apache 2.0)
+
+| Module       | Description                                       | Default |
+| ------------ | ------------------------------------------------- | ------- |
+| **pii**      | PII detection and redaction (Presidio + spaCy)    | Enabled |
+| **sessions** | Chat sessions, memory facts, and file attachments | Enabled |
+
+### Enterprise Modules (EE License)
+
+| Module      | Description                                          | Default  |
+| ----------- | ---------------------------------------------------- | -------- |
+| **rag**     | RAG Pro — full ingestion, vector search, collectors  | Disabled |
+| **auth**    | External authentication provider (SSO / OIDC)        | Disabled |
+| **mailer**  | Email notifications and alerts                       | Disabled |
+| **docling** | Advanced document parsing & conversion (IBM Docling) | Disabled |
+
+:::note
+The core backend includes **RAG Lite** (embedded pgvector-based retrieval) and a **lightweight document parser** as fallbacks when the full RAG and Docling modules are not enabled. Basic authentication via FastAPI Users is always available in core.
+:::
 
 ## Enabling / Disabling
 

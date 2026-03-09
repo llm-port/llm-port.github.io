@@ -14,13 +14,19 @@ Contributions to **llm.Port** are welcome! Here's how to get started.
 - Node.js 20+
 - Docker Engine 24+ with Compose V2
 - Git
+- [uv](https://docs.astral.sh/uv/) (recommended Python package manager)
 
-### Clone and bootstrap
+### Automated setup via CLI
 
-The CLI provides a one-command developer setup:
+The CLI provides a one-command developer bootstrap:
 
 ```bash
 pip install llmport-cli
+
+# Check and optionally install missing prerequisites
+llmport dev doctor --install
+
+# Bootstrap the full workspace
 llmport dev init ~/projects/llm-port
 ```
 
@@ -28,8 +34,25 @@ This will:
 
 1. Clone all repositories
 2. Install Python and Node.js dependencies
-3. Start shared infrastructure (Postgres, Redis, etc.)
+3. Start shared infrastructure (Postgres, Redis, Grafana, Loki)
 4. Run database migrations
+5. Generate `.env` files with development defaults
+6. Create a VS Code multi-root workspace file
+
+To launch the dev environment after init:
+
+```bash
+llmport dev up       # start backend + worker + frontend
+llmport dev status   # check repo branches and service status
+```
+
+#### Useful flags
+
+```bash
+llmport dev init --force-env ~/projects/llm-port   # regenerate .env files
+llmport dev init --install-prereqs ~/projects/llm-port  # auto-install missing tools
+llmport dev doctor --install -y   # install missing tools without prompting
+```
 
 ### Manual setup
 

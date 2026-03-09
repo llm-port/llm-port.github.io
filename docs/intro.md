@@ -18,6 +18,7 @@ slug: /intro
 ### Prerequisites
 
 - Docker Engine 24+ with Compose V2
+- Python 3.12+ (or [uv](https://docs.astral.sh/uv/))
 - 8 GB RAM (16 GB recommended for local model runtimes)
 - GPU (optional) — NVIDIA, AMD, or Intel for local inference
 
@@ -33,7 +34,7 @@ pip install llmport-cli
 llmport doctor
 ```
 
-This validates your OS, Docker, Compose, GPU drivers, RAM, disk, and port availability.
+This validates Docker, Compose, GPU drivers, RAM, disk, and port availability.
 
 ### 3. Start shared services
 
@@ -66,9 +67,27 @@ curl http://localhost:4000/v1/chat/completions \
 
 The gateway is fully OpenAI-compatible — any SDK or tool that speaks the OpenAI API works out of the box.
 
+## Developer Setup
+
+For contributing or running from source:
+
+```bash
+# Check and install dev prerequisites
+llmport dev doctor --install
+
+# Bootstrap a full development workspace
+llmport dev init ~/projects/llm-port
+
+# Launch backend + worker + frontend
+llmport dev up
+```
+
+See [Contributing](/docs/contributing) for details.
+
 ## What's next?
 
 - [Architecture](/docs/architecture) — how the platform is structured
 - [Features](/docs/features/gateway) — detailed feature documentation
 - [Modules](/docs/modules) — enable/disable optional capabilities
 - [Repositories](/docs/repos) — the full codebase layout
+- [Contributing](/docs/contributing) — development setup and guidelines
