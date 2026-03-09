@@ -69,3 +69,7 @@ Los permisos se evalúan por solicitud tanto en la API de administración como e
 - **Arrendamiento por instancia** distribuido vía Redis + scripts Lua
 - Previene la sobrecarga de instancias individuales de proveedores
 - Liberación automática del arrendamiento al completar (incluidos errores vía bloques `finally`)
+
+![Security Overview](/img/screenshots/security_overview.png)
+
+![User Profile](/img/screenshots/profile.png)

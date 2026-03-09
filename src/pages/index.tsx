@@ -114,11 +114,16 @@ type Screenshot = { src: string; alt: string };
 
 const screenshots: Screenshot[] = [
   { src: "/img/screenshots/dashboard.png", alt: "Dashboard" },
+  { src: "/img/screenshots/chat.png", alt: "Chat Console" },
   { src: "/img/screenshots/containers.png", alt: "Container Management" },
   { src: "/img/screenshots/llm_providers.png", alt: "LLM Providers" },
   {
     src: "/img/screenshots/llm_provider_details.png",
     alt: "Provider Details",
+  },
+  {
+    src: "/img/screenshots/llm_provider_local.png",
+    alt: "Local Runtime",
   },
   { src: "/img/screenshots/models.png", alt: "Models" },
   { src: "/img/screenshots/logging.png", alt: "Logging" },
@@ -127,8 +132,11 @@ const screenshots: Screenshot[] = [
     src: "/img/screenshots/security_overview.png",
     alt: "Security Overview",
   },
+  { src: "/img/screenshots/profile.png", alt: "User Profile" },
   { src: "/img/screenshots/pii.png", alt: "PII Detection" },
+  { src: "/img/screenshots/rag_kb.png", alt: "Knowledge Base" },
   { src: "/img/screenshots/rag_collectors.png", alt: "RAG Collectors" },
+  { src: "/img/screenshots/scheduler.png", alt: "Scheduled Publishing" },
   { src: "/img/screenshots/modules.png", alt: "Modules" },
   { src: "/img/screenshots/settings.png", alt: "Settings" },
   { src: "/img/screenshots/api.png", alt: "API Playground" },

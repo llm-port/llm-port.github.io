@@ -72,3 +72,7 @@ sidebar_position: 2
 - Gateway 中间件自动将 cookie 转换为 JWT 以供内部服务使用
 - 支持 SameSite 和 Secure cookie 属性
 - 配合 SSO 流程实现 302 重定向后无缝会话建立
+
+![Security Overview](/img/screenshots/security_overview.png)
+
+![User Profile](/img/screenshots/profile.png)

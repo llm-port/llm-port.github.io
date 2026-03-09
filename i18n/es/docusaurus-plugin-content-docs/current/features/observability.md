@@ -56,3 +56,7 @@ La consola de administración incluye:
 - Resúmenes de uso de tokens por tenant, modelo y ventana de tiempo
 
 ![Dashboard](/img/screenshots/dashboard.png)
+
+![Trace Viewer](/img/screenshots/trace.png)
+
+![Logging](/img/screenshots/logging.png)

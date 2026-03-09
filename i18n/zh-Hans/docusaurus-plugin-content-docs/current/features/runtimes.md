@@ -71,3 +71,9 @@ sidebar_position: 7
 - 实时请求流叠加
 
 ![LLM Providers](/img/screenshots/llm_providers.png)
+
+![Provider Details](/img/screenshots/llm_provider_details.png)
+
+![Local Runtime](/img/screenshots/llm_provider_local.png)
+
+![Models](/img/screenshots/models.png)

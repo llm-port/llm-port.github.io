@@ -125,3 +125,5 @@ llmport doctor
 ```
 
 Für manuelle GPU-Konfiguration, siehe die Dokumentation zur [LLM-Laufzeitverwaltung](/docs/features/runtimes).
+
+![Settings](/img/screenshots/settings.png)

@@ -62,3 +62,5 @@ PII-Scan-Ereignisse werden vom PII-Service an das Backend weitergeleitet und in 
 - **PII-Dashboard**: Überblick über Scan-Aktivitäten, Entity-Typ-Verteilung und Richtlinien-Trefferquoten
 - **Ereignisprotokoll**: Durchsuchbarer Verlauf aller PII-Scan-Ereignisse mit Entity-Details und Anonymisierungsaktionen
 - **Tenant-Richtlinien-Verwaltung**: Per-Tenant-PII-Richtlinien, Entity-Typen und Fail-Modi über die Einstellungs-UI konfigurieren
+
+![PII Detection](/img/screenshots/pii.png)

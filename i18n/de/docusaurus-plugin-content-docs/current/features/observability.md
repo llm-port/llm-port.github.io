@@ -56,3 +56,7 @@ Die Admin-Konsole enthält:
 - Token-Nutzungszusammenfassungen pro Tenant, Modell und Zeitfenster
 
 ![Dashboard](/img/screenshots/dashboard.png)
+
+![Trace Viewer](/img/screenshots/trace.png)
+
+![Logging](/img/screenshots/logging.png)

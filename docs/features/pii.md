@@ -62,3 +62,5 @@ PII scan events are forwarded from the PII service to the backend and stored in 
 - **PII dashboard**: overview of scan activity, entity type distribution, and policy hit rates
 - **Event log**: searchable history of all PII scan events with entity details and redaction actions
 - **Tenant policy admin**: configure per-tenant PII policies, entity types, and fail modes from the settings UI
+
+![PII Detection](/img/screenshots/pii.png)

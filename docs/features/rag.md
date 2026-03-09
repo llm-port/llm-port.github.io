@@ -83,4 +83,8 @@ When the full RAG module is not enabled, the gateway provides an embedded **RAG 
 
 See also: [Gateway — RAG Lite](/docs/features/gateway#rag-lite)
 
+![RAG Knowledge Base](/img/screenshots/rag_kb.png)
+
 ![RAG Collectors](/img/screenshots/rag_collectors.png)
+
+![Scheduled Publishing](/img/screenshots/scheduler.png)

@@ -83,4 +83,8 @@ Cuando el módulo RAG completo no está habilitado, el gateway proporciona un mo
 
 Ver también: [Gateway — RAG Lite](/docs/features/gateway#rag-lite)
 
+![RAG Knowledge Base](/img/screenshots/rag_kb.png)
+
 ![RAG Collectors](/img/screenshots/rag_collectors.png)
+
+![Scheduled Publishing](/img/screenshots/scheduler.png)

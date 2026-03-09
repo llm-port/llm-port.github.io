@@ -83,4 +83,8 @@ sidebar_position: 5
 - 用于摄入、发布和计划操作的后台 Worker
 - 带状态事件和进度报告的作业追踪
 
+![RAG Knowledge Base](/img/screenshots/rag_kb.png)
+
 ![RAG Collectors](/img/screenshots/rag_collectors.png)
+
+![Scheduled Publishing](/img/screenshots/scheduler.png)

@@ -66,3 +66,9 @@ Topología visual de toda la infraestructura LLM:
 - Superposición del flujo de solicitudes en tiempo real
 
 ![LLM Providers](/img/screenshots/llm_providers.png)
+
+![Provider Details](/img/screenshots/llm_provider_details.png)
+
+![Local Runtime](/img/screenshots/llm_provider_local.png)
+
+![Models](/img/screenshots/models.png)

@@ -74,7 +74,7 @@ llmport module enable mailer  # Email notifications
 llmport module enable docling # Document processing
 llmport module enable sessions # Chat sessions & memory
 ```
-
+![Settings](/img/screenshots/settings.png)
 ## Docker Compose
 
 The platform uses Docker Compose profiles for modular deployment:

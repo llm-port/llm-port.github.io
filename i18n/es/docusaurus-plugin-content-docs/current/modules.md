@@ -69,3 +69,5 @@ Cada módulo:
 - Tiene su propia base de datos (si es necesario)
 - Se comunica con el backend a través de APIs internas
 - Puede iniciarse/detenerse de forma independiente
+
+![Modules](/img/screenshots/modules.png)

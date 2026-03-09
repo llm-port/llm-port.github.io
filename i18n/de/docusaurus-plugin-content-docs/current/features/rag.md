@@ -83,4 +83,8 @@ Wenn das vollständige RAG-Modul nicht aktiviert ist, bietet das Gateway einen i
 
 Siehe auch: [Gateway — RAG Lite](/docs/features/gateway#rag-lite)
 
+![RAG Knowledge Base](/img/screenshots/rag_kb.png)
+
 ![RAG Collectors](/img/screenshots/rag_collectors.png)
+
+![Scheduled Publishing](/img/screenshots/scheduler.png)

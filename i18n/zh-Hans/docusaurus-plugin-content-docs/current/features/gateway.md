@@ -64,3 +64,7 @@ Gateway 支持 **SSE（Server-Sent Events）流式传输**，具备：
 - 通过 Redis + Lua 脚本实现分布式**每实例租约**
 - 防止单个提供商实例过载
 - 请求完成时（包括错误）自动释放租约
+
+![Chat Console](/img/screenshots/chat.png)
+
+![API Playground](/img/screenshots/api.png)

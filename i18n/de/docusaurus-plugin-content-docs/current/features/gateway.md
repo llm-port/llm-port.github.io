@@ -64,3 +64,7 @@ Das Gateway unterstützt **SSE (Server-Sent Events) Streaming** mit:
 - Verteiltes **per-Instanz-Leasing** über Redis + Lua-Skripten
 - Verhindert Überlastung einzelner Provider-Instanzen
 - Leases werden automatisch beim Abschluss der Anfrage freigegeben (auch bei Fehlern)
+
+![Chat Console](/img/screenshots/chat.png)
+
+![API Playground](/img/screenshots/api.png)

@@ -57,6 +57,10 @@ The admin console includes:
 
 ![Dashboard](/img/screenshots/dashboard.png)
 
+![Trace Viewer](/img/screenshots/trace.png)
+
+![Logging](/img/screenshots/logging.png)
+
 ## Notifications & Alerts
 
 Event-driven notification pipeline for system alerts and user workflows:

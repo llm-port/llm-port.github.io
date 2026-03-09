@@ -75,3 +75,7 @@ Permissions are evaluated per-request across both the admin API and the gateway.
 - Distributed **per-instance leasing** via Redis + Lua scripts
 - Prevents overloading individual provider instances
 - Automatic lease release on completion (including errors via `finally` blocks)
+
+![Security Overview](/img/screenshots/security_overview.png)
+
+![User Profile](/img/screenshots/profile.png)

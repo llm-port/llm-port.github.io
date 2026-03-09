@@ -64,3 +64,7 @@ El gateway soporta **streaming SSE (Server-Sent Events)** con:
 - **Arrendamiento por instancia** distribuido vía Redis + scripts Lua
 - Previene la sobrecarga de instancias individuales de proveedores
 - Los arrendamientos se liberan automáticamente al completar la solicitud (incluidos errores)
+
+![Chat Console](/img/screenshots/chat.png)
+
+![API Playground](/img/screenshots/api.png)

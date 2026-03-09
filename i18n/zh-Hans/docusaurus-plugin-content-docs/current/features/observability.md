@@ -56,3 +56,7 @@ sidebar_position: 4
 - 按租户、模型和时间窗口的 Token 用量摘要
 
 ![Dashboard](/img/screenshots/dashboard.png)
+
+![Trace Viewer](/img/screenshots/trace.png)
+
+![Logging](/img/screenshots/logging.png)

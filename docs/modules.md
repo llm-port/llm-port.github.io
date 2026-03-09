@@ -75,3 +75,5 @@ Some modules (RAG, gateway) use their own database schemas, while others (PII, m
 ### Module Sync Callbacks
 
 When a module is enabled or disabled, the module registry runs **sync callbacks** to perform cleanup or initialization tasks. For example, disabling the PII module clears cached PII policies, while enabling the auth module triggers provider discovery.
+
+![Modules](/img/screenshots/modules.png)

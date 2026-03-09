@@ -69,3 +69,7 @@ Berechtigungen werden pro Anfrage sowohl für die Admin-API als auch für das Ga
 - Verteiltes **per-Instanz-Leasing** über Redis + Lua-Skripten
 - Verhindert Überlastung einzelner Provider-Instanzen
 - Automatische Lease-Freigabe beim Abschluss (auch bei Fehlern via `finally`-Blöcke)
+
+![Security Overview](/img/screenshots/security_overview.png)
+
+![User Profile](/img/screenshots/profile.png)

@@ -125,3 +125,5 @@ llmport doctor
 ```
 
 手动 GPU 配置请参见 [LLM 运行时管理](/docs/features/runtimes) 文档。
+
+![Settings](/img/screenshots/settings.png)

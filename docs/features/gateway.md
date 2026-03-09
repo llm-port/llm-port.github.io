@@ -97,3 +97,7 @@ The gateway includes a built-in chat experience with persistent sessions and mem
 
 - Backend mirror routes for admin management of all chat activity
 - Full visibility into sessions, messages, and attachments across tenants
+
+![Chat Console](/img/screenshots/chat.png)
+
+![API Playground](/img/screenshots/api.png)

@@ -62,3 +62,5 @@ Los eventos de escaneo PII se reenvían del servicio PII al backend y se almacen
 - **Dashboard de PII**: visión general de la actividad de escaneo, distribución de tipos de entidad y tasas de coincidencia de políticas
 - **Registro de eventos**: historial buscable de todos los eventos de escaneo PII con detalles de entidades y acciones de redacción
 - **Administración de políticas de tenant**: configurar políticas PII por tenant, tipos de entidad y modos de fallo desde la UI de configuración
+
+![PII Detection](/img/screenshots/pii.png)
