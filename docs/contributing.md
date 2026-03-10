@@ -18,41 +18,22 @@ Contributions to **llm.Port** are welcome! Here's how to get started.
 
 ### Automated setup via CLI
 
-The CLI provides a one-command developer bootstrap:
-
 ```bash
 pip install llmport-cli
 
 # Check and optionally install missing prerequisites
-llmport dev doctor --install
+llmport doctor
 
 # Bootstrap the full workspace
 llmport dev init ~/projects/llm-port
+
+# Start development servers
+llmport dev up
 ```
 
-This will:
+Open **http://localhost:5173** — log in with `admin@localhost` / `admin`.
 
-1. Clone all repositories
-2. Install Python and Node.js dependencies
-3. Start shared infrastructure (Postgres, Redis, Grafana, Loki)
-4. Run database migrations
-5. Generate `.env` files with development defaults
-6. Create a VS Code multi-root workspace file
-
-To launch the dev environment after init:
-
-```bash
-llmport dev up       # start backend + worker + frontend
-llmport dev status   # check repo branches and service status
-```
-
-#### Useful flags
-
-```bash
-llmport dev init --force-env ~/projects/llm-port   # regenerate .env files
-llmport dev init --install-prereqs ~/projects/llm-port  # auto-install missing tools
-llmport dev doctor --install -y   # install missing tools without prompting
-```
+See the [Deployment guide](/docs/deployment) for all available flags and options.
 
 ### Manual setup
 
