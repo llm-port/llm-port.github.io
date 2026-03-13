@@ -29,12 +29,74 @@
   "feature.ops.description": {
     "message": "完整的容器生命周期管理、带 SSE 进度的镜像拉取、Compose 栈部署/回滚（含版本和审计跟踪）。多厂商 GPU 自动检测（NVIDIA、AMD、Intel、Apple Metal）。"
   },
-  "feature.cli.title": {
-    "message": "CLI 与自动化"
+  "feature.chat.title": {
+    "message": "聊天控制台"
   },
-  "feature.cli.description": {
-    "message": "llmport up/down/status/logs，交互式生产安装器（GPU 自动检测和 TUI），dev init 完整开发者工作区设置，doctor 健康检查和 .env 生成。"
+  "feature.chat.description": {
+    "message": "内置聊天界面，支持 SSE 流式传输、拖放式会话管理、错误重试、深色/浅色主题以及按模型的使用量跟踪。支持所有通过网关连接的模型。"
   },
+  "hero.gtcBadge": {
+    "message": "GTC 2026 — 企业级推理基础设施"
+  },
+  "hero.languages": {
+    "message": "支持 English、Deutsch、Español、中文"
+  },
+  "section.architecture.title": {
+    "message": "工作原理"
+  },
+  "section.comparison.title": {
+    "message": "llm.port 对比"
+  },
+  "section.roadmap.title": {
+    "message": "路线图"
+  },
+  "arch.gateway.title": { "message": "API 网关" },
+  "arch.gateway.desc": { "message": "兼容 OpenAI 的 /v1/* 端点。路由到 vLLM、llama.cpp、Ollama、TGI 及远程提供商（OpenAI、Azure 等）。SSE 流式传输、基于别名的模型解析、重试和速率限制。" },
+  "arch.pii.title": { "message": "PII 层" },
+  "arch.pii.desc": { "message": "Microsoft Presidio 集成，用于实时检测和脱敏。租户级策略，可配置实体类型和故障安全模式。" },
+  "arch.gpu.title": { "message": "GPU 编排" },
+  "arch.gpu.desc": { "message": "自动检测 NVIDIA (CUDA)、AMD (ROCm) 和 Intel GPU。使用正确的镜像（CUDA / ROCm / Legacy）启动 vLLM 容器。HuggingFace 缓存挂载实现快速模型加载。" },
+  "arch.storage.title": { "message": "存储" },
+  "arch.storage.desc": { "message": "PostgreSQL + pgvector 用于向量搜索（RAG）。Redis 用于速率限制、会话缓存和分布式租约。MinIO 用于兼容 S3 的文档存储。" },
+  "arch.observability.title": { "message": "可观测性" },
+  "arch.observability.desc": { "message": "Langfuse 用于 LLM 追踪（含隐私模式）。Grafana + Loki + Alloy 用于集中式日志。OpenTelemetry + Jaeger 用于分布式追踪。Prometheus 指标。" },
+  "arch.controlplane.title": { "message": "控制平面" },
+  "arch.controlplane.desc": { "message": "FastAPI 后端，用于 RBAC、设置、Docker 编排、模块生命周期、Agent 基础设施和带版本跟踪的 Compose 栈管理。" },
+  "gtc.label": { "message": "GTC 2026" },
+  "gtc.heading": { "message": "企业级推理基础设施" },
+  "gtc.body": { "message": "部署 GTC 2026 上展示的模型和加速器架构的团队，需要的不仅仅是运行时 ── 他们需要一个安全网关。llm.port 提供缺失的生产层：一个兼容 OpenAI 的 API 网关，内置 PII 脱敏、RBAC 和完整可观测性 ── 全部运行在您的私有 VPC 内。数据不会离开您的边界。" },
+  "gtc.feature.gateway": { "message": "安全 API 网关，支持速率限制、重试和基于别名的模型路由" },
+  "gtc.feature.pii": { "message": "入口和出口前的 PII 脱敏 ── 基于 Microsoft Presidio" },
+  "gtc.feature.gpu": { "message": "多厂商 GPU 自动检测（NVIDIA CUDA、AMD ROCm、Intel）并自动选择 vLLM 镜像" },
+  "gtc.feature.observability": { "message": "企业级可观测性：Langfuse LLM 追踪、Grafana 仪表板和 OpenTelemetry" },
+  "gtc.feature.sovereign": { "message": "气隙式、主权部署 ── 无外部云依赖" },
+  "comparison.header.feature": { "message": "功能" },
+  "comparison.gateway": { "message": "兼容 OpenAI 的网关" },
+  "comparison.pii": { "message": "PII 脱敏层" },
+  "comparison.rag": { "message": "RAG 管道" },
+  "comparison.gpu": { "message": "GPU 自动检测" },
+  "comparison.observability": { "message": "LLM 追踪" },
+  "comparison.rbac": { "message": "RBAC / 多租户" },
+  "comparison.containerOps": { "message": "容器运维 UI" },
+  "comparison.cli": { "message": "CLI 工具" },
+  "comparison.adminUi": { "message": "管理界面" },
+  "comparison.chatUi": { "message": "聊天界面" },
+  "comparison.i18n": { "message": "国际化（4 种语言）" },
+  "comparison.selfHosted": { "message": "完全自托管" },
+  "roadmap.docling.title": { "message": "高级 OCR（Docling）" },
+  "roadmap.docling.desc": { "message": "IBM Docling 用于丰富的文档提取 ── 表格、图像、页面。服务框架已有；与 RAG 管道的集成正在进行中。" },
+  "roadmap.status.inProgress": { "message": "进行中" },
+  "roadmap.auth.title": { "message": "认证服务（SSO / OIDC）" },
+  "roadmap.auth.desc": { "message": "专用认证服务，用于外部身份提供商管理。框架和 Compose 配置已定义。" },
+  "roadmap.status.planned": { "message": "计划中" },
+  "roadmap.mailer.title": { "message": "邮件服务" },
+  "roadmap.mailer.desc": { "message": "专用邮件发送服务，用于密码重置、管理员提醒和系统邀请。" },
+  "roadmap.ee.title": { "message": "企业版 Pro 模块" },
+  "roadmap.ee.desc": { "message": "许可框架已就绪（Ed25519 JWT）。PII、RAG 和网关的 Pro 实现即将推出。" },
+  "roadmap.runtimes.title": { "message": "更多运行时" },
+  "roadmap.runtimes.desc": { "message": "TensorRT-LLM、SGLang 及更多托管 API 提供商。" },
+  "roadmap.costs.title": { "message": "精细化成本控制" },
+  "roadmap.costs.desc": { "message": "按租户、模型和用户的使用量分析，支持预算限制和成本分摊。" },
   "hero.description": {
     "message": "路由、保护和观测本地 LLM 运行时与远程提供商之间的流量 ── 为团队提供端到端管理 LLM 服务的统一平台。"
   },

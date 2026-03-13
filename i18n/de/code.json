@@ -29,12 +29,74 @@
   "feature.ops.description": {
     "message": "Vollständiges Container-Lifecycle-Management, Image-Pulls mit SSE-Fortschritt, Compose-Stack-Deploy/Rollback mit Revisionen und Audit-Trail. Multi-Vendor-GPU-Erkennung (NVIDIA, AMD, Intel, Apple Metal)."
   },
-  "feature.cli.title": {
-    "message": "CLI & Automatisierung"
+  "feature.chat.title": {
+    "message": "Chat-Konsole"
   },
-  "feature.cli.description": {
-    "message": "llmport up/down/status/logs, interaktiver Produktions-Installer mit GPU-Erkennung und TUI, dev init für vollständige Entwickler-Workspace-Einrichtung, doctor Gesundheitsprüfungen und .env-Generierung."
+  "feature.chat.description": {
+    "message": "Integrierte Chat-UI mit SSE-Streaming, Drag-and-Drop-Sitzungsverwaltung, Fehlerwiederholung, Dark-/Light-Theming und nutzungsbasiertem Tracking pro Modell. Unterstützt alle über das Gateway verbundenen Modelle."
   },
+  "hero.gtcBadge": {
+    "message": "GTC 2026 — Inferenz-Infrastruktur für Unternehmen"
+  },
+  "hero.languages": {
+    "message": "Verfügbar in English, Deutsch, Español, 中文"
+  },
+  "section.architecture.title": {
+    "message": "So funktioniert es"
+  },
+  "section.comparison.title": {
+    "message": "llm.port im Vergleich"
+  },
+  "section.roadmap.title": {
+    "message": "Roadmap"
+  },
+  "arch.gateway.title": { "message": "API-Gateway" },
+  "arch.gateway.desc": { "message": "OpenAI-kompatibler /v1/*-Endpunkt. Leitet Anfragen an vLLM, llama.cpp, Ollama, TGI und Remote-Anbieter (OpenAI, Azure, …) weiter. SSE-Streaming, alias-basierte Modellauflösung, Retry und Rate-Limiting." },
+  "arch.pii.title": { "message": "PII-Schicht" },
+  "arch.pii.desc": { "message": "Microsoft Presidio-Integration für Echtzeit-Erkennung und -Schwärzung. Mandantenspezifische Richtlinien mit konfigurierbaren Entitätstypen und Fail-Safe-Modi." },
+  "arch.gpu.title": { "message": "GPU-Orchestrierung" },
+  "arch.gpu.desc": { "message": "Automatische Erkennung von NVIDIA (CUDA), AMD (ROCm) und Intel GPUs. Startet vLLM-Container mit dem korrekten Image (CUDA / ROCm / Legacy). HuggingFace-Cache-Mounting für schnelles Laden von Modellen." },
+  "arch.storage.title": { "message": "Speicher" },
+  "arch.storage.desc": { "message": "PostgreSQL mit pgvector für Vektorsuche (RAG). Redis für Rate-Limiting, Sitzungscache und verteiltes Leasing. MinIO für S3-kompatiblen Dokumentenspeicher." },
+  "arch.observability.title": { "message": "Observability" },
+  "arch.observability.desc": { "message": "Langfuse für LLM-Tracing mit Datenschutzmodi. Grafana + Loki + Alloy für zentralisiertes Logging. OpenTelemetry + Jaeger für verteiltes Tracing. Prometheus-Metriken." },
+  "arch.controlplane.title": { "message": "Control Plane" },
+  "arch.controlplane.desc": { "message": "FastAPI-Backend für RBAC, Einstellungen, Docker-Orchestrierung, Modullebenszyklus, Agenten-Infrastruktur und Compose-Stack-Management mit Revisionsverfolgung." },
+  "gtc.label": { "message": "GTC 2026" },
+  "gtc.heading": { "message": "Inferenz-Infrastruktur für Unternehmen" },
+  "gtc.body": { "message": "Teams, die die auf der GTC 2026 vorgestellten Modelle und Beschleuniger-Architekturen einsetzen, benötigen mehr als eine Runtime — sie brauchen ein sicheres Gateway. llm.port liefert die fehlende Produktionsschicht: ein OpenAI-kompatibles API-Gateway mit integrierter PII-Schwärzung, RBAC und vollständiger Observability — alles innerhalb Ihrer privaten VPC. Keine Daten verlassen Ihren Perimeter." },
+  "gtc.feature.gateway": { "message": "Sicheres API-Gateway mit Rate-Limiting, Retry und alias-basiertem Modell-Routing" },
+  "gtc.feature.pii": { "message": "PII-Schwärzung vor Ingress und Egress — Microsoft Presidio-basiert" },
+  "gtc.feature.gpu": { "message": "Multi-Vendor-GPU-Erkennung (NVIDIA CUDA, AMD ROCm, Intel) mit automatischer vLLM-Image-Auswahl" },
+  "gtc.feature.observability": { "message": "Enterprise Observability: Langfuse LLM-Tracing, Grafana-Dashboards und OpenTelemetry" },
+  "gtc.feature.sovereign": { "message": "Air-gapped, souveränes Deployment — keine externe Cloud-Abhängigkeit" },
+  "comparison.header.feature": { "message": "Funktion" },
+  "comparison.gateway": { "message": "OpenAI-kompatibles Gateway" },
+  "comparison.pii": { "message": "PII-Schwärzungsschicht" },
+  "comparison.rag": { "message": "RAG-Pipeline" },
+  "comparison.gpu": { "message": "GPU-Erkennung" },
+  "comparison.observability": { "message": "LLM-Tracing" },
+  "comparison.rbac": { "message": "RBAC / Mandantenfähigkeit" },
+  "comparison.containerOps": { "message": "Container-Ops-UI" },
+  "comparison.cli": { "message": "CLI-Tooling" },
+  "comparison.adminUi": { "message": "Admin-UI" },
+  "comparison.chatUi": { "message": "Chat-UI" },
+  "comparison.i18n": { "message": "i18n (4 Sprachen)" },
+  "comparison.selfHosted": { "message": "Vollständig selbst gehostet" },
+  "roadmap.docling.title": { "message": "Erweiterte OCR (Docling)" },
+  "roadmap.docling.desc": { "message": "IBM Docling für erweiterte Dokumentenextraktion — Tabellen, Bilder, Seiten. Service-Gerüst vorhanden; Integration mit RAG-Pipeline in Arbeit." },
+  "roadmap.status.inProgress": { "message": "In Arbeit" },
+  "roadmap.auth.title": { "message": "Auth-Service (SSO / OIDC)" },
+  "roadmap.auth.desc": { "message": "Dedizierter Auth-Service für externe Identity-Provider-Verwaltung. Framework und Compose-Profil definiert." },
+  "roadmap.status.planned": { "message": "Geplant" },
+  "roadmap.mailer.title": { "message": "Mailer-Service" },
+  "roadmap.mailer.desc": { "message": "Dedizierter E-Mail-Versanddienst für Passwort-Resets, Admin-Benachrichtigungen und Systemeinladungen." },
+  "roadmap.ee.title": { "message": "Enterprise Pro-Module" },
+  "roadmap.ee.desc": { "message": "Lizenz-Framework bereit (Ed25519 JWT). Pro-Implementierungen für PII, RAG und Gateway in Kürze." },
+  "roadmap.runtimes.title": { "message": "Weitere Runtimes" },
+  "roadmap.runtimes.desc": { "message": "TensorRT-LLM, SGLang und weitere verwaltete API-Anbieter." },
+  "roadmap.costs.title": { "message": "Feingranulare Kostenkontrolle" },
+  "roadmap.costs.desc": { "message": "Nutzungsanalysen pro Mandant, Modell und Benutzer mit Budgetlimits und Chargeback-Unterstützung." },
   "hero.description": {
     "message": "Leitet, sichert und überwacht den Datenverkehr zwischen lokalen LLM-Runtimes und Remote-Anbietern — und gibt Teams einen zentralen Ort zur Verwaltung von LLM-Diensten."
   },

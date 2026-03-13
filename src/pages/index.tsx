@@ -82,12 +82,12 @@ const features: FeatureItem[] = [
     ),
   },
   {
-    title: translate({ id: "feature.cli.title", message: "CLI & Automation" }),
-    icon: "⌨️",
+    title: translate({ id: "feature.chat.title", message: "Chat Console" }),
+    icon: "💬",
     description: (
-      <Translate id="feature.cli.description">
+      <Translate id="feature.chat.description">
         {
-          "llmport up/down/status/logs, interactive production installer with GPU auto-detection and TUI, dev init for full developer workspace setup, doctor health checks, and .env generation."
+          "Built-in chat with project-scoped sessions, persistent memory, file attachments, drag-and-drop session management, streaming with token usage tracking, and RAG Lite (embedded pgvector retrieval)."
         }
       </Translate>
     ),
@@ -105,6 +105,92 @@ function Feature({ title, icon, description }: FeatureItem) {
     </div>
   );
 }
+
+/* ------------------------------------------------------------------ */
+/*  Comparison table                                                   */
+/* ------------------------------------------------------------------ */
+
+type ComparisonRow = {
+  feature: string;
+  llmport: string;
+  litellm: string;
+  ollama: string;
+};
+
+const comparisonData: ComparisonRow[] = [
+  {
+    feature: translate({ id: "comparison.gateway", message: "OpenAI-compatible Gateway" }),
+    llmport: "✅",
+    litellm: "✅",
+    ollama: "✅",
+  },
+  {
+    feature: translate({ id: "comparison.adminUi", message: "Admin UI & Ops Console" }),
+    llmport: translate({ id: "comparison.adminUi.llmport", message: "✅ Built-in" }),
+    litellm: translate({ id: "comparison.adminUi.litellm", message: "💰 Paid" }),
+    ollama: "❌",
+  },
+  {
+    feature: translate({ id: "comparison.pii", message: "PII Redaction (Presidio)" }),
+    llmport: translate({ id: "comparison.pii.llmport", message: "✅ Native" }),
+    litellm: "❌",
+    ollama: "❌",
+  },
+  {
+    feature: translate({ id: "comparison.rag", message: "RAG Subsystem (pgvector)" }),
+    llmport: translate({ id: "comparison.rag.llmport", message: "✅ Built-in" }),
+    litellm: "❌",
+    ollama: "❌",
+  },
+  {
+    feature: translate({ id: "comparison.chat", message: "Chat Console with Memory" }),
+    llmport: "✅",
+    litellm: "❌",
+    ollama: "❌",
+  },
+  {
+    feature: translate({ id: "comparison.gpu", message: "Multi-vendor GPU (NVIDIA, AMD, Intel)" }),
+    llmport: translate({ id: "comparison.gpu.llmport", message: "✅ Auto-detect" }),
+    litellm: "❌",
+    ollama: "✅",
+  },
+  {
+    feature: translate({ id: "comparison.langfuse", message: "Langfuse Tracing" }),
+    llmport: translate({ id: "comparison.langfuse.llmport", message: "✅ Embedded" }),
+    litellm: translate({ id: "comparison.langfuse.litellm", message: "🔌 Plugin" }),
+    ollama: "❌",
+  },
+  {
+    feature: translate({ id: "comparison.grafana", message: "Grafana + Loki Logging" }),
+    llmport: translate({ id: "comparison.grafana.llmport", message: "✅ Pre-configured" }),
+    litellm: "❌",
+    ollama: "❌",
+  },
+  {
+    feature: translate({ id: "comparison.rbac", message: "RBAC / JWT / OAuth SSO" }),
+    llmport: "✅",
+    litellm: translate({ id: "comparison.rbac.litellm", message: "💰 Partial" }),
+    ollama: "❌",
+  },
+  {
+    feature: translate({ id: "comparison.i18n", message: "i18n (EN, DE, ES, ZH)" }),
+    llmport: "✅",
+    litellm: "❌",
+    ollama: "❌",
+  },
+  {
+    feature: translate({ id: "comparison.cli", message: "One-command Deploy (CLI)" }),
+    llmport: "✅ llmport deploy",
+    litellm: "❌",
+    ollama: "❌",
+  },
+  {
+    feature: translate({ id: "comparison.license", message: "License" }),
+    llmport: "Apache 2.0",
+    litellm: "MIT + Paid",
+    ollama: "MIT",
+  },
+];
 
 /* ------------------------------------------------------------------ */
 /*  Screenshot gallery                                                 */
@@ -148,92 +234,30 @@ const screenshots: Screenshot[] = [
 
 function Hero() {
   const { siteConfig } = useDocusaurusContext();
-  const showHeroControls = false;
 
-  // Transparency controls – tune these defaults or drag the sliders
-  const [bgOpacity, setBgOpacity] = React.useState(0.18);
-  const [overlayOpacity, setOverlayOpacity] = React.useState(0.72);
-  const [blur, setBlur] = React.useState(2);
-  const [showControls, setShowControls] = React.useState(true);
+  // Transparency controls
+  const [bgOpacity] = React.useState(0.18);
+  const [blur] = React.useState(2);
 
   const heroStyle = {
     "--hero-bg-opacity": bgOpacity,
-    "--hero-overlay-opacity": overlayOpacity,
+    "--hero-overlay-opacity": 0.72,
     "--hero-blur": `${blur}px`,
   } as React.CSSProperties;
 
   return (
     <header className={clsx("hero", styles.hero)} style={heroStyle}>
-      {/* Transparency control panel — toggle with the ⚙ button */}
-      {showHeroControls && showControls && (
-        <div className={styles.heroControls}>
-          <div className={styles.controlRow}>
-            <label>bg opacity</label>
-            <input
-              type="range"
-              min={0}
-              max={1}
-              step={0.01}
-              value={bgOpacity}
-              onChange={(e) => setBgOpacity(Number(e.target.value))}
-            />
-            <span>{bgOpacity.toFixed(2)}</span>
-          </div>
-          <div className={styles.controlRow}>
-            <label>overlay</label>
-            <input
-              type="range"
-              min={0}
-              max={1}
-              step={0.01}
-              value={overlayOpacity}
-              onChange={(e) => setOverlayOpacity(Number(e.target.value))}
-            />
-            <span>{overlayOpacity.toFixed(2)}</span>
-          </div>
-          <div className={styles.controlRow}>
-            <label>blur (px)</label>
-            <input
-              type="range"
-              min={0}
-              max={20}
-              step={0.5}
-              value={blur}
-              onChange={(e) => setBlur(Number(e.target.value))}
-            />
-            <span>{blur.toFixed(1)}</span>
-          </div>
-        </div>
-      )}
-
-      {showHeroControls && (
-        <button
-          onClick={() => setShowControls((v) => !v)}
-          aria-label="Toggle transparency controls"
-          style={{
-            position: "absolute",
-            top: "0.75rem",
-            right: showControls ? "0.75rem" : "0.75rem",
-            zIndex: 20,
-            background: "rgba(0,0,0,0.4)",
-            border: "none",
-            color: "#fff",
-            borderRadius: "50%",
-            width: 28,
-            height: 28,
-            cursor: "pointer",
-            fontSize: "0.85rem",
-            display: showControls ? "none" : "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-          title="Show transparency controls"
-        >
-          ⚙
-        </button>
-      )}
-
       <div className="container">
+        {/* GTC 2026 badge */}
+        <div className={styles.gtcBadge}>
+          <span className={styles.gtcBadgeIcon}>🟢</span>
+          <span>
+            <Translate id="hero.gtcBadge">
+              GTC 2026 — Inference Infrastructure for the Enterprise
+            </Translate>
+          </span>
+        </div>
+
         <h1 className={styles.heroTitle}>{siteConfig.title}</h1>
         <p className={styles.heroSubtitle}>{siteConfig.tagline}</p>
         <p className={styles.heroDescription}>
@@ -243,6 +267,36 @@ function Hero() {
             }
           </Translate>
         </p>
+
+        {/* Zero-to-Inference terminal */}
+        <div className={styles.terminalBlock}>
+          <div className={styles.terminalTitle}>
+            <span className={styles.terminalDot} style={{ background: "#ff5f57" }} />
+            <span className={styles.terminalDot} style={{ background: "#febc2e" }} />
+            <span className={styles.terminalDot} style={{ background: "#28c840" }} />
+            <span className={styles.terminalTitleText}>Zero-to-Inference</span>
+          </div>
+          <pre className={styles.terminalBody}>
+            <code>
+              <span className={styles.terminalComment}># Install the CLI</span>
+              {"\n"}
+              <span className={styles.terminalPrompt}>$</span> pip install llmport-cli
+              {"\n\n"}
+              <span className={styles.terminalComment}># Check prerequisites &amp; deploy</span>
+              {"\n"}
+              <span className={styles.terminalPrompt}>$</span> llmport doctor
+              {"\n"}
+              <span className={styles.terminalPrompt}>$</span> llmport deploy
+              {"\n\n"}
+              <span className={styles.terminalComment}># Enable optional modules</span>
+              {"\n"}
+              <span className={styles.terminalPrompt}>$</span> llmport module enable pii
+              {"\n"}
+              <span className={styles.terminalPrompt}>$</span> llmport module enable rag
+            </code>
+          </pre>
+        </div>
+
         <div className={styles.heroButtons}>
           <Link className="button button--primary button--lg" to="/docs/intro">
             <Translate id="hero.getStarted">Get Started</Translate>
@@ -253,9 +307,277 @@ function Hero() {
           >
             GitHub
           </Link>
+          {/* GitHub Star button */}
+          <iframe
+            src="https://ghbtns.com/github-btn.html?user=llm-port&repo=.github&type=star&count=true&size=large"
+            width="170"
+            height="30"
+            title="GitHub Stars"
+            className={styles.starButton}
+          />
         </div>
+
+        <p className={styles.heroLangs}>
+          <Translate id="hero.languages">
+            Available in English, Deutsch, Español, 中文
+          </Translate>
+        </p>
       </div>
     </header>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Architecture section                                               */
+/* ------------------------------------------------------------------ */
+
+function Architecture() {
+  return (
+    <section className={styles.architecture}>
+      <div className="container">
+        <h2 className={styles.sectionTitle}>
+          <Translate id="section.architecture.title">How it Works</Translate>
+        </h2>
+        <div className={styles.archGrid}>
+          <ArchCard
+            title={translate({ id: "arch.gateway.title", message: "API Gateway" })}
+            icon="🔀"
+            desc={translate({
+              id: "arch.gateway.desc",
+              message: "OpenAI-compatible /v1/* endpoint. Routes to vLLM, llama.cpp, Ollama, TGI and remote providers (OpenAI, Azure, …). SSE streaming, alias-based model resolution, retry, and rate limiting.",
+            })}
+          />
+          <ArchCard
+            title={translate({ id: "arch.pii.title", message: "PII Layer" })}
+            icon="🛡️"
+            desc={translate({
+              id: "arch.pii.desc",
+              message: "Microsoft Presidio integration for real-time detection and redaction. Per-tenant policies with configurable entity types and fail-safe modes.",
+            })}
+          />
+          <ArchCard
+            title={translate({ id: "arch.gpu.title", message: "GPU Orchestration" })}
+            icon="⚡"
+            desc={translate({
+              id: "arch.gpu.desc",
+              message: "Auto-detects NVIDIA (CUDA), AMD (ROCm), and Intel GPUs. Spawns vLLM containers with the correct image (CUDA / ROCm / Legacy). HuggingFace cache mounting for fast model loading.",
+            })}
+          />
+          <ArchCard
+            title={translate({ id: "arch.storage.title", message: "Storage" })}
+            icon="🗄️"
+            desc={translate({
+              id: "arch.storage.desc",
+              message: "PostgreSQL with pgvector for vector search (RAG). Redis for rate limiting, session cache, and distributed leasing. MinIO for S3-compatible document storage.",
+            })}
+          />
+          <ArchCard
+            title={translate({ id: "arch.observability.title", message: "Observability" })}
+            icon="📊"
+            desc={translate({
+              id: "arch.observability.desc",
+              message: "Langfuse for LLM tracing with privacy modes. Grafana + Loki + Alloy for centralized logging. OpenTelemetry + Jaeger for distributed tracing. Prometheus metrics.",
+            })}
+          />
+          <ArchCard
+            title={translate({ id: "arch.controlplane.title", message: "Control Plane" })}
+            icon="⚙️"
+            desc={translate({
+              id: "arch.controlplane.desc",
+              message: "FastAPI backend for RBAC, settings, Docker orchestration, module lifecycle, agent infra, and Compose stack management with revision tracking.",
+            })}
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ArchCard({
+  title,
+  icon,
+  desc,
+}: {
+  title: string;
+  icon: string;
+  desc: string;
+}) {
+  return (
+    <div className={styles.archCard}>
+      <div className={styles.archCardIcon}>{icon}</div>
+      <h4>{title}</h4>
+      <p>{desc}</p>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  GTC 2026 section                                                   */
+/* ------------------------------------------------------------------ */
+
+function GTC2026() {
+  return (
+    <section className={styles.gtcSection}>
+      <div className="container">
+        <div className={styles.gtcContent}>
+          <div className={styles.gtcText}>
+            <h2>
+              <span className={styles.gtcLabel}>
+                <Translate id="gtc.label">GTC 2026</Translate>
+              </span>{" "}
+              <Translate id="gtc.heading">
+                Inference Infrastructure for the Enterprise
+              </Translate>
+            </h2>
+            <p>
+              <Translate id="gtc.body">
+                Teams deploying the models and accelerator architectures showcased at GTC 2026 need more than a runtime — they need a secure gateway. llm.port provides the missing production layer: an OpenAI-compatible API gateway with built-in PII redaction, RBAC, and full observability — all running inside your private VPC. No data leaves your perimeter.
+              </Translate>
+            </p>
+            <ul className={styles.gtcFeatures}>
+              <li>
+                <Translate id="gtc.feature.gateway">
+                  Secure API gateway with rate limiting, retry, and alias-based model routing
+                </Translate>
+              </li>
+              <li>
+                <Translate id="gtc.feature.pii">
+                  PII redaction before ingress and egress — Microsoft Presidio-powered
+                </Translate>
+              </li>
+              <li>
+                <Translate id="gtc.feature.gpu">
+                  Multi-vendor GPU auto-detection (NVIDIA CUDA, AMD ROCm, Intel) with automatic vLLM image selection
+                </Translate>
+              </li>
+              <li>
+                <Translate id="gtc.feature.observability">
+                  Enterprise observability: Langfuse LLM tracing, Grafana dashboards, and OpenTelemetry
+                </Translate>
+              </li>
+              <li>
+                <Translate id="gtc.feature.sovereign">
+                  Air-gapped, sovereign deployment — no external cloud dependency
+                </Translate>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Comparison table section                                           */
+/* ------------------------------------------------------------------ */
+
+function ComparisonTable() {
+  return (
+    <section className={styles.comparison}>
+      <div className="container">
+        <h2 className={styles.sectionTitle}>
+          <Translate id="section.comparison.title">
+            How llm.port Compares
+          </Translate>
+        </h2>
+        <div className={styles.tableWrapper}>
+          <table className={styles.comparisonTable}>
+            <thead>
+              <tr>
+                <th>{translate({ id: "comparison.header.feature", message: "Feature" })}</th>
+                <th className={styles.highlight}>llm.port</th>
+                <th>LiteLLM</th>
+                <th>Ollama</th>
+              </tr>
+            </thead>
+            <tbody>
+              {comparisonData.map((row, idx) => (
+                <tr key={idx}>
+                  <td>{row.feature}</td>
+                  <td className={styles.highlight}>{row.llmport}</td>
+                  <td>{row.litellm}</td>
+                  <td>{row.ollama}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Roadmap section                                                    */
+/* ------------------------------------------------------------------ */
+
+function Roadmap() {
+  return (
+    <section className={styles.roadmap}>
+      <div className="container">
+        <h2 className={styles.sectionTitle}>
+          <Translate id="section.roadmap.title">Roadmap</Translate>
+        </h2>
+        <div className={styles.roadmapGrid}>
+          <RoadmapItem
+            title={translate({ id: "roadmap.docling.title", message: "Advanced OCR (Docling)" })}
+            desc={translate({ id: "roadmap.docling.desc", message: "IBM Docling for rich document extraction — tables, images, pages. Service scaffold exists; integration with RAG pipeline in progress." })}
+            status={translate({ id: "roadmap.status.inProgress", message: "In Progress" })}
+          />
+          <RoadmapItem
+            title={translate({ id: "roadmap.auth.title", message: "Auth Service (SSO / OIDC)" })}
+            desc={translate({ id: "roadmap.auth.desc", message: "Dedicated auth service for external identity provider management. Framework and compose profile defined." })}
+            status={translate({ id: "roadmap.status.planned", message: "Planned" })}
+          />
+          <RoadmapItem
+            title={translate({ id: "roadmap.mailer.title", message: "Mailer Service" })}
+            desc={translate({ id: "roadmap.mailer.desc", message: "Dedicated email delivery service for password resets, admin alerts, and system invites." })}
+            status={translate({ id: "roadmap.status.planned", message: "Planned" })}
+          />
+          <RoadmapItem
+            title={translate({ id: "roadmap.ee.title", message: "Enterprise Pro Modules" })}
+            desc={translate({ id: "roadmap.ee.desc", message: "License framework ready (Ed25519 JWT). Pro implementations for PII, RAG, and Gateway coming soon." })}
+            status={translate({ id: "roadmap.status.planned", message: "Planned" })}
+          />
+          <RoadmapItem
+            title={translate({ id: "roadmap.runtimes.title", message: "More Runtimes" })}
+            desc={translate({ id: "roadmap.runtimes.desc", message: "TensorRT-LLM, SGLang, and additional managed API providers." })}
+            status={translate({ id: "roadmap.status.planned", message: "Planned" })}
+          />
+          <RoadmapItem
+            title={translate({ id: "roadmap.costs.title", message: "Fine-grained Cost Controls" })}
+            desc={translate({ id: "roadmap.costs.desc", message: "Usage analytics per tenant, model, and user with budget limits and chargeback support." })}
+            status={translate({ id: "roadmap.status.planned", message: "Planned" })}
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function RoadmapItem({
+  title,
+  desc,
+  status,
+}: {
+  title: string;
+  desc: string;
+  status: string;
+}) {
+  return (
+    <div className={styles.roadmapCard}>
+      <span
+        className={clsx(
+          styles.roadmapBadge,
+          status === "In Progress" && styles.roadmapInProgress,
+        )}
+      >
+        {status}
+      </span>
+      <h4>{title}</h4>
+      <p>{desc}</p>
+    </div>
   );
 }
 
@@ -268,6 +590,9 @@ export default function Home(): JSX.Element {
   return (
     <Layout title="Home" description={siteConfig.tagline}>
       <Hero />
+
+      {/* Architecture — How it Works */}
+      <Architecture />
 
       {/* Features */}
       <section className={styles.features}>
@@ -282,6 +607,9 @@ export default function Home(): JSX.Element {
           </div>
         </div>
       </section>
+
+      {/* Comparison table */}
+      <ComparisonTable />
 
       {/* Why llm.port */}
       <section className={styles.whySection}>
@@ -304,6 +632,12 @@ export default function Home(): JSX.Element {
           </p>
         </div>
       </section>
+
+      {/* GTC 2026 */}
+      <GTC2026 />
+
+      {/* Roadmap */}
+      <Roadmap />
 
       {/* Screenshots */}
       <section className={styles.screenshots}>
