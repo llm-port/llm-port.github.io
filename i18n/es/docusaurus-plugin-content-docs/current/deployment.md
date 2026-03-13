@@ -24,6 +24,9 @@ Guía para desplegar **llm.Port** en producción.
 pip install llmport-cli
 ```
 
+Alternativamente, puede descargar un ejecutable independiente desde la
+[última versión de GitHub](https://github.com/llm-port/llm-port-cli/releases/latest) (no requiere Python).
+
 ### 2. Ejecutar la comprobación de salud
 
 ```bash

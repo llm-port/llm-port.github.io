@@ -27,6 +27,9 @@ slug: /intro
 pip install llmport-cli
 ```
 
+Oder laden Sie eine eigenständige Binärdatei (kein Python erforderlich) von der
+[GitHub Releases-Seite](https://github.com/llm-port/llm-port-cli/releases/latest) herunter.
+
 ### 2. Systemprüfung ausführen
 
 ```bash

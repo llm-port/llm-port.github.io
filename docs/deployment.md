@@ -26,6 +26,8 @@ Guide for deploying **llm.Port** in production and development.
 ```bash
 # 1. Install the CLI
 pip install llmport-cli          # or: uv tool install llmport-cli
+#    Alternatively, download a standalone binary from:
+#    https://github.com/llm-port/llm-port-cli/releases/latest
 
 # 2. Check prerequisites
 llmport doctor

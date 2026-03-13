@@ -8,9 +8,56 @@ La **CLI de llmport** (`llm_port_cli`) es una herramienta de línea de comandos 
 
 ## Instalación
 
+### Opción A — Paquete Python (PyPI)
+
+Requiere Python 3.12+.
+
 ```bash
 pip install llmport-cli
 ```
+
+O con [uv](https://docs.astral.sh/uv/):
+
+```bash
+uv tool install llmport-cli
+```
+
+### Opción B — Ejecutable independiente
+
+No requiere Python. Descargue el binario para su plataforma desde la
+[última versión de GitHub](https://github.com/llm-port/llm-port-cli/releases/latest):
+
+| Plataforma | Archivo | Arquitectura |
+|---|---|---|
+| Linux | `llmport-linux-amd64` | x86-64 |
+| Windows | `llmport-windows-amd64.exe` | x86-64 |
+| macOS | `llmport-macos-arm64` | Apple Silicon (M1+) |
+
+#### Linux / macOS
+
+```bash
+# Descargar (ejemplo para Linux)
+curl -LO https://github.com/llm-port/llm-port-cli/releases/latest/download/llmport-linux-amd64
+
+# Hacer ejecutable y mover al PATH
+chmod +x llmport-linux-amd64
+sudo mv llmport-linux-amd64 /usr/local/bin/llmport
+```
+
+#### Windows
+
+Descargue `llmport-windows-amd64.exe` desde la página de releases y colóquelo en
+un directorio de su `PATH`, o ejecútelo directamente:
+
+```powershell
+.\llmport-windows-amd64.exe doctor
+```
+
+:::tip
+Los ejecutables independientes se generan automáticamente en cada release usando
+PyInstaller y se adjuntan al
+[GitHub Release](https://github.com/llm-port/llm-port-cli/releases) correspondiente.
+:::
 
 ## Comandos
 

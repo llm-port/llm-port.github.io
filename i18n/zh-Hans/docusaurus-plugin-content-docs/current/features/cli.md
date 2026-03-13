@@ -8,9 +8,55 @@ sidebar_position: 8
 
 ## 安装
 
+### 方式一 — Python 包（PyPI）
+
+需要 Python 3.12+。
+
 ```bash
 pip install llmport-cli
 ```
+
+或使用 [uv](https://docs.astral.sh/uv/)：
+
+```bash
+uv tool install llmport-cli
+```
+
+### 方式二 — 独立可执行文件
+
+无需安装 Python。从
+[最新 GitHub Release](https://github.com/llm-port/llm-port-cli/releases/latest) 下载适合您平台的二进制文件：
+
+| 平台 | 文件 | 架构 |
+|---|---|---|
+| Linux | `llmport-linux-amd64` | x86-64 |
+| Windows | `llmport-windows-amd64.exe` | x86-64 |
+| macOS | `llmport-macos-arm64` | Apple Silicon (M1+) |
+
+#### Linux / macOS
+
+```bash
+# 下载（以 Linux 为例）
+curl -LO https://github.com/llm-port/llm-port-cli/releases/latest/download/llmport-linux-amd64
+
+# 添加执行权限并移动到 PATH
+chmod +x llmport-linux-amd64
+sudo mv llmport-linux-amd64 /usr/local/bin/llmport
+```
+
+#### Windows
+
+从 Release 页面下载 `llmport-windows-amd64.exe`，将其放置在 `PATH` 目录中，
+或直接运行：
+
+```powershell
+.\llmport-windows-amd64.exe doctor
+```
+
+:::tip
+独立可执行文件在每次发布时由 PyInstaller 自动构建，并附加到对应的
+[GitHub Release](https://github.com/llm-port/llm-port-cli/releases)。
+:::
 
 ## 命令
 

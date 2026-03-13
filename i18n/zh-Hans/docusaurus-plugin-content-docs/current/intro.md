@@ -27,6 +27,8 @@ slug: /intro
 pip install llmport-cli
 ```
 
+或从 [GitHub Releases 页面](https://github.com/llm-port/llm-port-cli/releases/latest)下载独立可执行文件（无需 Python）。
+
 ### 2. 运行健康检查
 
 ```bash

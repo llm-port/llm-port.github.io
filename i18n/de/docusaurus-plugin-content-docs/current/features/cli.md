@@ -8,9 +8,56 @@ Die **llmport CLI** (`llm_port_cli`) ist ein Click-basiertes Kommandozeilen-Tool
 
 ## Installation
 
+### Option A — Python-Paket (PyPI)
+
+Erfordert Python 3.12+.
+
 ```bash
 pip install llmport-cli
 ```
+
+Oder mit [uv](https://docs.astral.sh/uv/):
+
+```bash
+uv tool install llmport-cli
+```
+
+### Option B — Eigenständige Binärdatei
+
+Kein Python erforderlich. Laden Sie die Binärdatei für Ihre Plattform vom
+[neuesten GitHub Release](https://github.com/llm-port/llm-port-cli/releases/latest) herunter:
+
+| Plattform | Datei | Architektur |
+|---|---|---|
+| Linux | `llmport-linux-amd64` | x86-64 |
+| Windows | `llmport-windows-amd64.exe` | x86-64 |
+| macOS | `llmport-macos-arm64` | Apple Silicon (M1+) |
+
+#### Linux / macOS
+
+```bash
+# Herunterladen (Beispiel für Linux)
+curl -LO https://github.com/llm-port/llm-port-cli/releases/latest/download/llmport-linux-amd64
+
+# Ausführbar machen und in PATH verschieben
+chmod +x llmport-linux-amd64
+sudo mv llmport-linux-amd64 /usr/local/bin/llmport
+```
+
+#### Windows
+
+Laden Sie `llmport-windows-amd64.exe` von der Release-Seite herunter und legen Sie
+die Datei in ein Verzeichnis in Ihrem `PATH`, oder führen Sie sie direkt aus:
+
+```powershell
+.\llmport-windows-amd64.exe doctor
+```
+
+:::tip
+Eigenständige Binärdateien werden automatisch bei jedem Release mit PyInstaller
+erstellt und dem entsprechenden
+[GitHub Release](https://github.com/llm-port/llm-port-cli/releases) angehängt.
+:::
 
 ## Befehle
 

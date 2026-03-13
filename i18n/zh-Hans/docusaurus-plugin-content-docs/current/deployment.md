@@ -24,6 +24,8 @@ sidebar_position: 6
 pip install llmport-cli
 ```
 
+或者，您可以从[最新 GitHub Release](https://github.com/llm-port/llm-port-cli/releases/latest) 下载独立二进制文件（无需 Python）。
+
 ### 2. 运行健康检查
 
 ```bash

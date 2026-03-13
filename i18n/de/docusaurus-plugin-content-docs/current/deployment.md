@@ -24,6 +24,9 @@ Leitfaden zur Bereitstellung von **llm.Port** in der Produktion.
 pip install llmport-cli
 ```
 
+Alternativ können Sie eine eigenständige Binärdatei vom
+[neuesten GitHub Release](https://github.com/llm-port/llm-port-cli/releases/latest) herunterladen (kein Python erforderlich).
+
 ### 2. Systemprüfung ausführen
 
 ```bash

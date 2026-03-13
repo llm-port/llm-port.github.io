@@ -27,6 +27,9 @@ slug: /intro
 pip install llmport-cli
 ```
 
+O descargue un ejecutable independiente (no requiere Python) desde la
+[página de GitHub Releases](https://github.com/llm-port/llm-port-cli/releases/latest).
+
 ### 2. Ejecutar la verificación de salud
 
 ```bash

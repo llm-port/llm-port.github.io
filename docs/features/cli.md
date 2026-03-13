@@ -8,9 +8,56 @@ The **llmport CLI** (`llm_port_cli`) is a Click-based command-line tool for inst
 
 ## Installation
 
+### Option A — Python package (PyPI)
+
+Requires Python 3.12+.
+
 ```bash
 pip install llmport-cli
 ```
+
+Or with [uv](https://docs.astral.sh/uv/):
+
+```bash
+uv tool install llmport-cli
+```
+
+### Option B — Standalone executable
+
+No Python required. Download the binary for your platform from the
+[latest GitHub Release](https://github.com/llm-port/llm-port-cli/releases/latest):
+
+| Platform | File | Architecture |
+|---|---|---|
+| Linux | `llmport-linux-amd64` | x86-64 |
+| Windows | `llmport-windows-amd64.exe` | x86-64 |
+| macOS | `llmport-macos-arm64` | Apple Silicon (M1+) |
+
+#### Linux / macOS
+
+```bash
+# Download (example for Linux)
+curl -LO https://github.com/llm-port/llm-port-cli/releases/latest/download/llmport-linux-amd64
+
+# Make executable and move to PATH
+chmod +x llmport-linux-amd64
+sudo mv llmport-linux-amd64 /usr/local/bin/llmport
+```
+
+#### Windows
+
+Download `llmport-windows-amd64.exe` from the release page and place it in a
+directory on your `PATH`, or run it directly:
+
+```powershell
+.\llmport-windows-amd64.exe doctor
+```
+
+:::tip
+Standalone executables are built automatically for every release using
+PyInstaller and attached to the corresponding
+[GitHub Release](https://github.com/llm-port/llm-port-cli/releases).
+:::
 
 ## Commands
 
