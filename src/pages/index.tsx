@@ -119,67 +119,124 @@ type ComparisonRow = {
 
 const comparisonData: ComparisonRow[] = [
   {
-    feature: translate({ id: "comparison.gateway", message: "OpenAI-compatible Gateway" }),
+    feature: translate({
+      id: "comparison.gateway",
+      message: "OpenAI-compatible Gateway",
+    }),
     llmport: "✅",
     litellm: "✅",
     ollama: "✅",
   },
   {
-    feature: translate({ id: "comparison.adminUi", message: "Admin UI & Ops Console" }),
-    llmport: translate({ id: "comparison.adminUi.llmport", message: "✅ Built-in" }),
-    litellm: translate({ id: "comparison.adminUi.litellm", message: "💰 Paid" }),
+    feature: translate({
+      id: "comparison.adminUi",
+      message: "Admin UI & Ops Console",
+    }),
+    llmport: translate({
+      id: "comparison.adminUi.llmport",
+      message: "✅ Built-in",
+    }),
+    litellm: translate({
+      id: "comparison.adminUi.litellm",
+      message: "💰 Paid",
+    }),
     ollama: "❌",
   },
   {
-    feature: translate({ id: "comparison.pii", message: "PII Redaction (Presidio)" }),
+    feature: translate({
+      id: "comparison.pii",
+      message: "PII Redaction (Presidio)",
+    }),
     llmport: translate({ id: "comparison.pii.llmport", message: "✅ Native" }),
     litellm: "❌",
     ollama: "❌",
   },
   {
-    feature: translate({ id: "comparison.rag", message: "RAG Subsystem (pgvector)" }),
-    llmport: translate({ id: "comparison.rag.llmport", message: "✅ Built-in" }),
+    feature: translate({
+      id: "comparison.rag",
+      message: "RAG Subsystem (pgvector)",
+    }),
+    llmport: translate({
+      id: "comparison.rag.llmport",
+      message: "✅ Built-in",
+    }),
     litellm: "❌",
     ollama: "❌",
   },
   {
-    feature: translate({ id: "comparison.chat", message: "Chat Console with Memory" }),
+    feature: translate({
+      id: "comparison.chat",
+      message: "Chat Console with Memory",
+    }),
     llmport: "✅",
     litellm: "❌",
     ollama: "❌",
   },
   {
-    feature: translate({ id: "comparison.gpu", message: "Multi-vendor GPU (NVIDIA, AMD, Intel)" }),
-    llmport: translate({ id: "comparison.gpu.llmport", message: "✅ Auto-detect" }),
+    feature: translate({
+      id: "comparison.gpu",
+      message: "Multi-vendor GPU (NVIDIA, AMD, Intel)",
+    }),
+    llmport: translate({
+      id: "comparison.gpu.llmport",
+      message: "✅ Auto-detect",
+    }),
     litellm: "❌",
     ollama: "✅",
   },
   {
-    feature: translate({ id: "comparison.langfuse", message: "Langfuse Tracing" }),
-    llmport: translate({ id: "comparison.langfuse.llmport", message: "✅ Embedded" }),
-    litellm: translate({ id: "comparison.langfuse.litellm", message: "🔌 Plugin" }),
+    feature: translate({
+      id: "comparison.langfuse",
+      message: "Langfuse Tracing",
+    }),
+    llmport: translate({
+      id: "comparison.langfuse.llmport",
+      message: "✅ Embedded",
+    }),
+    litellm: translate({
+      id: "comparison.langfuse.litellm",
+      message: "🔌 Plugin",
+    }),
     ollama: "❌",
   },
   {
-    feature: translate({ id: "comparison.grafana", message: "Grafana + Loki Logging" }),
-    llmport: translate({ id: "comparison.grafana.llmport", message: "✅ Pre-configured" }),
+    feature: translate({
+      id: "comparison.grafana",
+      message: "Grafana + Loki Logging",
+    }),
+    llmport: translate({
+      id: "comparison.grafana.llmport",
+      message: "✅ Pre-configured",
+    }),
     litellm: "❌",
     ollama: "❌",
   },
   {
-    feature: translate({ id: "comparison.rbac", message: "RBAC / JWT / OAuth SSO" }),
+    feature: translate({
+      id: "comparison.rbac",
+      message: "RBAC / JWT / OAuth SSO",
+    }),
     llmport: "✅",
-    litellm: translate({ id: "comparison.rbac.litellm", message: "💰 Partial" }),
+    litellm: translate({
+      id: "comparison.rbac.litellm",
+      message: "💰 Partial",
+    }),
     ollama: "❌",
   },
   {
-    feature: translate({ id: "comparison.i18n", message: "i18n (EN, DE, ES, ZH)" }),
+    feature: translate({
+      id: "comparison.i18n",
+      message: "i18n (EN, DE, ES, ZH)",
+    }),
     llmport: "✅",
     litellm: "❌",
     ollama: "❌",
   },
   {
-    feature: translate({ id: "comparison.cli", message: "One-command Deploy (CLI)" }),
+    feature: translate({
+      id: "comparison.cli",
+      message: "One-command Deploy (CLI)",
+    }),
     llmport: "✅ llmport deploy",
     litellm: "❌",
     ollama: "❌",
@@ -271,28 +328,44 @@ function Hero() {
         {/* Zero-to-Inference terminal */}
         <div className={styles.terminalBlock}>
           <div className={styles.terminalTitle}>
-            <span className={styles.terminalDot} style={{ background: "#ff5f57" }} />
-            <span className={styles.terminalDot} style={{ background: "#febc2e" }} />
-            <span className={styles.terminalDot} style={{ background: "#28c840" }} />
+            <span
+              className={styles.terminalDot}
+              style={{ background: "#ff5f57" }}
+            />
+            <span
+              className={styles.terminalDot}
+              style={{ background: "#febc2e" }}
+            />
+            <span
+              className={styles.terminalDot}
+              style={{ background: "#28c840" }}
+            />
             <span className={styles.terminalTitleText}>Zero-to-Inference</span>
           </div>
           <pre className={styles.terminalBody}>
             <code>
               <span className={styles.terminalComment}># Install the CLI</span>
               {"\n"}
-              <span className={styles.terminalPrompt}>$</span> pip install llmport-cli
+              <span className={styles.terminalPrompt}>$</span> pip install
+              llmport-cli
               {"\n\n"}
-              <span className={styles.terminalComment}># Check prerequisites &amp; deploy</span>
+              <span className={styles.terminalComment}>
+                # Check prerequisites &amp; deploy
+              </span>
               {"\n"}
               <span className={styles.terminalPrompt}>$</span> llmport doctor
               {"\n"}
               <span className={styles.terminalPrompt}>$</span> llmport deploy
               {"\n\n"}
-              <span className={styles.terminalComment}># Enable optional modules</span>
+              <span className={styles.terminalComment}>
+                # Enable optional modules
+              </span>
               {"\n"}
-              <span className={styles.terminalPrompt}>$</span> llmport module enable pii
+              <span className={styles.terminalPrompt}>$</span> llmport module
+              enable pii
               {"\n"}
-              <span className={styles.terminalPrompt}>$</span> llmport module enable rag
+              <span className={styles.terminalPrompt}>$</span> llmport module
+              enable rag
             </code>
           </pre>
         </div>
@@ -340,11 +413,15 @@ function Architecture() {
         </h2>
         <div className={styles.archGrid}>
           <ArchCard
-            title={translate({ id: "arch.gateway.title", message: "API Gateway" })}
+            title={translate({
+              id: "arch.gateway.title",
+              message: "API Gateway",
+            })}
             icon="🔀"
             desc={translate({
               id: "arch.gateway.desc",
-              message: "OpenAI-compatible /v1/* endpoint. Routes to vLLM, llama.cpp, Ollama, TGI and remote providers (OpenAI, Azure, …). SSE streaming, alias-based model resolution, retry, and rate limiting.",
+              message:
+                "OpenAI-compatible /v1/* endpoint. Routes to vLLM, llama.cpp, Ollama, TGI and remote providers (OpenAI, Azure, …). SSE streaming, alias-based model resolution, retry, and rate limiting.",
             })}
           />
           <ArchCard
@@ -352,15 +429,20 @@ function Architecture() {
             icon="🛡️"
             desc={translate({
               id: "arch.pii.desc",
-              message: "Microsoft Presidio integration for real-time detection and redaction. Per-tenant policies with configurable entity types and fail-safe modes.",
+              message:
+                "Microsoft Presidio integration for real-time detection and redaction. Per-tenant policies with configurable entity types and fail-safe modes.",
             })}
           />
           <ArchCard
-            title={translate({ id: "arch.gpu.title", message: "GPU Orchestration" })}
+            title={translate({
+              id: "arch.gpu.title",
+              message: "GPU Orchestration",
+            })}
             icon="⚡"
             desc={translate({
               id: "arch.gpu.desc",
-              message: "Auto-detects NVIDIA (CUDA), AMD (ROCm), and Intel GPUs. Spawns vLLM containers with the correct image (CUDA / ROCm / Legacy). HuggingFace cache mounting for fast model loading.",
+              message:
+                "Auto-detects NVIDIA (CUDA), AMD (ROCm), and Intel GPUs. Spawns vLLM containers with the correct image (CUDA / ROCm / Legacy). HuggingFace cache mounting for fast model loading.",
             })}
           />
           <ArchCard
@@ -368,23 +450,32 @@ function Architecture() {
             icon="🗄️"
             desc={translate({
               id: "arch.storage.desc",
-              message: "PostgreSQL with pgvector for vector search (RAG). Redis for rate limiting, session cache, and distributed leasing. MinIO for S3-compatible document storage.",
+              message:
+                "PostgreSQL with pgvector for vector search (RAG). Redis for rate limiting, session cache, and distributed leasing. MinIO for S3-compatible document storage.",
             })}
           />
           <ArchCard
-            title={translate({ id: "arch.observability.title", message: "Observability" })}
+            title={translate({
+              id: "arch.observability.title",
+              message: "Observability",
+            })}
             icon="📊"
             desc={translate({
               id: "arch.observability.desc",
-              message: "Langfuse for LLM tracing with privacy modes. Grafana + Loki + Alloy for centralized logging. OpenTelemetry + Jaeger for distributed tracing. Prometheus metrics.",
+              message:
+                "Langfuse for LLM tracing with privacy modes. Grafana + Loki + Alloy for centralized logging. OpenTelemetry + Jaeger for distributed tracing. Prometheus metrics.",
             })}
           />
           <ArchCard
-            title={translate({ id: "arch.controlplane.title", message: "Control Plane" })}
+            title={translate({
+              id: "arch.controlplane.title",
+              message: "Control Plane",
+            })}
             icon="⚙️"
             desc={translate({
               id: "arch.controlplane.desc",
-              message: "FastAPI backend for RBAC, settings, Docker orchestration, module lifecycle, agent infra, and Compose stack management with revision tracking.",
+              message:
+                "FastAPI backend for RBAC, settings, Docker orchestration, module lifecycle, agent infra, and Compose stack management with revision tracking.",
             })}
           />
         </div>
@@ -431,33 +522,43 @@ function GTC2026() {
             </h2>
             <p>
               <Translate id="gtc.body">
-                Teams deploying the models and accelerator architectures showcased at GTC 2026 need more than a runtime — they need a secure gateway. llm.port provides the missing production layer: an OpenAI-compatible API gateway with built-in PII redaction, RBAC, and full observability — all running inside your private VPC. No data leaves your perimeter.
+                Teams deploying the models and accelerator architectures
+                showcased at GTC 2026 need more than a runtime — they need a
+                secure gateway. llm.port provides the missing production layer:
+                an OpenAI-compatible API gateway with built-in PII redaction,
+                RBAC, and full observability — all running inside your private
+                VPC. No data leaves your perimeter.
               </Translate>
             </p>
             <ul className={styles.gtcFeatures}>
               <li>
                 <Translate id="gtc.feature.gateway">
-                  Secure API gateway with rate limiting, retry, and alias-based model routing
+                  Secure API gateway with rate limiting, retry, and alias-based
+                  model routing
                 </Translate>
               </li>
               <li>
                 <Translate id="gtc.feature.pii">
-                  PII redaction before ingress and egress — Microsoft Presidio-powered
+                  PII redaction before ingress and egress — Microsoft
+                  Presidio-powered
                 </Translate>
               </li>
               <li>
                 <Translate id="gtc.feature.gpu">
-                  Multi-vendor GPU auto-detection (NVIDIA CUDA, AMD ROCm, Intel) with automatic vLLM image selection
+                  Multi-vendor GPU auto-detection (NVIDIA CUDA, AMD ROCm, Intel)
+                  with automatic vLLM image selection
                 </Translate>
               </li>
               <li>
                 <Translate id="gtc.feature.observability">
-                  Enterprise observability: Langfuse LLM tracing, Grafana dashboards, and OpenTelemetry
+                  Enterprise observability: Langfuse LLM tracing, Grafana
+                  dashboards, and OpenTelemetry
                 </Translate>
               </li>
               <li>
                 <Translate id="gtc.feature.sovereign">
-                  Air-gapped, sovereign deployment — no external cloud dependency
+                  Air-gapped, sovereign deployment — no external cloud
+                  dependency
                 </Translate>
               </li>
             </ul>
@@ -485,7 +586,12 @@ function ComparisonTable() {
           <table className={styles.comparisonTable}>
             <thead>
               <tr>
-                <th>{translate({ id: "comparison.header.feature", message: "Feature" })}</th>
+                <th>
+                  {translate({
+                    id: "comparison.header.feature",
+                    message: "Feature",
+                  })}
+                </th>
                 <th className={styles.highlight}>llm.port</th>
                 <th>LiteLLM</th>
                 <th>Ollama</th>
@@ -521,34 +627,94 @@ function Roadmap() {
         </h2>
         <div className={styles.roadmapGrid}>
           <RoadmapItem
-            title={translate({ id: "roadmap.docling.title", message: "Advanced OCR (Docling)" })}
-            desc={translate({ id: "roadmap.docling.desc", message: "IBM Docling for rich document extraction — tables, images, pages. Service scaffold exists; integration with RAG pipeline in progress." })}
-            status={translate({ id: "roadmap.status.inProgress", message: "In Progress" })}
+            title={translate({
+              id: "roadmap.docling.title",
+              message: "Advanced OCR (Docling)",
+            })}
+            desc={translate({
+              id: "roadmap.docling.desc",
+              message:
+                "IBM Docling for rich document extraction — tables, images, pages. Service scaffold exists; integration with RAG pipeline in progress.",
+            })}
+            status={translate({
+              id: "roadmap.status.inProgress",
+              message: "In Progress",
+            })}
           />
           <RoadmapItem
-            title={translate({ id: "roadmap.auth.title", message: "Auth Service (SSO / OIDC)" })}
-            desc={translate({ id: "roadmap.auth.desc", message: "Dedicated auth service for external identity provider management. Framework and compose profile defined." })}
-            status={translate({ id: "roadmap.status.planned", message: "Planned" })}
+            title={translate({
+              id: "roadmap.auth.title",
+              message: "Auth Service (SSO / OIDC)",
+            })}
+            desc={translate({
+              id: "roadmap.auth.desc",
+              message:
+                "Dedicated auth service for external identity provider management. Framework and compose profile defined.",
+            })}
+            status={translate({
+              id: "roadmap.status.planned",
+              message: "Planned",
+            })}
           />
           <RoadmapItem
-            title={translate({ id: "roadmap.mailer.title", message: "Mailer Service" })}
-            desc={translate({ id: "roadmap.mailer.desc", message: "Dedicated email delivery service for password resets, admin alerts, and system invites." })}
-            status={translate({ id: "roadmap.status.planned", message: "Planned" })}
+            title={translate({
+              id: "roadmap.mailer.title",
+              message: "Mailer Service",
+            })}
+            desc={translate({
+              id: "roadmap.mailer.desc",
+              message:
+                "Dedicated email delivery service for password resets, admin alerts, and system invites.",
+            })}
+            status={translate({
+              id: "roadmap.status.planned",
+              message: "Planned",
+            })}
           />
           <RoadmapItem
-            title={translate({ id: "roadmap.ee.title", message: "Enterprise Pro Modules" })}
-            desc={translate({ id: "roadmap.ee.desc", message: "License framework ready (Ed25519 JWT). Pro implementations for PII, RAG, and Gateway coming soon." })}
-            status={translate({ id: "roadmap.status.planned", message: "Planned" })}
+            title={translate({
+              id: "roadmap.ee.title",
+              message: "Enterprise Pro Modules",
+            })}
+            desc={translate({
+              id: "roadmap.ee.desc",
+              message:
+                "License framework ready (Ed25519 JWT). Pro implementations for PII, RAG, and Gateway coming soon.",
+            })}
+            status={translate({
+              id: "roadmap.status.planned",
+              message: "Planned",
+            })}
           />
           <RoadmapItem
-            title={translate({ id: "roadmap.runtimes.title", message: "More Runtimes" })}
-            desc={translate({ id: "roadmap.runtimes.desc", message: "TensorRT-LLM, SGLang, and additional managed API providers." })}
-            status={translate({ id: "roadmap.status.planned", message: "Planned" })}
+            title={translate({
+              id: "roadmap.runtimes.title",
+              message: "More Runtimes",
+            })}
+            desc={translate({
+              id: "roadmap.runtimes.desc",
+              message:
+                "TensorRT-LLM, SGLang, and additional managed API providers.",
+            })}
+            status={translate({
+              id: "roadmap.status.planned",
+              message: "Planned",
+            })}
           />
           <RoadmapItem
-            title={translate({ id: "roadmap.costs.title", message: "Fine-grained Cost Controls" })}
-            desc={translate({ id: "roadmap.costs.desc", message: "Usage analytics per tenant, model, and user with budget limits and chargeback support." })}
-            status={translate({ id: "roadmap.status.planned", message: "Planned" })}
+            title={translate({
+              id: "roadmap.costs.title",
+              message: "Fine-grained Cost Controls",
+            })}
+            desc={translate({
+              id: "roadmap.costs.desc",
+              message:
+                "Usage analytics per tenant, model, and user with budget limits and chargeback support.",
+            })}
+            status={translate({
+              id: "roadmap.status.planned",
+              message: "Planned",
+            })}
           />
         </div>
       </div>

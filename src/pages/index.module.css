@@ -35,7 +35,7 @@
   background: linear-gradient(
     180deg,
     rgba(15, 23, 42, 0.85) 0%,
-    rgba(15, 23, 42, 0.70) 100%
+    rgba(15, 23, 42, 0.7) 100%
   );
   pointer-events: none;
   z-index: 1;
@@ -217,7 +217,9 @@
   border-radius: 8px;
   background: var(--ifm-background-color);
   border: 1px solid var(--ifm-color-emphasis-200);
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
 }
 
 .archCard:hover {
