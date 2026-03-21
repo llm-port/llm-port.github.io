@@ -29,10 +29,10 @@ sidebar_position: 9
 
 通过 Brave Search API 进行网页和本地搜索。
 
-| 工具                  | 描述                          |
-| --------------------- | ----------------------------- |
-| `brave.web_search`    | 通过 Brave Search API 网页搜索 |
-| `brave.local_search`  | 通过 Brave 本地/地图搜索      |
+| 工具                 | 描述                           |
+| -------------------- | ------------------------------ |
+| `brave.web_search`   | 通过 Brave Search API 网页搜索 |
+| `brave.local_search` | 通过 Brave 本地/地图搜索       |
 
 需要 `BRAVE_API_KEY`。通过 `RATE_LIMIT_RPS` 进行速率限制。
 
@@ -52,9 +52,9 @@ sidebar_position: 9
 
 使用 Trafilatura 从网页中提取主要内容——去除样板以获得紧凑的 LLM 上下文。
 
-| 工具                    | 描述                              |
-| ----------------------- | --------------------------------- |
-| `webscrape.scrape_url`  | 从 Web URL 获取并提取内容          |
+| 工具                   | 描述                      |
+| ---------------------- | ------------------------- |
+| `webscrape.scrape_url` | 从 Web URL 获取并提取内容 |
 
 可配置输出字符上限（`DEFAULT_MAX_OUTPUT_CHARS`）。
 

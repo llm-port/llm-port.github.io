@@ -26,11 +26,11 @@ Das Backend bleibt die einzige Autorität für Scheduling und Platzierung — de
 
 Kein Python auf dem Zielknoten erforderlich. Vorgefertigte Binaries sind verfügbar für:
 
-| Plattform     | Architektur     |
-| ------------- | --------------- |
-| Linux         | x86-64          |
-| Windows       | x86-64          |
-| macOS         | Universal (M1+) |
+| Plattform | Architektur     |
+| --------- | --------------- |
+| Linux     | x86-64          |
+| Windows   | x86-64          |
+| macOS     | Universal (M1+) |
 
 Deployment über die CLI:
 

@@ -26,11 +26,11 @@ El backend sigue siendo la única autoridad para scheduling y placement — el a
 
 No se requiere Python en el nodo destino. Binarios precompilados disponibles para:
 
-| Plataforma    | Arquitectura    |
-| ------------- | --------------- |
-| Linux         | x86-64          |
-| Windows       | x86-64          |
-| macOS         | Universal (M1+) |
+| Plataforma | Arquitectura    |
+| ---------- | --------------- |
+| Linux      | x86-64          |
+| Windows    | x86-64          |
+| macOS      | Universal (M1+) |
 
 Despliegue vía CLI:
 

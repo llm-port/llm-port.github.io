@@ -8,11 +8,11 @@ Die **Skills-Registry** (`llm_port_skills`) verwaltet wiederverwendbare Reasonin
 
 ## Konzept
 
-| Ebene      | Rolle                                           |
-| ---------- | ----------------------------------------------- |
-| **RAG**    | Was das System **weiß** (Kontext)               |
-| **MCP**    | Was das System **tun kann** (Tools)             |
-| **Skills** | **Wie** das System eine Aufgabe lösen soll      |
+| Ebene      | Rolle                                      |
+| ---------- | ------------------------------------------ |
+| **RAG**    | Was das System **weiß** (Kontext)          |
+| **MCP**    | Was das System **tun kann** (Tools)        |
+| **Skills** | **Wie** das System eine Aufgabe lösen soll |
 
 Skills sind Markdown-Dokumente mit YAML-Frontmatter. Sie kodieren Domänenexpertise, schrittweise Workflows und Reasoning-Muster, die das Verhalten des LLMs bei bestimmten Anfragen steuern.
 
@@ -57,15 +57,15 @@ Beim Code-Review folge diesen Schritten:
 
 ## API-Endpunkte
 
-| Endpunkt                         | Beschreibung                             |
-| -------------------------------- | ---------------------------------------- |
-| `GET /api/admin/skills`          | Alle Skills auflisten                    |
-| `POST /api/admin/skills`         | Neuen Skill erstellen                    |
-| `PUT /api/admin/skills/{id}`     | Skill aktualisieren                      |
-| `DELETE /api/admin/skills/{id}`  | Skill löschen                            |
-| `POST /api/internal/resolve`     | Passende Skills für eine Anfrage finden  |
-| `GET /api/admin/skills/export`   | Skills als `.md`-Dateien exportieren     |
-| `POST /api/admin/skills/import`  | Skills aus `.md`-Dateien importieren     |
+| Endpunkt                        | Beschreibung                            |
+| ------------------------------- | --------------------------------------- |
+| `GET /api/admin/skills`         | Alle Skills auflisten                   |
+| `POST /api/admin/skills`        | Neuen Skill erstellen                   |
+| `PUT /api/admin/skills/{id}`    | Skill aktualisieren                     |
+| `DELETE /api/admin/skills/{id}` | Skill löschen                           |
+| `POST /api/internal/resolve`    | Passende Skills für eine Anfrage finden |
+| `GET /api/admin/skills/export`  | Skills als `.md`-Dateien exportieren    |
+| `POST /api/admin/skills/import` | Skills aus `.md`-Dateien importieren    |
 
 ## CLI-Verwaltung
 

@@ -26,11 +26,11 @@ The backend remains the single authority for scheduling and placement — the ag
 
 No Python required on the target node. Pre-built binaries are available for:
 
-| Platform      | Architecture    |
-| ------------- | --------------- |
-| Linux         | x86-64          |
-| Windows       | x86-64          |
-| macOS         | Universal (M1+) |
+| Platform | Architecture    |
+| -------- | --------------- |
+| Linux    | x86-64          |
+| Windows  | x86-64          |
+| macOS    | Universal (M1+) |
 
 Deploy via the CLI:
 

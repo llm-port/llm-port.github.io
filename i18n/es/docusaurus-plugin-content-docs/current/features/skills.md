@@ -8,7 +8,7 @@ El **Registro de Skills** (`llm_port_skills`) gestiona playbooks de razonamiento
 
 ## Concepto
 
-| Capa       | Rol                                             |
+| Capa       | Rol                                              |
 | ---------- | ------------------------------------------------ |
 | **RAG**    | Lo que el sistema **sabe** (contexto)            |
 | **MCP**    | Lo que el sistema **puede hacer** (herramientas) |
@@ -57,15 +57,15 @@ Al revisar código, sigue estos pasos:
 
 ## Endpoints de la API
 
-| Endpoint                         | Descripción                                |
-| -------------------------------- | ------------------------------------------ |
-| `GET /api/admin/skills`          | Listar todos los skills                     |
-| `POST /api/admin/skills`         | Crear un nuevo skill                        |
-| `PUT /api/admin/skills/{id}`     | Actualizar un skill                         |
-| `DELETE /api/admin/skills/{id}`  | Eliminar un skill                           |
-| `POST /api/internal/resolve`     | Resolver skills coincidentes para una solicitud |
-| `GET /api/admin/skills/export`   | Exportar skills como archivos `.md`         |
-| `POST /api/admin/skills/import`  | Importar skills desde archivos `.md`        |
+| Endpoint                        | Descripción                                     |
+| ------------------------------- | ----------------------------------------------- |
+| `GET /api/admin/skills`         | Listar todos los skills                         |
+| `POST /api/admin/skills`        | Crear un nuevo skill                            |
+| `PUT /api/admin/skills/{id}`    | Actualizar un skill                             |
+| `DELETE /api/admin/skills/{id}` | Eliminar un skill                               |
+| `POST /api/internal/resolve`    | Resolver skills coincidentes para una solicitud |
+| `GET /api/admin/skills/export`  | Exportar skills como archivos `.md`             |
+| `POST /api/admin/skills/import` | Importar skills desde archivos `.md`            |
 
 ## Gestión por CLI
 

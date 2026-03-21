@@ -210,16 +210,16 @@ The **RAG subsystem** is an internal service accessed only through the backend. 
 
 Infrastructure containers managed via Docker Compose:
 
-| Service       | Purpose                                                           |
-| ------------- | ----------------------------------------------------------------- |
+| Service       | Purpose                                                                                       |
+| ------------- | --------------------------------------------------------------------------------------------- |
 | PostgreSQL    | Backend + auth metadata + PII events, gateway sessions/memory, RAG vectors, MCP + skills data |
-| Redis         | Rate limiting, concurrency leases, caching                        |
-| RabbitMQ      | Async task broker (Taskiq)                                        |
-| MinIO         | Object storage for uploads and snapshots                          |
-| Langfuse      | LLM trace and generation event storage                            |
-| Loki + Alloy  | Centralized log collection and querying                           |
-| Grafana       | Dashboard and visualization                                       |
-| Docker Engine | Container orchestration for runtimes                              |
+| Redis         | Rate limiting, concurrency leases, caching                                                    |
+| RabbitMQ      | Async task broker (Taskiq)                                                                    |
+| MinIO         | Object storage for uploads and snapshots                                                      |
+| Langfuse      | LLM trace and generation event storage                                                        |
+| Loki + Alloy  | Centralized log collection and querying                                                       |
+| Grafana       | Dashboard and visualization                                                                   |
+| Docker Engine | Container orchestration for runtimes                                                          |
 
 ## Calling Paths
 

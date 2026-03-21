@@ -10,13 +10,13 @@ sidebar_position: 4
 
 ### Core Modules (Apache 2.0)
 
-| Module         | Description                                                  | Default |
-| -------------- | ------------------------------------------------------------ | ------- |
-| **pii**        | PII detection and redaction (Presidio + spaCy)               | Enabled |
-| **sessions**   | Chat sessions, memory facts, and file attachments            | Enabled |
-| **mcp**        | MCP tool registry and governed tool invocation broker         | Enabled |
-| **skills**     | Centralized skills registry for reasoning playbooks           | Enabled |
-| **node-agent** | Host-side execution agent for remote node clusters            | Disabled |
+| Module         | Description                                           | Default  |
+| -------------- | ----------------------------------------------------- | -------- |
+| **pii**        | PII detection and redaction (Presidio + spaCy)        | Enabled  |
+| **sessions**   | Chat sessions, memory facts, and file attachments     | Enabled  |
+| **mcp**        | MCP tool registry and governed tool invocation broker | Enabled  |
+| **skills**     | Centralized skills registry for reasoning playbooks   | Enabled  |
+| **node-agent** | Host-side execution agent for remote node clusters    | Disabled |
 
 ### Enterprise Modules (EE License)
 

@@ -210,16 +210,16 @@ El **subsistema RAG** es un servicio interno accesible solo a través del backen
 
 Contenedores de infraestructura gestionados vía Docker Compose:
 
-| Servicio      | Propósito                                                                          |
-| ------------- | ---------------------------------------------------------------------------------- |
+| Servicio      | Propósito                                                                                              |
+| ------------- | ------------------------------------------------------------------------------------------------------ |
 | PostgreSQL    | Backend + metadatos auth + eventos PII, sesiones/memoria del gateway, vectores RAG, datos MCP + skills |
-| Redis         | Rate limiting, concurrency leases, caché                                           |
-| RabbitMQ      | Broker de tareas asíncronas (Taskiq)                                               |
-| MinIO         | Almacenamiento de objetos para uploads y snapshots                                 |
-| Langfuse      | Almacenamiento de trazas LLM y eventos de generación                               |
-| Loki + Alloy  | Recopilación y consulta centralizada de logs                                       |
-| Grafana       | Dashboard y visualización                                                          |
-| Docker Engine | Orquestación de contenedores para runtimes                                         |
+| Redis         | Rate limiting, concurrency leases, caché                                                               |
+| RabbitMQ      | Broker de tareas asíncronas (Taskiq)                                                                   |
+| MinIO         | Almacenamiento de objetos para uploads y snapshots                                                     |
+| Langfuse      | Almacenamiento de trazas LLM y eventos de generación                                                   |
+| Loki + Alloy  | Recopilación y consulta centralizada de logs                                                           |
+| Grafana       | Dashboard y visualización                                                                              |
+| Docker Engine | Orquestación de contenedores para runtimes                                                             |
 
 ## Rutas de Llamada
 

@@ -8,35 +8,35 @@ The **llm.Port** platform is organized as a multi-repo codebase. Each service ha
 
 ## Core Repositories (Apache 2.0)
 
-| Repository                                                           | Description                                                              | Stack                                 |
-| -------------------------------------------------------------------- | ------------------------------------------------------------------------ | ------------------------------------- |
-| [`llm-port-frontend`](https://github.com/llm-port/llm-port-frontend) | React admin console UI                                                   | Vite + React Router + MUI + Tailwind  |
-| [`llm-port-backend`](https://github.com/llm-port/llm-port-backend)   | FastAPI control-plane: users, RBAC, LLM management, Docker orchestration | Python + FastAPI + SQLAlchemy         |
-| [`llm-port-api`](https://github.com/llm-port/llm-port-api)           | OpenAI-compatible `/v1/*` gateway with sessions, memory, and attachments | Python + FastAPI                      |
-| [`llm-port-pii`](https://github.com/llm-port/llm-port-pii)           | PII detection and redaction service                                      | Python + FastAPI + Presidio           |
-| [`llm-port-mcp`](https://github.com/llm-port/llm-port-mcp)           | MCP tool registry and governed invocation broker                         | Python + FastAPI + MCP SDK            |
-| [`llm-port-skills`](https://github.com/llm-port/llm-port-skills)     | Centralized skills registry for reasoning playbooks                      | Python + FastAPI + SQLAlchemy         |
-| [`llm-port-node-agent`](https://github.com/llm-port/llm-port-node-agent) | Host-side execution agent for remote node clusters                   | Python + httpx + websockets           |
-| [`llm-port-cli`](https://github.com/llm-port/llm-port-cli)           | CLI installer and management tool                                        | Python + Click + Textual              |
-| [`llm-port-shared`](https://github.com/llm-port/llm-port-shared)     | Docker Compose stack for shared services                                 | Postgres, Redis, Grafana, Loki, Alloy |
+| Repository                                                               | Description                                                              | Stack                                 |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------- |
+| [`llm-port-frontend`](https://github.com/llm-port/llm-port-frontend)     | React admin console UI                                                   | Vite + React Router + MUI + Tailwind  |
+| [`llm-port-backend`](https://github.com/llm-port/llm-port-backend)       | FastAPI control-plane: users, RBAC, LLM management, Docker orchestration | Python + FastAPI + SQLAlchemy         |
+| [`llm-port-api`](https://github.com/llm-port/llm-port-api)               | OpenAI-compatible `/v1/*` gateway with sessions, memory, and attachments | Python + FastAPI                      |
+| [`llm-port-pii`](https://github.com/llm-port/llm-port-pii)               | PII detection and redaction service                                      | Python + FastAPI + Presidio           |
+| [`llm-port-mcp`](https://github.com/llm-port/llm-port-mcp)               | MCP tool registry and governed invocation broker                         | Python + FastAPI + MCP SDK            |
+| [`llm-port-skills`](https://github.com/llm-port/llm-port-skills)         | Centralized skills registry for reasoning playbooks                      | Python + FastAPI + SQLAlchemy         |
+| [`llm-port-node-agent`](https://github.com/llm-port/llm-port-node-agent) | Host-side execution agent for remote node clusters                       | Python + httpx + websockets           |
+| [`llm-port-cli`](https://github.com/llm-port/llm-port-cli)               | CLI installer and management tool                                        | Python + Click + Textual              |
+| [`llm-port-shared`](https://github.com/llm-port/llm-port-shared)         | Docker Compose stack for shared services                                 | Postgres, Redis, Grafana, Loki, Alloy |
 
 ## MCP Server Repositories (Apache 2.0)
 
-| Repository                                                                     | Description                                                | Stack                            |
-| ------------------------------------------------------------------------------ | ---------------------------------------------------------- | -------------------------------- |
-| [`mcp-server-brave`](https://github.com/llm-port/mcp-server-brave)             | MCP server exposing Brave Search as tools                  | Python + FastAPI + MCP SDK       |
-| [`mcp-server-searxng`](https://github.com/llm-port/mcp-server-searxng)         | MCP server backed by self-hosted SearXNG (no API key)      | Python + FastAPI + MCP SDK       |
-| [`mcp-server-webscrape`](https://github.com/llm-port/mcp-server-webscrape)     | MCP server for web content extraction via Trafilatura       | Python + FastAPI + MCP SDK       |
+| Repository                                                                 | Description                                           | Stack                      |
+| -------------------------------------------------------------------------- | ----------------------------------------------------- | -------------------------- |
+| [`mcp-server-brave`](https://github.com/llm-port/mcp-server-brave)         | MCP server exposing Brave Search as tools             | Python + FastAPI + MCP SDK |
+| [`mcp-server-searxng`](https://github.com/llm-port/mcp-server-searxng)     | MCP server backed by self-hosted SearXNG (no API key) | Python + FastAPI + MCP SDK |
+| [`mcp-server-webscrape`](https://github.com/llm-port/mcp-server-webscrape) | MCP server for web content extraction via Trafilatura | Python + FastAPI + MCP SDK |
 
 ## Enterprise Module Repositories (EE License)
 
-| Repository                                                         | Module    | Description                                              |
-| ------------------------------------------------------------------ | --------- | -------------------------------------------------------- |
-| [`llm-port-rag`](https://github.com/llm-port/llm-port-rag)         | `rag`     | RAG Pro — ingestion, knowledge search, collector plugins |
-| [`llm-port-auth`](https://github.com/llm-port/llm-port-auth)       | `auth`    | SSO / OIDC / OAuth2 provider                             |
-| [`llm-port-mailer`](https://github.com/llm-port/llm-port-mailer)   | `mailer`  | Email notifications and alerts                           |
-| [`llm-port-docling`](https://github.com/llm-port/llm-port-docling) | `docling` | Document parsing & conversion (IBM Docling)              |
-| [`llm-port-ee`](https://github.com/llm-port/llm-port-ee)           | —         | Shared EE library: licensing, lifecycle hooks, schema    |
+| Repository                                                         | Module    | Description                                                  |
+| ------------------------------------------------------------------ | --------- | ------------------------------------------------------------ |
+| [`llm-port-rag`](https://github.com/llm-port/llm-port-rag)         | `rag`     | RAG Pro — ingestion, knowledge search, collector plugins     |
+| [`llm-port-auth`](https://github.com/llm-port/llm-port-auth)       | `auth`    | SSO / OIDC / OAuth2 provider                                 |
+| [`llm-port-mailer`](https://github.com/llm-port/llm-port-mailer)   | `mailer`  | Email notifications and alerts                               |
+| [`llm-port-docling`](https://github.com/llm-port/llm-port-docling) | `docling` | Document parsing & conversion (IBM Docling)                  |
+| [`llm-port-ee`](https://github.com/llm-port/llm-port-ee)           | —         | Shared EE library: licensing, lifecycle hooks, schema        |
 | [`llm-port-cli-ee`](https://github.com/llm-port/llm-port-cli-ee)   | —         | Enterprise CLI: GitHub auth, license management, Pro modules |
 
 :::note

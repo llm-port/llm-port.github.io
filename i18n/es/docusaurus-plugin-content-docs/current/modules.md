@@ -10,22 +10,22 @@ sidebar_position: 4
 
 ### Módulos Core (Apache 2.0)
 
-| Módulo         | Descripción                                                                | Por Defecto   |
-| -------------- | -------------------------------------------------------------------------- | ------------- |
-| **pii**        | Detección y redacción de PII (Presidio + spaCy)                            | Habilitado    |
-| **sessions**   | Sesiones de chat, hechos de memoria y archivos adjuntos                    | Habilitado    |
-| **mcp**        | Registro de herramientas MCP y broker de invocación gobernado              | Habilitado    |
-| **skills**     | Registro centralizado de skills para playbooks de razonamiento             | Habilitado    |
-| **node-agent** | Agente de ejecución en host para clusters de nodos remotos                 | Deshabilitado |
+| Módulo         | Descripción                                                    | Por Defecto   |
+| -------------- | -------------------------------------------------------------- | ------------- |
+| **pii**        | Detección y redacción de PII (Presidio + spaCy)                | Habilitado    |
+| **sessions**   | Sesiones de chat, hechos de memoria y archivos adjuntos        | Habilitado    |
+| **mcp**        | Registro de herramientas MCP y broker de invocación gobernado  | Habilitado    |
+| **skills**     | Registro centralizado de skills para playbooks de razonamiento | Habilitado    |
+| **node-agent** | Agente de ejecución en host para clusters de nodos remotos     | Deshabilitado |
 
 ### Módulos Enterprise (Licencia EE)
 
-| Módulo      | Descripción                                                                | Por Defecto   |
-| ----------- | -------------------------------------------------------------------------- | ------------- |
+| Módulo      | Descripción                                                                 | Por Defecto   |
+| ----------- | --------------------------------------------------------------------------- | ------------- |
 | **rag**     | RAG Pro — ingesta de documentos, búsqueda vectorial, plugins de recolección | Deshabilitado |
-| **auth**    | Proveedor de autenticación externo (SSO / OIDC)                            | Deshabilitado |
-| **mailer**  | Notificaciones y alertas por correo electrónico                            | Deshabilitado |
-| **docling** | Análisis y conversión avanzada de documentos (IBM Docling)                 | Deshabilitado |
+| **auth**    | Proveedor de autenticación externo (SSO / OIDC)                             | Deshabilitado |
+| **mailer**  | Notificaciones y alertas por correo electrónico                             | Deshabilitado |
+| **docling** | Análisis y conversión avanzada de documentos (IBM Docling)                  | Deshabilitado |
 
 :::note
 El backend core incluye **RAG Lite** (recuperación embebida basada en pgvector) y un **parser de documentos ligero** como respaldo cuando los módulos completos de RAG y Docling no están habilitados. La autenticación básica vía FastAPI Users siempre está disponible en el core.

@@ -8,11 +8,11 @@ sidebar_position: 10
 
 ## 概念
 
-| 层        | 角色                           |
-| --------- | ------------------------------ |
-| **RAG**   | 系统**知道**什么（上下文）     |
-| **MCP**   | 系统**能做**什么（工具）       |
-| **Skills** | 系统**如何**解决任务          |
+| 层         | 角色                       |
+| ---------- | -------------------------- |
+| **RAG**    | 系统**知道**什么（上下文） |
+| **MCP**    | 系统**能做**什么（工具）   |
+| **Skills** | 系统**如何**解决任务       |
 
 Skills 是带有 YAML Frontmatter 的 Markdown 文档。它们编码领域专业知识、分步工作流和推理模式，指导 LLM 处理特定类型请求的行为。
 
@@ -57,15 +57,15 @@ triggers:
 
 ## API 端点
 
-| 端点                              | 描述                         |
-| --------------------------------- | ---------------------------- |
-| `GET /api/admin/skills`           | 列出所有 Skills              |
-| `POST /api/admin/skills`          | 创建新 Skill                 |
-| `PUT /api/admin/skills/{id}`      | 更新 Skill                   |
-| `DELETE /api/admin/skills/{id}`   | 删除 Skill                   |
-| `POST /api/internal/resolve`      | 为请求解析匹配的 Skills       |
-| `GET /api/admin/skills/export`    | 将 Skills 导出为 `.md` 文件   |
-| `POST /api/admin/skills/import`   | 从 `.md` 文件导入 Skills      |
+| 端点                            | 描述                        |
+| ------------------------------- | --------------------------- |
+| `GET /api/admin/skills`         | 列出所有 Skills             |
+| `POST /api/admin/skills`        | 创建新 Skill                |
+| `PUT /api/admin/skills/{id}`    | 更新 Skill                  |
+| `DELETE /api/admin/skills/{id}` | 删除 Skill                  |
+| `POST /api/internal/resolve`    | 为请求解析匹配的 Skills     |
+| `GET /api/admin/skills/export`  | 将 Skills 导出为 `.md` 文件 |
+| `POST /api/admin/skills/import` | 从 `.md` 文件导入 Skills    |
 
 ## CLI 管理
 

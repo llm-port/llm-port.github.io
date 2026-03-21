@@ -8,10 +8,10 @@ The **Skills Registry** (`llm_port_skills`) manages reusable reasoning playbooks
 
 ## Concept
 
-| Layer   | Role                                      |
-| ------- | ----------------------------------------- |
-| **RAG** | What the system **knows** (context)       |
-| **MCP** | What the system **can do** (tools)        |
+| Layer      | Role                                   |
+| ---------- | -------------------------------------- |
+| **RAG**    | What the system **knows** (context)    |
+| **MCP**    | What the system **can do** (tools)     |
 | **Skills** | **How** the system should solve a task |
 
 Skills are Markdown documents with YAML frontmatter. They encode domain expertise, step-by-step workflows, and reasoning patterns that guide the LLM's behavior for specific types of requests.
@@ -57,15 +57,15 @@ When reviewing code, follow these steps:
 
 ## API Endpoints
 
-| Endpoint                         | Description                           |
-| -------------------------------- | ------------------------------------- |
-| `GET /api/admin/skills`          | List all skills                       |
-| `POST /api/admin/skills`         | Create a new skill                    |
-| `PUT /api/admin/skills/{id}`     | Update a skill                        |
-| `DELETE /api/admin/skills/{id}`  | Delete a skill                        |
-| `POST /api/internal/resolve`     | Resolve matching skills for a request |
-| `GET /api/admin/skills/export`   | Export skills as `.md` files          |
-| `POST /api/admin/skills/import`  | Import skills from `.md` files        |
+| Endpoint                        | Description                           |
+| ------------------------------- | ------------------------------------- |
+| `GET /api/admin/skills`         | List all skills                       |
+| `POST /api/admin/skills`        | Create a new skill                    |
+| `PUT /api/admin/skills/{id}`    | Update a skill                        |
+| `DELETE /api/admin/skills/{id}` | Delete a skill                        |
+| `POST /api/internal/resolve`    | Resolve matching skills for a request |
+| `GET /api/admin/skills/export`  | Export skills as `.md` files          |
+| `POST /api/admin/skills/import` | Import skills from `.md` files        |
 
 ## CLI Management
 

@@ -210,16 +210,16 @@ Das **RAG-Subsystem** ist ein interner Dienst, der nur über das Backend zugäng
 
 Infrastruktur-Container, die über Docker Compose verwaltet werden:
 
-| Dienst        | Zweck                                                                         |
-| ------------- | ----------------------------------------------------------------------------- |
+| Dienst        | Zweck                                                                                                     |
+| ------------- | --------------------------------------------------------------------------------------------------------- |
 | PostgreSQL    | Backend + Auth-Metadaten + PII-Ereignisse, Gateway-Sitzungen/Gedächtnis, RAG-Vektoren, MCP + Skills-Daten |
-| Redis         | Rate-Limiting, Concurrency-Leases, Caching                                   |
-| RabbitMQ      | Asynchroner Task-Broker (Taskiq)                                              |
-| MinIO         | Objektspeicher für Uploads und Snapshots                                      |
-| Langfuse      | LLM-Trace- und Generation-Ereignisspeicher                                    |
-| Loki + Alloy  | Zentrale Log-Sammlung und -Abfrage                                            |
-| Grafana       | Dashboard und Visualisierung                                                  |
-| Docker Engine | Container-Orchestrierung für Runtimes                                         |
+| Redis         | Rate-Limiting, Concurrency-Leases, Caching                                                                |
+| RabbitMQ      | Asynchroner Task-Broker (Taskiq)                                                                          |
+| MinIO         | Objektspeicher für Uploads und Snapshots                                                                  |
+| Langfuse      | LLM-Trace- und Generation-Ereignisspeicher                                                                |
+| Loki + Alloy  | Zentrale Log-Sammlung und -Abfrage                                                                        |
+| Grafana       | Dashboard und Visualisierung                                                                              |
+| Docker Engine | Container-Orchestrierung für Runtimes                                                                     |
 
 ## Aufrufpfade
 

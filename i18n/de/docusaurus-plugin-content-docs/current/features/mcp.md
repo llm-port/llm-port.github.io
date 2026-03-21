@@ -29,10 +29,10 @@ Der **MCP Hub** (`llm_port_mcp`) ist der zentrale Broker:
 
 Web- und lokale Suche über die Brave Search API.
 
-| Tool                  | Beschreibung                          |
-| --------------------- | ------------------------------------- |
-| `brave.web_search`    | Websuche über die Brave Search API    |
-| `brave.local_search`  | Lokale/Kartensuche über Brave         |
+| Tool                 | Beschreibung                       |
+| -------------------- | ---------------------------------- |
+| `brave.web_search`   | Websuche über die Brave Search API |
+| `brave.local_search` | Lokale/Kartensuche über Brave      |
 
 Erfordert einen `BRAVE_API_KEY`. Rate-limitiert über `RATE_LIMIT_RPS`.
 
@@ -40,11 +40,11 @@ Erfordert einen `BRAVE_API_KEY`. Rate-limitiert über `RATE_LIMIT_RPS`.
 
 Datenschutzfreundliche Meta-Suche — kein externer API-Schlüssel erforderlich.
 
-| Tool                    | Beschreibung                |
-| ----------------------- | --------------------------- |
-| `searxng.web_search`    | Websuche über SearXNG       |
+| Tool                    | Beschreibung                  |
+| ----------------------- | ----------------------------- |
+| `searxng.web_search`    | Websuche über SearXNG         |
 | `searxng.news_search`   | Nachrichtensuche über SearXNG |
-| `searxng.images_search` | Bildersuche über SearXNG    |
+| `searxng.images_search` | Bildersuche über SearXNG      |
 
 Führt SearXNG und den MCP-Server in einem einzigen Container via `supervisord` aus.
 
@@ -52,9 +52,9 @@ Führt SearXNG und den MCP-Server in einem einzigen Container via `supervisord` 
 
 Extrahiert Hauptinhalte aus Webseiten mit Trafilatura — entfernt Boilerplate für kompakten LLM-Kontext.
 
-| Tool                    | Beschreibung                                    |
-| ----------------------- | ----------------------------------------------- |
-| `webscrape.scrape_url`  | Inhalt von einer Web-URL abrufen und extrahieren |
+| Tool                   | Beschreibung                                     |
+| ---------------------- | ------------------------------------------------ |
+| `webscrape.scrape_url` | Inhalt von einer Web-URL abrufen und extrahieren |
 
 Konfigurierbares Ausgabezeichenlimit (`DEFAULT_MAX_OUTPUT_CHARS`).
 

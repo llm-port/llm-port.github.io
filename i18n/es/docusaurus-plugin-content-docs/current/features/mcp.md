@@ -29,10 +29,10 @@ El **MCP Hub** (`llm_port_mcp`) es el broker central:
 
 Búsqueda web y local a través de la API de Brave Search.
 
-| Herramienta           | Descripción                              |
-| --------------------- | ---------------------------------------- |
-| `brave.web_search`    | Búsqueda web vía API de Brave Search     |
-| `brave.local_search`  | Búsqueda local/mapas vía Brave           |
+| Herramienta          | Descripción                          |
+| -------------------- | ------------------------------------ |
+| `brave.web_search`   | Búsqueda web vía API de Brave Search |
+| `brave.local_search` | Búsqueda local/mapas vía Brave       |
 
 Requiere `BRAVE_API_KEY`. Limitado por `RATE_LIMIT_RPS`.
 
@@ -40,9 +40,9 @@ Requiere `BRAVE_API_KEY`. Limitado por `RATE_LIMIT_RPS`.
 
 Meta-búsqueda respetuosa con la privacidad — sin API key externo requerido.
 
-| Herramienta             | Descripción                    |
-| ----------------------- | ------------------------------ |
-| `searxng.web_search`    | Búsqueda web vía SearXNG       |
+| Herramienta             | Descripción                      |
+| ----------------------- | -------------------------------- |
+| `searxng.web_search`    | Búsqueda web vía SearXNG         |
 | `searxng.news_search`   | Búsqueda de noticias vía SearXNG |
 | `searxng.images_search` | Búsqueda de imágenes vía SearXNG |
 
@@ -52,9 +52,9 @@ Ejecuta SearXNG y el servidor MCP en un único contenedor vía `supervisord`.
 
 Extrae el contenido principal de páginas web usando Trafilatura — elimina boilerplate para contexto LLM compacto.
 
-| Herramienta             | Descripción                                     |
-| ----------------------- | ----------------------------------------------- |
-| `webscrape.scrape_url`  | Obtener y extraer contenido de una URL web       |
+| Herramienta            | Descripción                                |
+| ---------------------- | ------------------------------------------ |
+| `webscrape.scrape_url` | Obtener y extraer contenido de una URL web |
 
 Límite de caracteres configurable (`DEFAULT_MAX_OUTPUT_CHARS`).
 

@@ -29,8 +29,8 @@ The **MCP Hub** (`llm_port_mcp`) is the central broker. It:
 
 Web and local search powered by the Brave Search API.
 
-| Tool           | Description                     |
-| -------------- | ------------------------------- |
+| Tool                 | Description                     |
+| -------------------- | ------------------------------- |
 | `brave.web_search`   | Web search via Brave Search API |
 | `brave.local_search` | Local/map search via Brave      |
 
@@ -40,8 +40,8 @@ Requires a `BRAVE_API_KEY`. Rate-limited via `RATE_LIMIT_RPS`.
 
 Privacy-friendly meta-search — no external API key required.
 
-| Tool                   | Description              |
-| ---------------------- | ------------------------ |
+| Tool                    | Description              |
+| ----------------------- | ------------------------ |
 | `searxng.web_search`    | Web search via SearXNG   |
 | `searxng.news_search`   | News search via SearXNG  |
 | `searxng.images_search` | Image search via SearXNG |

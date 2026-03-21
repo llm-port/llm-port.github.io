@@ -10,22 +10,22 @@ sidebar_position: 4
 
 ### Core-Module (Apache 2.0)
 
-| Modul          | Beschreibung                                                      | Standard    |
-| -------------- | ----------------------------------------------------------------- | ----------- |
-| **pii**        | PII-Erkennung und -Anonymisierung (Presidio + spaCy)              | Aktiviert   |
-| **sessions**   | Chat-Sitzungen, Gedächtnis-Fakten und Dateianhänge               | Aktiviert   |
-| **mcp**        | MCP-Tool-Registry und gesteuerter Tool-Aufruf-Broker              | Aktiviert   |
-| **skills**     | Zentrales Skills-Register für Reasoning-Playbooks                 | Aktiviert   |
-| **node-agent** | Host-seitiger Ausführungsagent für Remote-Node-Cluster            | Deaktiviert |
+| Modul          | Beschreibung                                           | Standard    |
+| -------------- | ------------------------------------------------------ | ----------- |
+| **pii**        | PII-Erkennung und -Anonymisierung (Presidio + spaCy)   | Aktiviert   |
+| **sessions**   | Chat-Sitzungen, Gedächtnis-Fakten und Dateianhänge     | Aktiviert   |
+| **mcp**        | MCP-Tool-Registry und gesteuerter Tool-Aufruf-Broker   | Aktiviert   |
+| **skills**     | Zentrales Skills-Register für Reasoning-Playbooks      | Aktiviert   |
+| **node-agent** | Host-seitiger Ausführungsagent für Remote-Node-Cluster | Deaktiviert |
 
 ### Enterprise-Module (EE-Lizenz)
 
-| Modul       | Beschreibung                                                      | Standard    |
-| ----------- | ----------------------------------------------------------------- | ----------- |
-| **rag**     | RAG Pro — Dokumentenerfassung, Vektorsuche, Collector-Plugins     | Deaktiviert |
-| **auth**    | Externer Authentifizierungsanbieter (SSO / OIDC)                  | Deaktiviert |
-| **mailer**  | E-Mail-Benachrichtigungen und -Warnungen                          | Deaktiviert |
-| **docling** | Erweiterte Dokumentenverarbeitung & -konvertierung (IBM Docling)  | Deaktiviert |
+| Modul       | Beschreibung                                                     | Standard    |
+| ----------- | ---------------------------------------------------------------- | ----------- |
+| **rag**     | RAG Pro — Dokumentenerfassung, Vektorsuche, Collector-Plugins    | Deaktiviert |
+| **auth**    | Externer Authentifizierungsanbieter (SSO / OIDC)                 | Deaktiviert |
+| **mailer**  | E-Mail-Benachrichtigungen und -Warnungen                         | Deaktiviert |
+| **docling** | Erweiterte Dokumentenverarbeitung & -konvertierung (IBM Docling) | Deaktiviert |
 
 :::note
 Das Core-Backend enthält **RAG Lite** (eingebettete pgvector-basierte Suche) und einen **leichtgewichtigen Dokumentenparser** als Fallback, wenn die vollständigen RAG- und Docling-Module nicht aktiviert sind. Basis-Authentifizierung über FastAPI Users ist immer im Core verfügbar.

@@ -201,16 +201,16 @@ flowchart LR
 
 通过 Docker Compose 管理的基础设施容器：
 
-| 服务          | 用途                                       |
-| ------------- | ------------------------------------------ |
+| 服务          | 用途                                                                          |
+| ------------- | ----------------------------------------------------------------------------- |
 | PostgreSQL    | 后端元数据、认证、PII 事件、RAG 向量（pgvector）、网关审计、MCP + Skills 数据 |
-| Redis         | 速率限制、并发租约、缓存                   |
-| RabbitMQ      | 异步任务代理（Taskiq）                     |
-| MinIO         | 上传和快照的对象存储                       |
-| Langfuse      | LLM 追踪和生成事件存储                     |
-| Loki + Alloy  | 集中式日志收集和查询                       |
-| Grafana       | 仪表板和可视化                             |
-| Docker Engine | 运行时的容器编排                           |
+| Redis         | 速率限制、并发租约、缓存                                                      |
+| RabbitMQ      | 异步任务代理（Taskiq）                                                        |
+| MinIO         | 上传和快照的对象存储                                                          |
+| Langfuse      | LLM 追踪和生成事件存储                                                        |
+| Loki + Alloy  | 集中式日志收集和查询                                                          |
+| Grafana       | 仪表板和可视化                                                                |
+| Docker Engine | 运行时的容器编排                                                              |
 
 ## 调用路径
 
