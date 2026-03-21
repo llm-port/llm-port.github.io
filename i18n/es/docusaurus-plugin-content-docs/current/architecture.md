@@ -36,6 +36,17 @@ flowchart LR
         DOCLING["llm_port_docling (IBM Docling)"]
     end
 
+    subgraph MCP["Plano MCP"]
+        MCPHUB["llm_port_mcp (Registro de Herramientas)"]
+        MCPBRAVE["mcp_server_brave (Brave Search)"]
+        MCPSEARX["mcp_server_searxng (SearXNG)"]
+        MCPWEB["mcp_server_webscrape (Trafilatura)"]
+    end
+
+    subgraph Skills["Plano de Skills"]
+        SKILLSVC["llm_port_skills (Registro de Skills)"]
+    end
+
     subgraph RAG["Plano RAG (Interno)"]
         RAGAPI["llm_port_rag API (/api/internal/*)"]
         RAGW["Taskiq Worker"]
@@ -45,12 +56,14 @@ flowchart LR
     subgraph Runtime["Ejecución de Modelos"]
         LOCAL["Runtimes Locales (vLLM / llama.cpp / etc.)"]
         REMOTE["Proveedores Remotos (OpenAI / Azure / etc.)"]
+        NODEAGENT["llm_port_node_agent (Nodos Remotos)"]
     end
 
     subgraph Shared["Servicios Compartidos de Plataforma"]
         PGMAIN["Postgres (backend + auth + eventos PII)"]
         PGAPI["Postgres (gateway / sesiones / memoria)"]
         PGRAG["Postgres + pgvector (RAG)"]
+        PGMCP["Postgres (MCP + Skills)"]
         REDIS["Redis (rate limit / leases / cache)"]
         RMQ["RabbitMQ (broker Taskiq)"]
         MINIO["MinIO (snapshots/uploads)"]
@@ -71,6 +84,9 @@ flowchart LR
     BE -->|Proxy config/stats PII| PII
     BE -->|Entrega de notificaciones| MAILER
     BE -->|Conversión de documentos| DOCLING
+    BE -->|Gestión de herramientas MCP| MCPHUB
+    BE -->|Resolución de skills| SKILLSVC
+    BE -->|Coordinación node-agent| NODEAGENT
     BE -->|Acciones Ops| DOCKER
     BE --> PGMAIN
     BE --> PGAPI
@@ -81,9 +97,21 @@ flowchart LR
     API -->|Enrutar chat/embeddings| REMOTE
     API -->|Screening PII| PII
     API -->|Extracción de adjuntos| DOCLING
+    API -->|Invocación de herramientas| MCPHUB
+    API -->|Resolución de skills| SKILLSVC
     API --> PGAPI
     API --> REDIS
     API --> LANGFUSE
+
+    MCPHUB -->|Descubrir herramientas| MCPBRAVE
+    MCPHUB -->|Descubrir herramientas| MCPSEARX
+    MCPHUB -->|Descubrir herramientas| MCPWEB
+    MCPHUB -->|Proxy PII| PII
+    MCPHUB --> PGMCP
+
+    SKILLSVC --> PGMCP
+
+    NODEAGENT -->|WebSocket heartbeat| BE
 
     AUTH -->|OAuth callback → JWT cookie| BE
     AUTH --> PGMAIN
@@ -144,6 +172,31 @@ Servicios separados que se pueden habilitar o deshabilitar vía perfiles de Dock
 - **Mailer** — Notificaciones por correo con plantillas Jinja2
 - **Docling** — Procesamiento de documentos basado en IBM Docling para extracción de texto
 
+### Plano MCP
+
+El **registro de herramientas MCP** (`llm_port_mcp`) es un broker gobernado para servidores de herramientas del Model Context Protocol:
+
+- Registra servidores MCP-compatibles (transportes stdio, SSE y Streamable HTTP)
+- Descubre automáticamente herramientas y las convierte en definiciones de herramientas compatibles con OpenAI
+- Enruta todas las invocaciones a través de un **Privacy Proxy** (detección PII basada en Presidio)
+- Cifra credenciales de servidor con Fernet
+
+Servidores MCP integrados: **Brave Search**, **SearXNG** (autoalojado, sin API key) y **Web Scrape** (extracción de contenido basada en Trafilatura).
+
+### Plano de Skills
+
+El **registro de Skills** (`llm_port_skills`) gestiona playbooks de razonamiento reutilizables. Los skills son documentos Markdown con frontmatter YAML que determinan cómo el sistema razona sobre clases de solicitudes — entre contexto RAG, herramientas MCP y composición de prompts.
+
+### Agente de Nodo
+
+El **Agente de Nodo** (`llm_port_node_agent`) es un binario ligero del lado del host para despliegues multi-nodo:
+
+- Registro con el backend usando un token de un solo uso
+- Conexión WebSocket autenticada para heartbeats y despacho de comandos
+- Ejecución de comandos del ciclo de vida de Docker en nodos remotos
+- Envío de logs a Loki (journald en Linux, Event Log en Windows)
+- Distribución como binarios independientes (sin Python requerido en el nodo)
+
 ### Plano RAG
 
 El **subsistema RAG** es un servicio interno accesible solo a través del backend. Gestiona:
@@ -159,7 +212,7 @@ Contenedores de infraestructura gestionados vía Docker Compose:
 
 | Servicio      | Propósito                                                                          |
 | ------------- | ---------------------------------------------------------------------------------- |
-| PostgreSQL    | Backend + metadatos auth + eventos PII, sesiones/memoria del gateway, vectores RAG |
+| PostgreSQL    | Backend + metadatos auth + eventos PII, sesiones/memoria del gateway, vectores RAG, datos MCP + skills |
 | Redis         | Rate limiting, concurrency leases, caché                                           |
 | RabbitMQ      | Broker de tareas asíncronas (Taskiq)                                               |
 | MinIO         | Almacenamiento de objetos para uploads y snapshots                                 |
@@ -180,5 +233,8 @@ Contenedores de infraestructura gestionados vía Docker Compose:
 8. **Entrega de notificaciones** — `Backend (escritura outbox) → dispatcher → Mailer /send → proveedor SMTP`
 9. **Procesamiento de documentos** — `Subida de archivo → Docling /convert → pipeline IBM Docling → texto estructurado → llamador (worker RAG / gateway)`
 10. **Observabilidad** — `Backend + Gateway + RAG → Loki / Langfuse → dashboards Grafana`
+11. **Invocación de herramientas MCP** — `Gateway → MCP Hub → Privacy Proxy (escaneo PII) → Servidor MCP → resultado → Gateway`
+12. **Resolución de skills** — `Gateway (pre-prompt) → Skills /resolve → playbooks coincidentes → composición de prompt`
+13. **Despacho de agente de nodo** — `Backend → WebSocket → Agente de Nodo → comando de ciclo de vida Docker → informe de estado`
 
 Para diagramas de secuencia detallados de cada flujo, consulta [Secuencias de Llamada](/docs/call-sequences).

@@ -36,6 +36,17 @@ flowchart LR
         DOCLING["llm_port_docling (IBM Docling)"]
     end
 
+    subgraph MCP["MCP Plane"]
+        MCPHUB["llm_port_mcp (Tool Registry)"]
+        MCPBRAVE["mcp_server_brave (Brave Search)"]
+        MCPSEARX["mcp_server_searxng (SearXNG)"]
+        MCPWEB["mcp_server_webscrape (Trafilatura)"]
+    end
+
+    subgraph Skills["Skills Plane"]
+        SKILLSVC["llm_port_skills (Skills Registry)"]
+    end
+
     subgraph RAG["RAG Plane (Internal)"]
         RAGAPI["llm_port_rag API (/api/internal/*)"]
         RAGW["Taskiq Worker"]
@@ -45,12 +56,14 @@ flowchart LR
     subgraph Runtime["Model Execution"]
         LOCAL["Local Runtimes (vLLM / llama.cpp / etc.)"]
         REMOTE["Remote Providers (OpenAI / Azure / etc.)"]
+        NODEAGENT["llm_port_node_agent (Remote Nodes)"]
     end
 
     subgraph Shared["Shared Platform Services"]
         PGMAIN["Postgres (backend + auth + PII events)"]
         PGAPI["Postgres (gateway / sessions / memory)"]
         PGRAG["Postgres + pgvector (RAG)"]
+        PGMCP["Postgres (MCP + Skills)"]
         REDIS["Redis (rate limit / leases / cache)"]
         RMQ["RabbitMQ (Taskiq broker)"]
         MINIO["MinIO (raw snapshots/uploads)"]
@@ -71,6 +84,9 @@ flowchart LR
     BE -->|PII config/stats proxy| PII
     BE -->|Notification delivery| MAILER
     BE -->|Document conversion| DOCLING
+    BE -->|MCP tool management| MCPHUB
+    BE -->|Skills resolution| SKILLSVC
+    BE -->|Node agent coordination| NODEAGENT
     BE -->|Ops actions| DOCKER
     BE --> PGMAIN
     BE --> PGAPI
@@ -81,9 +97,21 @@ flowchart LR
     API -->|Route chat/embeddings| REMOTE
     API -->|PII screening| PII
     API -->|Attachment extraction| DOCLING
+    API -->|Tool invocation| MCPHUB
+    API -->|Skill resolution| SKILLSVC
     API --> PGAPI
     API --> REDIS
     API --> LANGFUSE
+
+    MCPHUB -->|Discover tools| MCPBRAVE
+    MCPHUB -->|Discover tools| MCPSEARX
+    MCPHUB -->|Discover tools| MCPWEB
+    MCPHUB -->|PII proxy| PII
+    MCPHUB --> PGMCP
+
+    SKILLSVC --> PGMCP
+
+    NODEAGENT -->|WebSocket heartbeat| BE
 
     AUTH -->|OAuth callback → JWT cookie| BE
     AUTH --> PGMAIN
@@ -144,6 +172,31 @@ Separate services that can be enabled or disabled via Docker Compose profiles:
 - **Mailer** — Email notifications with Jinja2-templated messages
 - **Docling** — IBM Docling-based document processing for text extraction
 
+### MCP Plane
+
+The **MCP tool registry** (`llm_port_mcp`) is a governed broker for Model Context Protocol tool servers. It:
+
+- Registers MCP-compliant servers (stdio, SSE, Streamable HTTP transports)
+- Auto-discovers tools and converts them to OpenAI-compatible tool definitions
+- Routes all tool invocations through a **Privacy Proxy** (Presidio-based PII detection)
+- Encrypts server credentials with Fernet
+
+Built-in MCP servers include **Brave Search**, **SearXNG** (self-hosted, no API key), and **Web Scrape** (Trafilatura-based content extraction).
+
+### Skills Plane
+
+The **Skills registry** (`llm_port_skills`) manages reusable reasoning playbooks. Skills are Markdown documents with YAML frontmatter that shape how the system reasons about classes of requests. They sit between RAG context, MCP tools, and prompt composition — providing the "how to solve" layer.
+
+### Node Agent
+
+The **Node Agent** (`llm_port_node_agent`) is a lightweight host-side binary that enables multi-node deployments. It:
+
+- Enrolls with the backend using a one-time token
+- Maintains an authenticated WebSocket connection for heartbeats and command dispatch
+- Executes Docker runtime lifecycle commands on remote nodes
+- Ships logs to Loki (journald on Linux, Event Log on Windows)
+- Distributes as standalone binaries (no Python required on the node)
+
 ### RAG Plane
 
 The **RAG subsystem** is an internal service accessed only through the backend. It manages:
@@ -159,7 +212,7 @@ Infrastructure containers managed via Docker Compose:
 
 | Service       | Purpose                                                           |
 | ------------- | ----------------------------------------------------------------- |
-| PostgreSQL    | Backend + auth metadata + PII events, gateway sessions/memory, RAG vectors |
+| PostgreSQL    | Backend + auth metadata + PII events, gateway sessions/memory, RAG vectors, MCP + skills data |
 | Redis         | Rate limiting, concurrency leases, caching                        |
 | RabbitMQ      | Async task broker (Taskiq)                                        |
 | MinIO         | Object storage for uploads and snapshots                          |
@@ -180,5 +233,8 @@ Infrastructure containers managed via Docker Compose:
 8. **Notification delivery** — `Backend (outbox write) → dispatcher → Mailer /send → SMTP provider`
 9. **Document processing** — `File upload → Docling /convert → IBM Docling pipeline → structured text → caller (RAG worker / gateway)`
 10. **Observability** — `Backend + Gateway + RAG → Loki / Langfuse → Grafana dashboards`
+11. **MCP tool invocation** — `Gateway → MCP Hub → Privacy Proxy (PII scan) → MCP Server → tool result → Gateway`
+12. **Skill resolution** — `Gateway (pre-prompt) → Skills /resolve → matching playbooks → prompt composition`
+13. **Node agent dispatch** — `Backend → WebSocket → Node Agent → Docker lifecycle command → status report`
 
 For detailed sequence diagrams of each flow, see [Call Sequences](/docs/call-sequences).

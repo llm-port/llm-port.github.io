@@ -36,6 +36,17 @@ flowchart LR
         DOCLING["llm_port_docling (文档解析)"]
     end
 
+    subgraph MCP["MCP 层"]
+        MCPHUB["llm_port_mcp (工具注册中心)"]
+        MCPBRAVE["mcp_server_brave (Brave Search)"]
+        MCPSEARX["mcp_server_searxng (SearXNG)"]
+        MCPWEB["mcp_server_webscrape (Trafilatura)"]
+    end
+
+    subgraph Skills["Skills 层"]
+        SKILLSVC["llm_port_skills (技能注册中心)"]
+    end
+
     subgraph RAG["RAG 层（内部）"]
         RAGAPI["llm_port_rag API (/api/internal/*)"]
         RAGW["Taskiq Worker"]
@@ -45,11 +56,13 @@ flowchart LR
     subgraph Runtime["模型执行"]
         LOCAL["本地运行时（vLLM / llama.cpp 等）"]
         REMOTE["远程提供商（OpenAI / Azure 等）"]
+        NODEAGENT["llm_port_node_agent (远程节点)"]
     end
 
     subgraph Shared["共享平台服务"]
         PGMAIN["Postgres（后端 + 认证 + PII 事件）"]
         PGAPI["Postgres（llm_api 元数据/审计）"]
+        PGMCP["Postgres（MCP + Skills）"]
         REDIS["Redis（速率限制 / 租约 / 缓存）"]
         RMQ["RabbitMQ（Taskiq Broker）"]
         MINIO["MinIO（快照/上传）"]
@@ -72,6 +85,8 @@ flowchart LR
     BE --> LOKI
 
     API -->|PII 扫描| PII
+    API -->|工具调用| MCPHUB
+    API -->|Skill 解析| SKILLSVC
     API -->|路由聊天/嵌入| LOCAL
     API -->|路由聊天/嵌入| REMOTE
     API --> PGAPI
@@ -79,12 +94,25 @@ flowchart LR
     API --> LANGFUSE
     API --> LOKI
 
+    MCPHUB -->|发现工具| MCPBRAVE
+    MCPHUB -->|发现工具| MCPSEARX
+    MCPHUB -->|发现工具| MCPWEB
+    MCPHUB -->|PII 代理| PII
+    MCPHUB --> PGMCP
+
+    SKILLSVC --> PGMCP
+
+    NODEAGENT -->|WebSocket 心跳| BE
+
     PII -->|事件转发| BE
 
     AUTH --> PGMAIN
     BE -->|SSO 认证| AUTH
     BE -->|发送邮件| MAILER
     BE -->|文档解析| DOCLING
+    BE -->|MCP 工具管理| MCPHUB
+    BE -->|Skills 解析| SKILLSVC
+    BE -->|节点代理协调| NODEAGENT
 
     RAGAPI --> PGMAIN
     RAGAPI --> MINIO
@@ -126,6 +154,40 @@ flowchart LR
 - 带 TTFT 提取的 SSE 流式传输
 - Langfuse 追踪和审计日志
 
+### 可选模块
+
+可通过 Docker Compose Profiles 启用或禁用的独立服务：
+
+- **Auth** — 带 OAuth 提供商适配器的 SSO / OIDC 认证
+- **PII** — 基于 Presidio 的 PII 扫描、脱敏和令牌化
+- **Mailer** — 带 Jinja2 模板的邮件通知
+- **Docling** — 基于 IBM Docling 的文档处理，用于文本提取
+
+### MCP 层
+
+**MCP 工具注册中心**（`llm_port_mcp`）是 Model Context Protocol 工具服务器的受治理代理：
+
+- 注册 MCP 兼容服务器（stdio、SSE、Streamable HTTP 传输）
+- 自动发现工具并转换为 OpenAI 兼容的工具定义
+- 所有工具调用通过 **Privacy Proxy**（基于 Presidio 的 PII 检测）
+- 使用 Fernet 加密服务器凭据
+
+内置 MCP 服务器包括 **Brave Search**、**SearXNG**（自托管，无需 API 密钥）和 **Web Scrape**（基于 Trafilatura 的内容提取）。
+
+### Skills 层
+
+**Skills 注册中心**（`llm_port_skills`）管理可重用的推理 Playbook。Skills 是带有 YAML Frontmatter 的 Markdown 文档，决定系统如何推理特定类别的请求——位于 RAG 上下文、MCP 工具和 Prompt 组合之间。
+
+### 节点代理
+
+**节点代理**（`llm_port_node_agent`）是用于多节点部署的轻量级主机端二进制文件：
+
+- 使用一次性令牌向后端注册
+- 维持认证的 WebSocket 连接用于心跳和命令分发
+- 在远程节点上执行 Docker 运行时生命周期命令
+- 日志发送到 Loki（Linux 上的 journald，Windows 上的 Event Log）
+- 以独立二进制文件分发（节点上无需安装 Python）
+
 ### RAG 层
 
 **RAG 子系统**是只能通过后端访问的内部服务，管理：
@@ -141,7 +203,7 @@ flowchart LR
 
 | 服务          | 用途                                       |
 | ------------- | ------------------------------------------ |
-| PostgreSQL    | 后端元数据、认证、PII 事件、RAG 向量（pgvector）、网关审计 |
+| PostgreSQL    | 后端元数据、认证、PII 事件、RAG 向量（pgvector）、网关审计、MCP + Skills 数据 |
 | Redis         | 速率限制、并发租约、缓存                   |
 | RabbitMQ      | 异步任务代理（Taskiq）                     |
 | MinIO         | 上传和快照的对象存储                       |
@@ -162,5 +224,8 @@ flowchart LR
 8. **邮件通知** — `后端 → Mailer 服务 → SMTP`
 9. **文档解析** — `后端 → Docling 服务 → 结构化输出`
 10. **可观测性** — `后端 + 网关 + RAG → Loki / Langfuse → Grafana 仪表板`
+11. **MCP 工具调用** — `网关 → MCP Hub → Privacy Proxy（PII 扫描）→ MCP 服务器 → 工具结果 → 网关`
+12. **Skill 解析** — `网关（预提示）→ Skills /resolve → 匹配的 Playbook → Prompt 组合`
+13. **节点代理分发** — `后端 → WebSocket → 节点代理 → Docker 生命周期命令 → 状态报告`
 
 有关每个流的详细序列图，请参阅[调用序列](/docs/call-sequences)。

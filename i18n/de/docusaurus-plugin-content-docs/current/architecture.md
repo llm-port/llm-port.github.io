@@ -36,6 +36,17 @@ flowchart LR
         DOCLING["llm_port_docling (IBM Docling)"]
     end
 
+    subgraph MCP["MCP-Ebene"]
+        MCPHUB["llm_port_mcp (Tool-Registry)"]
+        MCPBRAVE["mcp_server_brave (Brave Search)"]
+        MCPSEARX["mcp_server_searxng (SearXNG)"]
+        MCPWEB["mcp_server_webscrape (Trafilatura)"]
+    end
+
+    subgraph Skills["Skills-Ebene"]
+        SKILLSVC["llm_port_skills (Skills-Registry)"]
+    end
+
     subgraph RAG["RAG-Ebene (Intern)"]
         RAGAPI["llm_port_rag API (/api/internal/*)"]
         RAGW["Taskiq Worker"]
@@ -45,6 +56,7 @@ flowchart LR
     subgraph Runtime["Modell-Ausführung"]
         LOCAL["Lokale Runtimes (vLLM / llama.cpp / etc.)"]
         REMOTE["Remote-Anbieter (OpenAI / Azure / etc.)"]
+        NODEAGENT["llm_port_node_agent (Remote-Nodes)"]
     end
 
     subgraph Shared["Gemeinsame Plattformdienste"]
@@ -58,6 +70,7 @@ flowchart LR
         LOKI["Loki + Alloy (Logs)"]
         GRAF["Grafana (Dashboards)"]
         DOCKER["Docker Engine / Compose"]
+        PGMCP["Postgres (MCP + Skills)"]
     end
 
     U1 --> FE
@@ -71,6 +84,9 @@ flowchart LR
     BE -->|PII-Konfig/Stats-Proxy| PII
     BE -->|Benachrichtigungszustellung| MAILER
     BE -->|Dokumentkonvertierung| DOCLING
+    BE -->|MCP-Tool-Verwaltung| MCPHUB
+    BE -->|Skills-Auflösung| SKILLSVC
+    BE -->|Node-Agent-Koordination| NODEAGENT
     BE -->|Ops-Aktionen| DOCKER
     BE --> PGMAIN
     BE --> PGAPI
@@ -81,9 +97,21 @@ flowchart LR
     API -->|Chat/Embeddings weiterleiten| REMOTE
     API -->|PII-Screening| PII
     API -->|Anhang-Extraktion| DOCLING
+    API -->|Tool-Aufruf| MCPHUB
+    API -->|Skill-Auflösung| SKILLSVC
     API --> PGAPI
     API --> REDIS
     API --> LANGFUSE
+
+    MCPHUB -->|Tools ermitteln| MCPBRAVE
+    MCPHUB -->|Tools ermitteln| MCPSEARX
+    MCPHUB -->|Tools ermitteln| MCPWEB
+    MCPHUB -->|PII-Proxy| PII
+    MCPHUB --> PGMCP
+
+    SKILLSVC --> PGMCP
+
+    NODEAGENT -->|WebSocket-Heartbeat| BE
 
     AUTH -->|OAuth Callback → JWT Cookie| BE
     AUTH --> PGMAIN
@@ -144,6 +172,31 @@ Separate Dienste, die über Docker Compose Profile aktiviert oder deaktiviert we
 - **Mailer** — E-Mail-Benachrichtigungen mit Jinja2-Vorlagen
 - **Docling** — IBM Docling-basierte Dokumentverarbeitung für Textextraktion
 
+### MCP-Ebene
+
+Die **MCP-Tool-Registry** (`llm_port_mcp`) ist ein gesteuerter Broker für Model-Context-Protocol-Tool-Server:
+
+- Registriert MCP-kompatible Server (stdio, SSE, Streamable HTTP-Transporte)
+- Ermittelt automatisch Tools und konvertiert sie in OpenAI-kompatible Tool-Definitionen
+- Leitet alle Tool-Aufrufe durch einen **Privacy Proxy** (Presidio-basierte PII-Erkennung)
+- Verschlüsselt Server-Anmeldedaten mit Fernet
+
+Integrierte MCP-Server: **Brave Search**, **SearXNG** (selbstgehostet, kein API-Schlüssel) und **Web Scrape** (Trafilatura-basierte Content-Extraktion).
+
+### Skills-Ebene
+
+Die **Skills-Registry** (`llm_port_skills`) verwaltet wiederverwendbare Reasoning-Playbooks. Skills sind Markdown-Dokumente mit YAML-Frontmatter, die bestimmen, wie das System über bestimmte Anfrageklassen nachdenkt — zwischen RAG-Kontext, MCP-Tools und Prompt-Komposition.
+
+### Node-Agent
+
+Der **Node-Agent** (`llm_port_node_agent`) ist ein leichtgewichtiges Host-seitiges Binary für Multi-Node-Deployments:
+
+- Registrierung beim Backend mit einem Einmal-Token
+- Aufrechterhaltung einer authentifizierten WebSocket-Verbindung für Heartbeats und Befehlsdispatch
+- Ausführung von Docker-Runtime-Lifecycle-Befehlen auf Remote-Nodes
+- Log-Weiterleitung an Loki (journald unter Linux, Event Log unter Windows)
+- Verteilung als Standalone-Binaries (kein Python auf dem Node erforderlich)
+
 ### RAG-Ebene
 
 Das **RAG-Subsystem** ist ein interner Dienst, der nur über das Backend zugänglich ist. Es verwaltet:
@@ -159,7 +212,7 @@ Infrastruktur-Container, die über Docker Compose verwaltet werden:
 
 | Dienst        | Zweck                                                                         |
 | ------------- | ----------------------------------------------------------------------------- |
-| PostgreSQL    | Backend + Auth-Metadaten + PII-Ereignisse, Gateway-Sitzungen/Gedächtnis, RAG-Vektoren |
+| PostgreSQL    | Backend + Auth-Metadaten + PII-Ereignisse, Gateway-Sitzungen/Gedächtnis, RAG-Vektoren, MCP + Skills-Daten |
 | Redis         | Rate-Limiting, Concurrency-Leases, Caching                                   |
 | RabbitMQ      | Asynchroner Task-Broker (Taskiq)                                              |
 | MinIO         | Objektspeicher für Uploads und Snapshots                                      |
@@ -180,5 +233,8 @@ Infrastruktur-Container, die über Docker Compose verwaltet werden:
 8. **Benachrichtigungszustellung** — `Backend (Outbox-Schreiben) → Dispatcher → Mailer /send → SMTP-Anbieter`
 9. **Dokumentverarbeitung** — `Datei-Upload → Docling /convert → IBM Docling Pipeline → strukturierter Text → Aufrufer (RAG-Worker / Gateway)`
 10. **Observability** — `Backend + Gateway + RAG → Loki / Langfuse → Grafana-Dashboards`
+11. **MCP-Tool-Aufruf** — `Gateway → MCP-Hub → Privacy Proxy (PII-Scan) → MCP-Server → Tool-Ergebnis → Gateway`
+12. **Skill-Auflösung** — `Gateway (Pre-Prompt) → Skills /resolve → passende Playbooks → Prompt-Komposition`
+13. **Node-Agent-Dispatch** — `Backend → WebSocket → Node-Agent → Docker-Lifecycle-Befehl → Statusbericht`
 
 Detaillierte Sequenzdiagramme für jeden Fluss finden Sie unter [Aufrufsequenzen](/docs/call-sequences).
