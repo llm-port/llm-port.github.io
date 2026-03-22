@@ -83,6 +83,10 @@ POST /api/admin/mcp/servers
 
 The hub will auto-discover all tools exposed by the server and make them available as OpenAI-compatible tool definitions.
 
+![MCP Hub](/img/screenshots/mcp.png)
+
+![MCP Network Scanner](/img/screenshots/mcp_scanner.png)
+
 ## CLI Management
 
 ```bash

@@ -4,7 +4,7 @@ sidebar_position: 11
 
 # Agente de Nodo
 
-El **Agente de Nodo** (`llm_port_node_agent`) es un binario ligero del lado del host que permite despliegues de clusters multi-nodo. Se ejecuta en cada host remoto y ejecuta comandos del ciclo de vida de Docker runtime despachados por el backend.
+El **Agente de Nodo** (`llm_port_node_agent`) es un binario ligero del lado del host que permite despliegues de clusters multi-nodo. El nombre publicado del paquete Python y del ejecutable es **`llmport-agent`**. Se ejecuta en cada host remoto y ejecuta comandos del ciclo de vida de Docker runtime despachados por el backend.
 
 ## Cómo Funciona
 
@@ -43,7 +43,7 @@ La CLI detecta automáticamente el mejor binario para la plataforma destino.
 ### Opción B — Paquete Python
 
 ```bash
-pip install llm-port-node-agent
+pip install llmport-agent
 ```
 
 ### Opción C — Servicio systemd
@@ -51,8 +51,8 @@ pip install llm-port-node-agent
 Se incluye un archivo de unidad systemd para despliegues en Linux:
 
 ```bash
-sudo cp deploy/systemd/llm-port-node-agent.service /etc/systemd/system/
-sudo systemctl enable --now llm-port-node-agent
+sudo cp deploy/systemd/llmport-agent.service /etc/systemd/system/
+sudo systemctl enable --now llmport-agent
 ```
 
 ## Características
@@ -70,4 +70,13 @@ sudo systemctl enable --now llm-port-node-agent
 llmport node list              # Listar nodos registrados
 llmport node agent deploy      # Desplegar binario del agente a un nodo remoto
 llmport node agent status      # Verificar estado del agente en un nodo
+```
+
+## Comandos del Agente
+
+```bash
+llmport-agent         # Ejecutar en primer plano (probar conectividad)
+llmport-agent start   # Instalar/iniciar como servicio systemd
+llmport-agent status  # Mostrar estado del servicio
+llmport-agent stop    # Detener/deshabilitar el servicio
 ```

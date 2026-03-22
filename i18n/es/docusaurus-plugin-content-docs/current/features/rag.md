@@ -81,7 +81,7 @@ Cuando el módulo RAG completo no está habilitado, el gateway proporciona un mo
 - Búsqueda semántica sobre archivos adjuntos de sesión y documentos subidos
 - No requiere un servicio RAG separado — ideal para despliegues ligeros
 
-Ver también: [Gateway — RAG Lite](/docs/features/gateway#rag-lite)
+Ver también: [Gateway — RAG Lite](/docs/features/gateway)
 
 ![RAG Knowledge Base](/img/screenshots/rag_kb.png)
 

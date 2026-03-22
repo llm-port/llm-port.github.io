@@ -16,6 +16,8 @@ The **Skills Registry** (`llm_port_skills`) manages reusable reasoning playbooks
 
 Skills are Markdown documents with YAML frontmatter. They encode domain expertise, step-by-step workflows, and reasoning patterns that guide the LLM's behavior for specific types of requests.
 
+![Skills Hub](/img/screenshots/skills.png)
+
 ## Skill Format
 
 ```markdown

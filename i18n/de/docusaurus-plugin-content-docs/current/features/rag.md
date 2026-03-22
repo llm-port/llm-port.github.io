@@ -81,7 +81,7 @@ Wenn das vollständige RAG-Modul nicht aktiviert ist, bietet das Gateway einen i
 - Semantische Suche über Sitzungsanhänge und hochgeladene Dokumente
 - Kein separater RAG-Service erforderlich — ideal für leichtgewichtige Deployments
 
-Siehe auch: [Gateway — RAG Lite](/docs/features/gateway#rag-lite)
+Siehe auch: [Gateway — RAG Lite](/docs/features/gateway)
 
 ![RAG Knowledge Base](/img/screenshots/rag_kb.png)
 

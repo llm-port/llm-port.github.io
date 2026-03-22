@@ -4,7 +4,7 @@ sidebar_position: 11
 
 # 节点代理
 
-**节点代理**（`llm_port_node_agent`）是一个轻量级主机端二进制文件，支持多节点集群部署。它运行在每个远程主机上，执行由后端分发的 Docker 运行时生命周期命令.
+**节点代理**（`llm_port_node_agent`）是一个轻量级主机端二进制文件，支持多节点集群部署。发布的 Python 包名和可执行命令名是 **`llmport-agent`**。它运行在每个远程主机上，执行由后端分发的 Docker 运行时生命周期命令。
 
 ## 工作原理
 
@@ -43,7 +43,7 @@ CLI 会自动检测目标平台的最佳二进制文件。
 ### 方式 B — Python 包
 
 ```bash
-pip install llm-port-node-agent
+pip install llmport-agent
 ```
 
 ### 方式 C — systemd 服务
@@ -51,8 +51,8 @@ pip install llm-port-node-agent
 Linux 部署包含 systemd 单元文件：
 
 ```bash
-sudo cp deploy/systemd/llm-port-node-agent.service /etc/systemd/system/
-sudo systemctl enable --now llm-port-node-agent
+sudo cp deploy/systemd/llmport-agent.service /etc/systemd/system/
+sudo systemctl enable --now llmport-agent
 ```
 
 ## 功能特性
@@ -70,4 +70,13 @@ sudo systemctl enable --now llm-port-node-agent
 llmport node list              # 列出已注册的节点
 llmport node agent deploy      # 将代理二进制文件部署到远程节点
 llmport node agent status      # 检查节点上的代理状态
+```
+
+## 代理命令
+
+```bash
+llmport-agent         # 前台运行（测试连通性）
+llmport-agent start   # 安装并启动 systemd 服务
+llmport-agent status  # 查看服务状态
+llmport-agent stop    # 停止并禁用服务
 ```

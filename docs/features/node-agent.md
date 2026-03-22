@@ -4,7 +4,7 @@ sidebar_position: 11
 
 # Node Agent
 
-The **Node Agent** (`llm_port_node_agent`) is a lightweight host-side binary that enables multi-node cluster deployments. It runs on each remote host and executes Docker runtime lifecycle commands dispatched by the backend.
+The **Node Agent** (`llm_port_node_agent`) is a lightweight host-side binary that enables multi-node cluster deployments. The published Python package and executable name are **`llmport-agent`**. It runs on each remote host and executes Docker runtime lifecycle commands dispatched by the backend.
 
 ## How It Works
 
@@ -19,6 +19,10 @@ Backend ◄──WebSocket──► Node Agent ──► Docker Engine (on remot
 5. **Heartbeat + inventory** data flows continuously to the backend
 
 The backend remains the single authority for scheduling and placement — the agent is purely an execution arm.
+
+![Node Fleet](/img/screenshots/nodes.png)
+
+![Node Detail](/img/screenshots/node_stats.png)
 
 ## Installation
 
@@ -43,7 +47,7 @@ The CLI auto-detects the best binary for the target platform.
 ### Option B — Python package
 
 ```bash
-pip install llm-port-node-agent
+pip install llmport-agent
 ```
 
 ### Option C — Systemd service
@@ -51,8 +55,8 @@ pip install llm-port-node-agent
 A systemd unit file is included for Linux deployments:
 
 ```bash
-sudo cp deploy/systemd/llm-port-node-agent.service /etc/systemd/system/
-sudo systemctl enable --now llm-port-node-agent
+sudo cp deploy/systemd/llmport-agent.service /etc/systemd/system/
+sudo systemctl enable --now llmport-agent
 ```
 
 ## Features
@@ -70,4 +74,13 @@ sudo systemctl enable --now llm-port-node-agent
 llmport node list              # List enrolled nodes
 llmport node agent deploy      # Deploy agent binary to a remote node
 llmport node agent status      # Check agent status on a node
+```
+
+## Agent Commands
+
+```bash
+llmport-agent         # Run in foreground (test connectivity)
+llmport-agent start   # Install/start as systemd service
+llmport-agent status  # Show service status
+llmport-agent stop    # Stop/disable service
 ```

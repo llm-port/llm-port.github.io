@@ -64,3 +64,5 @@ PII scan events are forwarded from the PII service to the backend and stored in 
 - **Tenant policy admin**: configure per-tenant PII policies, entity types, and fail modes from the settings UI
 
 ![PII Detection](/img/screenshots/pii.png)
+
+![PII Activity Log](/img/screenshots/pii_logs.png)

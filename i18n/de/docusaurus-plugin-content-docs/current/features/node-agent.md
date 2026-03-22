@@ -4,7 +4,7 @@ sidebar_position: 11
 
 # Node-Agent
 
-Der **Node-Agent** (`llm_port_node_agent`) ist ein leichtgewichtiges Host-seitiges Binary, das Multi-Node-Cluster-Deployments ermöglicht. Er läuft auf jedem Remote-Host und führt Docker-Runtime-Lifecycle-Befehle aus, die vom Backend dispatcht werden.
+Der **Node-Agent** (`llm_port_node_agent`) ist ein leichtgewichtiges Host-seitiges Binary, das Multi-Node-Cluster-Deployments ermöglicht. Der veröffentlichte Python-Paketname und das ausführbare Kommando sind **`llmport-agent`**. Er läuft auf jedem Remote-Host und führt Docker-Runtime-Lifecycle-Befehle aus, die vom Backend dispatcht werden.
 
 ## Funktionsweise
 
@@ -43,7 +43,7 @@ Die CLI erkennt automatisch das beste Binary für die Zielplattform.
 ### Option B — Python-Paket
 
 ```bash
-pip install llm-port-node-agent
+pip install llmport-agent
 ```
 
 ### Option C — Systemd-Service
@@ -51,8 +51,8 @@ pip install llm-port-node-agent
 Eine systemd-Unit-Datei ist für Linux-Deployments enthalten:
 
 ```bash
-sudo cp deploy/systemd/llm-port-node-agent.service /etc/systemd/system/
-sudo systemctl enable --now llm-port-node-agent
+sudo cp deploy/systemd/llmport-agent.service /etc/systemd/system/
+sudo systemctl enable --now llmport-agent
 ```
 
 ## Funktionen
@@ -70,4 +70,13 @@ sudo systemctl enable --now llm-port-node-agent
 llmport node list              # Registrierte Nodes auflisten
 llmport node agent deploy      # Agent-Binary auf einen Remote-Node deployen
 llmport node agent status      # Agent-Status auf einem Node prüfen
+```
+
+## Agent-Befehle
+
+```bash
+llmport-agent         # Im Vordergrund ausführen (Konnektivität testen)
+llmport-agent start   # Als systemd-Service installieren/starten
+llmport-agent status  # Service-Status anzeigen
+llmport-agent stop    # Service stoppen/deaktivieren
 ```

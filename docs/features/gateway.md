@@ -100,4 +100,6 @@ The gateway includes a built-in chat experience with persistent sessions and mem
 
 ![Chat Console](/img/screenshots/chat.png)
 
+![Chat Administration](/img/screenshots/chat_admin.png)
+
 ![API Playground](/img/screenshots/api.png)

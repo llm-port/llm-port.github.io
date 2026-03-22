@@ -71,4 +71,6 @@ Visual topology of the entire LLM infrastructure:
 
 ![Local Runtime](/img/screenshots/llm_provider_local.png)
 
+![Remote Runtime](/img/screenshots/llm_provider_remote.png)
+
 ![Models](/img/screenshots/models.png)
