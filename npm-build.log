@@ -1,0 +1,11 @@
+
+> llm-port-github-io@0.0.0 build
+> docusaurus build
+
+[INFO] [en] Creating an optimized production build...
+[90m[[90mwebpackbar[90m][39m [36mℹ[39m Compiling Client
+[90m[[90mwebpackbar[90m][39m [36mℹ[39m Compiling Server
+[90m[[90mwebpackbar[90m][39m [32m✔[39m Server: Compiled with some errors in 18.30s
+[90m[[90mwebpackbar[90m][39m [32m✔[39m Client: Compiled with some errors in 56.06s
+[ERROR] Client bundle compiled with errors therefore further build is impossible.
+Module not found: Error: Can't resolve 'mermaid' in 'C:\101_CodeProjects\llm-port\github.io\node_modules\@docusaurus\theme-mermaid\lib\client'

@@ -1,0 +1,22 @@
+{
+  "version.label": {
+    "message": "当前",
+    "description": "The label for version current"
+  },
+  "sidebar.docsSidebar.category.Architecture": {
+    "message": "架构",
+    "description": "The label for category 'Architecture' in sidebar"
+  },
+  "sidebar.docsSidebar.category.Features": {
+    "message": "功能",
+    "description": "The label for category 'Features' in sidebar"
+  },
+  "sidebar.docsSidebar.category.Platform": {
+    "message": "平台",
+    "description": "The label for category 'Platform' in sidebar"
+  },
+  "sidebar.docsSidebar.category.Community": {
+    "message": "社区",
+    "description": "The label for category 'Community' in sidebar"
+  }
+}

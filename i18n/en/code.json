@@ -1,0 +1,458 @@
+{
+  "feature.gateway.title": {
+    "message": "Gateway & Routing"
+  },
+  "feature.gateway.description": {
+    "message": "OpenAI-compatible API endpoint (/v1/*) that routes to local runtimes (vLLM, llama.cpp, Ollama, TGI) and remote providers (OpenAI, Azure, …). Alias-based model resolution, SSE streaming with TTFT extraction, and automatic retry."
+  },
+  "feature.security.title": {
+    "message": "Security & PII"
+  },
+  "feature.security.description": {
+    "message": "Full RBAC with JWT authentication, OAuth / SSO / OIDC, Redis rate limiting, concurrency leasing, and Fernet-encrypted DB secrets. Presidio-based PII detection with per-tenant policies, configurable entity types, and fail-safe modes."
+  },
+  "feature.observability.title": {
+    "message": "Observability"
+  },
+  "feature.observability.description": {
+    "message": "Langfuse tracing with privacy modes, Loki + Alloy centralized logging, OpenTelemetry + Jaeger distributed tracing, and a dashboard with Grafana panel embeds. Every gateway request and admin action is audit-logged."
+  },
+  "feature.rag.title": {
+    "message": "RAG Pipeline"
+  },
+  "feature.rag.description": {
+    "message": "Multi-tenant retrieval with vector, keyword, and hybrid search. Virtual container tree with draft/publish workflows, presigned MinIO uploads, collector plugins, and async processing via Taskiq + RabbitMQ."
+  },
+  "feature.ops.title": {
+    "message": "Ops Console"
+  },
+  "feature.ops.description": {
+    "message": "Full container lifecycle management, image pulls with SSE progress, Compose stack deploy/rollback with revisions and audit trail. Multi-vendor GPU auto-detection (NVIDIA, AMD, Intel, Apple Metal)."
+  },
+  "feature.chat.title": {
+    "message": "Chat Console",
+    "description": "Title for the Chat Console feature card"
+  },
+  "feature.chat.description": {
+    "message": "Built-in chat UI with SSE streaming, drag-and-drop session management, error retry, dark / light theming, and per-model usage tracking. Supports all gateway-connected models."
+  },
+  "hero.gtcBadge": {
+    "message": "GTC 2026 — Inference Infrastructure for the Enterprise"
+  },
+  "hero.languages": {
+    "message": "Available in English, Deutsch, Español, 中文"
+  },
+  "section.architecture.title": {
+    "message": "How it Works"
+  },
+  "section.comparison.title": {
+    "message": "How llm.port Compares"
+  },
+  "section.roadmap.title": {
+    "message": "Roadmap"
+  },
+  "arch.gateway.title": { "message": "API Gateway" },
+  "arch.gateway.desc": { "message": "OpenAI-compatible /v1/* endpoint. Routes to vLLM, llama.cpp, Ollama, TGI and remote providers (OpenAI, Azure, …). SSE streaming, alias-based model resolution, retry, and rate limiting." },
+  "arch.pii.title": { "message": "PII Layer" },
+  "arch.pii.desc": { "message": "Microsoft Presidio integration for real-time detection and redaction. Per-tenant policies with configurable entity types and fail-safe modes." },
+  "arch.gpu.title": { "message": "GPU Orchestration" },
+  "arch.gpu.desc": { "message": "Auto-detects NVIDIA (CUDA), AMD (ROCm), and Intel GPUs. Spawns vLLM containers with the correct image (CUDA / ROCm / Legacy). HuggingFace cache mounting for fast model loading." },
+  "arch.storage.title": { "message": "Storage" },
+  "arch.storage.desc": { "message": "PostgreSQL with pgvector for vector search (RAG). Redis for rate limiting, session cache, and distributed leasing. MinIO for S3-compatible document storage." },
+  "arch.observability.title": { "message": "Observability" },
+  "arch.observability.desc": { "message": "Langfuse for LLM tracing with privacy modes. Grafana + Loki + Alloy for centralized logging. OpenTelemetry + Jaeger for distributed tracing. Prometheus metrics." },
+  "arch.controlplane.title": { "message": "Control Plane" },
+  "arch.controlplane.desc": { "message": "FastAPI backend for RBAC, settings, Docker orchestration, module lifecycle, agent infra, and Compose stack management with revision tracking." },
+  "gtc.label": { "message": "GTC 2026" },
+  "gtc.heading": { "message": "Inference Infrastructure for the Enterprise" },
+  "gtc.body": { "message": "Teams deploying the models and accelerator architectures showcased at GTC 2026 need more than a runtime — they need a secure gateway. llm.port provides the missing production layer: an OpenAI-compatible API gateway with built-in PII redaction, RBAC, and full observability — all running inside your private VPC. No data leaves your perimeter." },
+  "gtc.feature.gateway": { "message": "Secure API gateway with rate limiting, retry, and alias-based model routing" },
+  "gtc.feature.pii": { "message": "PII redaction before ingress and egress — Microsoft Presidio-powered" },
+  "gtc.feature.gpu": { "message": "Multi-vendor GPU auto-detection (NVIDIA CUDA, AMD ROCm, Intel) with automatic vLLM image selection" },
+  "gtc.feature.observability": { "message": "Enterprise observability: Langfuse LLM tracing, Grafana dashboards, and OpenTelemetry" },
+  "gtc.feature.sovereign": { "message": "Air-gapped, sovereign deployment — no external cloud dependency" },
+  "comparison.header.feature": { "message": "Feature" },
+  "comparison.gateway": { "message": "OpenAI-compatible gateway" },
+  "comparison.pii": { "message": "PII redaction layer" },
+  "comparison.rag": { "message": "RAG pipeline" },
+  "comparison.gpu": { "message": "GPU auto-detection" },
+  "comparison.observability": { "message": "LLM tracing" },
+  "comparison.rbac": { "message": "RBAC / multi-tenant" },
+  "comparison.containerOps": { "message": "Container ops UI" },
+  "comparison.cli": { "message": "CLI tooling" },
+  "comparison.adminUi": { "message": "Admin UI" },
+  "comparison.chatUi": { "message": "Chat UI" },
+  "comparison.i18n": { "message": "i18n (4 languages)" },
+  "comparison.selfHosted": { "message": "Fully self-hosted" },
+  "roadmap.docling.title": { "message": "Advanced OCR (Docling)" },
+  "roadmap.docling.desc": { "message": "IBM Docling for rich document extraction — tables, images, pages. Service scaffold exists; integration with RAG pipeline in progress." },
+  "roadmap.status.inProgress": { "message": "In Progress" },
+  "roadmap.auth.title": { "message": "Auth Service (SSO / OIDC)" },
+  "roadmap.auth.desc": { "message": "Dedicated auth service for external identity provider management. Framework and compose profile defined." },
+  "roadmap.status.planned": { "message": "Planned" },
+  "roadmap.mailer.title": { "message": "Mailer Service" },
+  "roadmap.mailer.desc": { "message": "Dedicated email delivery service for password resets, admin alerts, and system invites." },
+  "roadmap.ee.title": { "message": "Enterprise Pro Modules" },
+  "roadmap.ee.desc": { "message": "License framework ready (Ed25519 JWT). Pro implementations for PII, RAG, and Gateway coming soon." },
+  "roadmap.runtimes.title": { "message": "More Runtimes" },
+  "roadmap.runtimes.desc": { "message": "TensorRT-LLM, SGLang, and additional managed API providers." },
+  "roadmap.costs.title": { "message": "Fine-grained Cost Controls" },
+  "roadmap.costs.desc": { "message": "Usage analytics per tenant, model, and user with budget limits and chargeback support." },
+  "hero.description": {
+    "message": "Routes, secures, and observes traffic across local LLM runtimes and remote providers — giving teams a single place to manage LLM services end-to-end."
+  },
+  "hero.getStarted": {
+    "message": "Get Started"
+  },
+  "section.features.title": {
+    "message": "What it does"
+  },
+  "section.why.title": {
+    "message": "Why llm.port"
+  },
+  "section.why.bold": {
+    "message": "Sovereign-by-default AI"
+  },
+  "section.why.text": {
+    "message": "keep data on-prem when needed, use remote providers when allowed, without changing your apps or losing governance and observability. One platform replaces a patchwork of proxies, dashboards, and scripts."
+  },
+  "section.screenshots.title": {
+    "message": "Screenshots"
+  },
+  "section.enterprise.bold": {
+    "message": "Enterprise features available"
+  },
+  "section.enterprise.text": {
+    "message": "for teams that need SSO, advanced PII tokenization, and governance."
+  },
+  "section.enterprise.cta": {
+    "message": "Get in touch →"
+  },
+  "theme.ErrorPageContent.title": {
+    "message": "This page crashed.",
+    "description": "The title of the fallback page when the page crashed"
+  },
+  "theme.BackToTopButton.buttonAriaLabel": {
+    "message": "Scroll back to top",
+    "description": "The ARIA label for the back to top button"
+  },
+  "theme.blog.archive.title": {
+    "message": "Archive",
+    "description": "The page & hero title of the blog archive page"
+  },
+  "theme.blog.archive.description": {
+    "message": "Archive",
+    "description": "The page & hero description of the blog archive page"
+  },
+  "theme.blog.post.paginator.navAriaLabel": {
+    "message": "Blog post page navigation",
+    "description": "The ARIA label for the blog posts pagination"
+  },
+  "theme.blog.post.paginator.newerPost": {
+    "message": "Newer post",
+    "description": "The blog post button label to navigate to the newer/previous post"
+  },
+  "theme.blog.post.paginator.olderPost": {
+    "message": "Older post",
+    "description": "The blog post button label to navigate to the older/next post"
+  },
+  "theme.blog.paginator.navAriaLabel": {
+    "message": "Blog list page navigation",
+    "description": "The ARIA label for the blog pagination"
+  },
+  "theme.blog.paginator.newerEntries": {
+    "message": "Newer entries",
+    "description": "The label used to navigate to the newer blog posts page (previous page)"
+  },
+  "theme.blog.paginator.olderEntries": {
+    "message": "Older entries",
+    "description": "The label used to navigate to the older blog posts page (next page)"
+  },
+  "theme.tags.tagsPageLink": {
+    "message": "View all tags",
+    "description": "The label of the link targeting the tag list page"
+  },
+  "theme.docs.DocCard.categoryDescription.plurals": {
+    "message": "1 item|{count} items",
+    "description": "The default description for a category card in the generated index about how many items this category includes"
+  },
+  "theme.docs.breadcrumbs.navAriaLabel": {
+    "message": "Breadcrumbs",
+    "description": "The ARIA label for the breadcrumbs"
+  },
+  "theme.colorToggle.ariaLabel.mode.system": {
+    "message": "system mode",
+    "description": "The name for the system color mode"
+  },
+  "theme.colorToggle.ariaLabel.mode.light": {
+    "message": "light mode",
+    "description": "The name for the light color mode"
+  },
+  "theme.colorToggle.ariaLabel.mode.dark": {
+    "message": "dark mode",
+    "description": "The name for the dark color mode"
+  },
+  "theme.colorToggle.ariaLabel": {
+    "message": "Switch between dark and light mode (currently {mode})",
+    "description": "The ARIA label for the color mode toggle"
+  },
+  "theme.docs.paginator.navAriaLabel": {
+    "message": "Docs pages",
+    "description": "The ARIA label for the docs pagination"
+  },
+  "theme.docs.paginator.previous": {
+    "message": "Previous",
+    "description": "The label used to navigate to the previous doc"
+  },
+  "theme.docs.paginator.next": {
+    "message": "Next",
+    "description": "The label used to navigate to the next doc"
+  },
+  "theme.docs.versionBadge.label": {
+    "message": "Version: {versionLabel}"
+  },
+  "theme.docs.tagDocListPageTitle.nDocsTagged": {
+    "message": "One doc tagged|{count} docs tagged",
+    "description": "Pluralized label for \"{count} docs tagged\". Use as much plural forms (separated by \"|\") as your language support (see https://www.unicode.org/cldr/cldr-aux/charts/34/supplemental/language_plural_rules.html)"
+  },
+  "theme.docs.tagDocListPageTitle": {
+    "message": "{nDocsTagged} with \"{tagName}\"",
+    "description": "The title of the page for a docs tag"
+  },
+  "theme.docs.versions.unreleasedVersionLabel": {
+    "message": "This is unreleased documentation for {siteTitle} {versionLabel} version.",
+    "description": "The label used to tell the user that he's browsing an unreleased doc version"
+  },
+  "theme.docs.versions.unmaintainedVersionLabel": {
+    "message": "This is documentation for {siteTitle} {versionLabel}, which is no longer actively maintained.",
+    "description": "The label used to tell the user that he's browsing an unmaintained doc version"
+  },
+  "theme.docs.versions.latestVersionSuggestionLabel": {
+    "message": "For up-to-date documentation, see the {latestVersionLink} ({versionLabel}).",
+    "description": "The label used to tell the user to check the latest version"
+  },
+  "theme.docs.versions.latestVersionLinkLabel": {
+    "message": "latest version",
+    "description": "The label used for the latest version suggestion link label"
+  },
+  "theme.common.editThisPage": {
+    "message": "Edit this page",
+    "description": "The link label to edit the current page"
+  },
+  "theme.common.headingLinkTitle": {
+    "message": "Direct link to {heading}",
+    "description": "Title for link to heading"
+  },
+  "theme.lastUpdated.atDate": {
+    "message": " on {date}",
+    "description": "The words used to describe on which date a page has been last updated"
+  },
+  "theme.lastUpdated.byUser": {
+    "message": " by {user}",
+    "description": "The words used to describe by who the page has been last updated"
+  },
+  "theme.lastUpdated.lastUpdatedAtBy": {
+    "message": "Last updated{atDate}{byUser}",
+    "description": "The sentence used to display when a page has been last updated, and by who"
+  },
+  "theme.NotFound.title": {
+    "message": "Page Not Found",
+    "description": "The title of the 404 page"
+  },
+  "theme.navbar.mobileVersionsDropdown.label": {
+    "message": "Versions",
+    "description": "The label for the navbar versions dropdown on mobile view"
+  },
+  "theme.tags.tagsListLabel": {
+    "message": "Tags:",
+    "description": "The label alongside a tag list"
+  },
+  "theme.admonition.caution": {
+    "message": "caution",
+    "description": "The default label used for the Caution admonition (:::caution)"
+  },
+  "theme.admonition.danger": {
+    "message": "danger",
+    "description": "The default label used for the Danger admonition (:::danger)"
+  },
+  "theme.admonition.info": {
+    "message": "info",
+    "description": "The default label used for the Info admonition (:::info)"
+  },
+  "theme.admonition.note": {
+    "message": "note",
+    "description": "The default label used for the Note admonition (:::note)"
+  },
+  "theme.admonition.tip": {
+    "message": "tip",
+    "description": "The default label used for the Tip admonition (:::tip)"
+  },
+  "theme.admonition.warning": {
+    "message": "warning",
+    "description": "The default label used for the Warning admonition (:::warning)"
+  },
+  "theme.AnnouncementBar.closeButtonAriaLabel": {
+    "message": "Close",
+    "description": "The ARIA label for close button of announcement bar"
+  },
+  "theme.blog.sidebar.navAriaLabel": {
+    "message": "Blog recent posts navigation",
+    "description": "The ARIA label for recent posts in the blog sidebar"
+  },
+  "theme.DocSidebarItem.expandCategoryAriaLabel": {
+    "message": "Expand sidebar category '{label}'",
+    "description": "The ARIA label to expand the sidebar category"
+  },
+  "theme.DocSidebarItem.collapseCategoryAriaLabel": {
+    "message": "Collapse sidebar category '{label}'",
+    "description": "The ARIA label to collapse the sidebar category"
+  },
+  "theme.IconExternalLink.ariaLabel": {
+    "message": "(opens in new tab)",
+    "description": "The ARIA label for the external link icon"
+  },
+  "theme.NavBar.navAriaLabel": {
+    "message": "Main",
+    "description": "The ARIA label for the main navigation"
+  },
+  "theme.NotFound.p1": {
+    "message": "We could not find what you were looking for.",
+    "description": "The first paragraph of the 404 page"
+  },
+  "theme.NotFound.p2": {
+    "message": "Please contact the owner of the site that linked you to the original URL and let them know their link is broken.",
+    "description": "The 2nd paragraph of the 404 page"
+  },
+  "theme.navbar.mobileLanguageDropdown.label": {
+    "message": "Languages",
+    "description": "The label for the mobile language switcher dropdown"
+  },
+  "theme.TOCCollapsible.toggleButtonLabel": {
+    "message": "On this page",
+    "description": "The label used by the button on the collapsible TOC component"
+  },
+  "theme.blog.post.readMore": {
+    "message": "Read more",
+    "description": "The label used in blog post item excerpts to link to full blog posts"
+  },
+  "theme.blog.post.readMoreLabel": {
+    "message": "Read more about {title}",
+    "description": "The ARIA label for the link to full blog posts from excerpts"
+  },
+  "theme.blog.post.readingTime.plurals": {
+    "message": "One min read|{readingTime} min read",
+    "description": "Pluralized label for \"{readingTime} min read\". Use as much plural forms (separated by \"|\") as your language support (see https://www.unicode.org/cldr/cldr-aux/charts/34/supplemental/language_plural_rules.html)"
+  },
+  "theme.CodeBlock.wordWrapToggle": {
+    "message": "Toggle word wrap",
+    "description": "The title attribute for toggle word wrapping button of code block lines"
+  },
+  "theme.CodeBlock.copy": {
+    "message": "Copy",
+    "description": "The copy button label on code blocks"
+  },
+  "theme.CodeBlock.copied": {
+    "message": "Copied",
+    "description": "The copied button label on code blocks"
+  },
+  "theme.CodeBlock.copyButtonAriaLabel": {
+    "message": "Copy code to clipboard",
+    "description": "The ARIA label for copy code blocks button"
+  },
+  "theme.docs.breadcrumbs.home": {
+    "message": "Home page",
+    "description": "The ARIA label for the home page in the breadcrumbs"
+  },
+  "theme.docs.sidebar.collapseButtonTitle": {
+    "message": "Collapse sidebar",
+    "description": "The title attribute for collapse button of doc sidebar"
+  },
+  "theme.docs.sidebar.collapseButtonAriaLabel": {
+    "message": "Collapse sidebar",
+    "description": "The title attribute for collapse button of doc sidebar"
+  },
+  "theme.docs.sidebar.navAriaLabel": {
+    "message": "Docs sidebar",
+    "description": "The ARIA label for the sidebar navigation"
+  },
+  "theme.docs.sidebar.closeSidebarButtonAriaLabel": {
+    "message": "Close navigation bar",
+    "description": "The ARIA label for close button of mobile sidebar"
+  },
+  "theme.docs.sidebar.toggleSidebarButtonAriaLabel": {
+    "message": "Toggle navigation bar",
+    "description": "The ARIA label for hamburger menu button of mobile navigation"
+  },
+  "theme.navbar.mobileSidebarSecondaryMenu.backButtonLabel": {
+    "message": "← Back to main menu",
+    "description": "The label of the back button to return to main menu, inside the mobile navbar sidebar secondary menu (notably used to display the docs sidebar)"
+  },
+  "theme.navbar.mobileDropdown.collapseButton.expandAriaLabel": {
+    "message": "Expand the dropdown",
+    "description": "The ARIA label of the button to expand the mobile dropdown navbar item"
+  },
+  "theme.navbar.mobileDropdown.collapseButton.collapseAriaLabel": {
+    "message": "Collapse the dropdown",
+    "description": "The ARIA label of the button to collapse the mobile dropdown navbar item"
+  },
+  "theme.docs.sidebar.expandButtonTitle": {
+    "message": "Expand sidebar",
+    "description": "The ARIA label and title attribute for expand button of doc sidebar"
+  },
+  "theme.docs.sidebar.expandButtonAriaLabel": {
+    "message": "Expand sidebar",
+    "description": "The ARIA label and title attribute for expand button of doc sidebar"
+  },
+  "theme.blog.post.plurals": {
+    "message": "One post|{count} posts",
+    "description": "Pluralized label for \"{count} posts\". Use as much plural forms (separated by \"|\") as your language support (see https://www.unicode.org/cldr/cldr-aux/charts/34/supplemental/language_plural_rules.html)"
+  },
+  "theme.blog.tagTitle": {
+    "message": "{nPosts} tagged with \"{tagName}\"",
+    "description": "The title of the page for a blog tag"
+  },
+  "theme.blog.author.pageTitle": {
+    "message": "{authorName} - {nPosts}",
+    "description": "The title of the page for a blog author"
+  },
+  "theme.blog.authorsList.pageTitle": {
+    "message": "Authors",
+    "description": "The title of the authors page"
+  },
+  "theme.blog.authorsList.viewAll": {
+    "message": "View all authors",
+    "description": "The label of the link targeting the blog authors page"
+  },
+  "theme.blog.author.noPosts": {
+    "message": "This author has not written any posts yet.",
+    "description": "The text for authors with 0 blog post"
+  },
+  "theme.contentVisibility.unlistedBanner.title": {
+    "message": "Unlisted page",
+    "description": "The unlisted content banner title"
+  },
+  "theme.contentVisibility.unlistedBanner.message": {
+    "message": "This page is unlisted. Search engines will not index it, and only users having a direct link can access it.",
+    "description": "The unlisted content banner message"
+  },
+  "theme.contentVisibility.draftBanner.title": {
+    "message": "Draft page",
+    "description": "The draft content banner title"
+  },
+  "theme.contentVisibility.draftBanner.message": {
+    "message": "This page is a draft. It will only be visible in dev and be excluded from the production build.",
+    "description": "The draft content banner message"
+  },
+  "theme.ErrorPageContent.tryAgain": {
+    "message": "Try again",
+    "description": "The label of the button to try again rendering when the React error boundary captures an error"
+  },
+  "theme.common.skipToMainContent": {
+    "message": "Skip to main content",
+    "description": "The skip to content label used for accessibility, allowing to rapidly navigate to main content with keyboard tab/enter navigation"
+  },
+  "theme.tags.tagsPageTitle": {
+    "message": "Tags",
+    "description": "The title of the tag list page"
+  }
+}

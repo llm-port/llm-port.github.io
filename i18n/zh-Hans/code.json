@@ -1,0 +1,247 @@
+{
+  "feature.gateway.title": {
+    "message": "网关与路由"
+  },
+  "feature.gateway.description": {
+    "message": "兼容 OpenAI 的 API 端点 (/v1/*)，可将请求路由到本地运行时（vLLM、llama.cpp、Ollama、TGI）和远程提供商（OpenAI、Azure 等）。基于别名的模型解析、SSE 流式传输与 TTFT 提取，以及自动重试。"
+  },
+  "feature.security.title": {
+    "message": "安全与隐私"
+  },
+  "feature.security.description": {
+    "message": "完整的 RBAC 与 JWT 认证、OAuth / SSO / OIDC、Redis 速率限制、并发租约和 Fernet 加密的数据库密钥。基于 Presidio 的 PII 检测，支持租户级策略、可配置的实体类型和故障安全模式。"
+  },
+  "feature.observability.title": {
+    "message": "可观测性"
+  },
+  "feature.observability.description": {
+    "message": "Langfuse 追踪与隐私模式、Loki + Alloy 集中式日志、OpenTelemetry + Jaeger 分布式追踪，以及嵌入 Grafana 面板的仪表板。每个网关请求和管理操作均有审计日志。"
+  },
+  "feature.rag.title": {
+    "message": "RAG 管道"
+  },
+  "feature.rag.description": {
+    "message": "多租户检索，支持向量、关键词和混合搜索。虚拟容器树，具有草稿/发布工作流、MinIO 预签名上传、收集器插件和通过 Taskiq + RabbitMQ 的异步处理。"
+  },
+  "feature.ops.title": {
+    "message": "运维控制台"
+  },
+  "feature.ops.description": {
+    "message": "完整的容器生命周期管理、带 SSE 进度的镜像拉取、Compose 栈部署/回滚（含版本和审计跟踪）。多厂商 GPU 自动检测（NVIDIA、AMD、Intel、Apple Metal）。"
+  },
+  "feature.chat.title": {
+    "message": "聊天控制台"
+  },
+  "feature.chat.description": {
+    "message": "内置聊天界面，支持 SSE 流式传输、拖放式会话管理、错误重试、深色/浅色主题以及按模型的使用量跟踪。支持所有通过网关连接的模型。"
+  },
+  "hero.gtcBadge": {
+    "message": "GTC 2026 — 企业级推理基础设施"
+  },
+  "hero.languages": {
+    "message": "支持 English、Deutsch、Español、中文"
+  },
+  "section.architecture.title": {
+    "message": "工作原理"
+  },
+  "section.comparison.title": {
+    "message": "llm.port 对比"
+  },
+  "section.roadmap.title": {
+    "message": "路线图"
+  },
+  "arch.gateway.title": { "message": "API 网关" },
+  "arch.gateway.desc": { "message": "兼容 OpenAI 的 /v1/* 端点。路由到 vLLM、llama.cpp、Ollama、TGI 及远程提供商（OpenAI、Azure 等）。SSE 流式传输、基于别名的模型解析、重试和速率限制。" },
+  "arch.pii.title": { "message": "PII 层" },
+  "arch.pii.desc": { "message": "Microsoft Presidio 集成，用于实时检测和脱敏。租户级策略，可配置实体类型和故障安全模式。" },
+  "arch.gpu.title": { "message": "GPU 编排" },
+  "arch.gpu.desc": { "message": "自动检测 NVIDIA (CUDA)、AMD (ROCm) 和 Intel GPU。使用正确的镜像（CUDA / ROCm / Legacy）启动 vLLM 容器。HuggingFace 缓存挂载实现快速模型加载。" },
+  "arch.storage.title": { "message": "存储" },
+  "arch.storage.desc": { "message": "PostgreSQL + pgvector 用于向量搜索（RAG）。Redis 用于速率限制、会话缓存和分布式租约。MinIO 用于兼容 S3 的文档存储。" },
+  "arch.observability.title": { "message": "可观测性" },
+  "arch.observability.desc": { "message": "Langfuse 用于 LLM 追踪（含隐私模式）。Grafana + Loki + Alloy 用于集中式日志。OpenTelemetry + Jaeger 用于分布式追踪。Prometheus 指标。" },
+  "arch.controlplane.title": { "message": "控制平面" },
+  "arch.controlplane.desc": { "message": "FastAPI 后端，用于 RBAC、设置、Docker 编排、模块生命周期、Agent 基础设施和带版本跟踪的 Compose 栈管理。" },
+  "gtc.label": { "message": "GTC 2026" },
+  "gtc.heading": { "message": "企业级推理基础设施" },
+  "gtc.body": { "message": "部署 GTC 2026 上展示的模型和加速器架构的团队，需要的不仅仅是运行时 ── 他们需要一个安全网关。llm.port 提供缺失的生产层：一个兼容 OpenAI 的 API 网关，内置 PII 脱敏、RBAC 和完整可观测性 ── 全部运行在您的私有 VPC 内。数据不会离开您的边界。" },
+  "gtc.feature.gateway": { "message": "安全 API 网关，支持速率限制、重试和基于别名的模型路由" },
+  "gtc.feature.pii": { "message": "入口和出口前的 PII 脱敏 ── 基于 Microsoft Presidio" },
+  "gtc.feature.gpu": { "message": "多厂商 GPU 自动检测（NVIDIA CUDA、AMD ROCm、Intel）并自动选择 vLLM 镜像" },
+  "gtc.feature.observability": { "message": "企业级可观测性：Langfuse LLM 追踪、Grafana 仪表板和 OpenTelemetry" },
+  "gtc.feature.sovereign": { "message": "气隙式、主权部署 ── 无外部云依赖" },
+  "comparison.header.feature": { "message": "功能" },
+  "comparison.gateway": { "message": "兼容 OpenAI 的网关" },
+  "comparison.pii": { "message": "PII 脱敏层" },
+  "comparison.rag": { "message": "RAG 管道" },
+  "comparison.gpu": { "message": "GPU 自动检测" },
+  "comparison.observability": { "message": "LLM 追踪" },
+  "comparison.rbac": { "message": "RBAC / 多租户" },
+  "comparison.containerOps": { "message": "容器运维 UI" },
+  "comparison.cli": { "message": "CLI 工具" },
+  "comparison.adminUi": { "message": "管理界面" },
+  "comparison.chatUi": { "message": "聊天界面" },
+  "comparison.i18n": { "message": "国际化（4 种语言）" },
+  "comparison.selfHosted": { "message": "完全自托管" },
+  "roadmap.docling.title": { "message": "高级 OCR（Docling）" },
+  "roadmap.docling.desc": { "message": "IBM Docling 用于丰富的文档提取 ── 表格、图像、页面。服务框架已有；与 RAG 管道的集成正在进行中。" },
+  "roadmap.status.inProgress": { "message": "进行中" },
+  "roadmap.auth.title": { "message": "认证服务（SSO / OIDC）" },
+  "roadmap.auth.desc": { "message": "专用认证服务，用于外部身份提供商管理。框架和 Compose 配置已定义。" },
+  "roadmap.status.planned": { "message": "计划中" },
+  "roadmap.mailer.title": { "message": "邮件服务" },
+  "roadmap.mailer.desc": { "message": "专用邮件发送服务，用于密码重置、管理员提醒和系统邀请。" },
+  "roadmap.ee.title": { "message": "企业版 Pro 模块" },
+  "roadmap.ee.desc": { "message": "许可框架已就绪（Ed25519 JWT）。PII、RAG 和网关的 Pro 实现即将推出。" },
+  "roadmap.runtimes.title": { "message": "更多运行时" },
+  "roadmap.runtimes.desc": { "message": "TensorRT-LLM、SGLang 及更多托管 API 提供商。" },
+  "roadmap.costs.title": { "message": "精细化成本控制" },
+  "roadmap.costs.desc": { "message": "按租户、模型和用户的使用量分析，支持预算限制和成本分摊。" },
+  "hero.description": {
+    "message": "路由、保护和观测本地 LLM 运行时与远程提供商之间的流量 ── 为团队提供端到端管理 LLM 服务的统一平台。"
+  },
+  "hero.getStarted": {
+    "message": "快速开始"
+  },
+  "section.features.title": {
+    "message": "功能概览"
+  },
+  "section.why.title": {
+    "message": "为什么选择 llm.port"
+  },
+  "section.why.bold": {
+    "message": "默认主权 AI"
+  },
+  "section.why.text": {
+    "message": "需要时将数据保留在本地，允许时使用远程提供商，无需更改应用或失去治理和可观测性。一个平台取代了代理、仪表板和脚本的拼凑组合。"
+  },
+  "section.screenshots.title": {
+    "message": "界面截图"
+  },
+  "section.enterprise.bold": {
+    "message": "企业版功能可用"
+  },
+  "section.enterprise.text": {
+    "message": "适用于需要 SSO、高级 PII 令牌化和治理的团队。"
+  },
+  "section.enterprise.cta": {
+    "message": "联系我们 →"
+  },
+  "theme.ErrorPageContent.title": {
+    "message": "此页面已崩溃。"
+  },
+  "theme.BackToTopButton.buttonAriaLabel": {
+    "message": "滚动回顶部"
+  },
+  "theme.colorToggle.ariaLabel.mode.system": {
+    "message": "系统模式"
+  },
+  "theme.colorToggle.ariaLabel.mode.light": {
+    "message": "浅色模式"
+  },
+  "theme.colorToggle.ariaLabel.mode.dark": {
+    "message": "深色模式"
+  },
+  "theme.colorToggle.ariaLabel": {
+    "message": "在深色和浅色模式之间切换（当前为{mode}）"
+  },
+  "theme.docs.paginator.navAriaLabel": {
+    "message": "文档页面"
+  },
+  "theme.docs.paginator.previous": {
+    "message": "上一页"
+  },
+  "theme.docs.paginator.next": {
+    "message": "下一页"
+  },
+  "theme.docs.versionBadge.label": {
+    "message": "版本：{versionLabel}"
+  },
+  "theme.common.editThisPage": {
+    "message": "编辑此页"
+  },
+  "theme.common.headingLinkTitle": {
+    "message": "直达链接：{heading}"
+  },
+  "theme.lastUpdated.atDate": {
+    "message": " 于 {date}"
+  },
+  "theme.lastUpdated.byUser": {
+    "message": " 由 {user}"
+  },
+  "theme.lastUpdated.lastUpdatedAtBy": {
+    "message": "最后更新{atDate}{byUser}"
+  },
+  "theme.NotFound.title": {
+    "message": "页面未找到"
+  },
+  "theme.NotFound.p1": {
+    "message": "我们找不到您要查找的内容。"
+  },
+  "theme.NotFound.p2": {
+    "message": "请联系将您链接到原始 URL 的网站所有者，告知他们链接已损坏。"
+  },
+  "theme.admonition.caution": {
+    "message": "注意"
+  },
+  "theme.admonition.danger": {
+    "message": "危险"
+  },
+  "theme.admonition.info": {
+    "message": "信息"
+  },
+  "theme.admonition.note": {
+    "message": "备注"
+  },
+  "theme.admonition.tip": {
+    "message": "提示"
+  },
+  "theme.admonition.warning": {
+    "message": "警告"
+  },
+  "theme.CodeBlock.copy": {
+    "message": "复制"
+  },
+  "theme.CodeBlock.copied": {
+    "message": "已复制"
+  },
+  "theme.CodeBlock.copyButtonAriaLabel": {
+    "message": "复制代码到剪贴板"
+  },
+  "theme.docs.breadcrumbs.home": {
+    "message": "首页"
+  },
+  "theme.docs.sidebar.collapseButtonTitle": {
+    "message": "折叠侧边栏"
+  },
+  "theme.docs.sidebar.collapseButtonAriaLabel": {
+    "message": "折叠侧边栏"
+  },
+  "theme.docs.sidebar.expandButtonTitle": {
+    "message": "展开侧边栏"
+  },
+  "theme.docs.sidebar.expandButtonAriaLabel": {
+    "message": "展开侧边栏"
+  },
+  "theme.docs.sidebar.navAriaLabel": {
+    "message": "文档侧边栏"
+  },
+  "theme.navbar.mobileLanguageDropdown.label": {
+    "message": "语言"
+  },
+  "theme.TOCCollapsible.toggleButtonLabel": {
+    "message": "本页目录"
+  },
+  "theme.navbar.mobileSidebarSecondaryMenu.backButtonLabel": {
+    "message": "← 返回主菜单"
+  },
+  "theme.common.skipToMainContent": {
+    "message": "跳至主要内容"
+  },
+  "theme.tags.tagsPageTitle": {
+    "message": "标签"
+  },
+  "theme.ErrorPageContent.tryAgain": {
+    "message": "重试"
+  }
+}

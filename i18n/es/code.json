@@ -1,0 +1,247 @@
+{
+  "feature.gateway.title": {
+    "message": "Gateway y Enrutamiento"
+  },
+  "feature.gateway.description": {
+    "message": "Endpoint API compatible con OpenAI (/v1/*) que enruta a runtimes locales (vLLM, llama.cpp, Ollama, TGI) y proveedores remotos (OpenAI, Azure, …). Resolución de modelos basada en alias, streaming SSE con extracción de TTFT y reintentos automáticos."
+  },
+  "feature.security.title": {
+    "message": "Seguridad y PII"
+  },
+  "feature.security.description": {
+    "message": "RBAC completo con autenticación JWT, OAuth / SSO / OIDC, limitación de tasa con Redis, leasing de concurrencia y secretos de BD cifrados con Fernet. Detección de PII basada en Presidio con políticas por inquilino, tipos de entidad configurables y modos fail-safe."
+  },
+  "feature.observability.title": {
+    "message": "Observabilidad"
+  },
+  "feature.observability.description": {
+    "message": "Trazado Langfuse con modos de privacidad, registro centralizado Loki + Alloy, trazado distribuido OpenTelemetry + Jaeger, y un panel con embeds de Grafana. Cada solicitud al gateway y acción administrativa queda en el registro de auditoría."
+  },
+  "feature.rag.title": {
+    "message": "Pipeline RAG"
+  },
+  "feature.rag.description": {
+    "message": "Recuperación multi-inquilino con búsqueda vectorial, por palabras clave e híbrida. Árbol de contenedores virtual con flujos de borrador/publicación, cargas presignadas a MinIO, plugins de recolección y procesamiento asíncrono vía Taskiq + RabbitMQ."
+  },
+  "feature.ops.title": {
+    "message": "Consola de Operaciones"
+  },
+  "feature.ops.description": {
+    "message": "Gestión completa del ciclo de vida de contenedores, pulls de imágenes con progreso SSE, deploy/rollback de stacks Compose con revisiones y registro de auditoría. Detección automática de GPU multi-fabricante (NVIDIA, AMD, Intel, Apple Metal)."
+  },
+  "feature.chat.title": {
+    "message": "Consola de Chat"
+  },
+  "feature.chat.description": {
+    "message": "Interfaz de chat integrada con streaming SSE, gestión de sesiones con arrastrar y soltar, reintento de errores, temas oscuro/claro y seguimiento de uso por modelo. Compatible con todos los modelos conectados al gateway."
+  },
+  "hero.gtcBadge": {
+    "message": "GTC 2026 — Infraestructura de Inferencia para la Empresa"
+  },
+  "hero.languages": {
+    "message": "Disponible en English, Deutsch, Español, 中文"
+  },
+  "section.architecture.title": {
+    "message": "Cómo funciona"
+  },
+  "section.comparison.title": {
+    "message": "Cómo se compara llm.port"
+  },
+  "section.roadmap.title": {
+    "message": "Hoja de ruta"
+  },
+  "arch.gateway.title": { "message": "API Gateway" },
+  "arch.gateway.desc": { "message": "Endpoint /v1/* compatible con OpenAI. Enruta a vLLM, llama.cpp, Ollama, TGI y proveedores remotos (OpenAI, Azure, …). Streaming SSE, resolución de modelos basada en alias, reintentos y limitación de tasa." },
+  "arch.pii.title": { "message": "Capa PII" },
+  "arch.pii.desc": { "message": "Integración con Microsoft Presidio para detección y redacción en tiempo real. Políticas por inquilino con tipos de entidad configurables y modos fail-safe." },
+  "arch.gpu.title": { "message": "Orquestación de GPU" },
+  "arch.gpu.desc": { "message": "Detección automática de GPUs NVIDIA (CUDA), AMD (ROCm) e Intel. Inicia contenedores vLLM con la imagen correcta (CUDA / ROCm / Legacy). Montaje de caché HuggingFace para carga rápida de modelos." },
+  "arch.storage.title": { "message": "Almacenamiento" },
+  "arch.storage.desc": { "message": "PostgreSQL con pgvector para búsqueda vectorial (RAG). Redis para limitación de tasa, caché de sesiones y leasing distribuido. MinIO para almacenamiento de documentos compatible con S3." },
+  "arch.observability.title": { "message": "Observabilidad" },
+  "arch.observability.desc": { "message": "Langfuse para trazado LLM con modos de privacidad. Grafana + Loki + Alloy para registro centralizado. OpenTelemetry + Jaeger para trazado distribuido. Métricas Prometheus." },
+  "arch.controlplane.title": { "message": "Plano de Control" },
+  "arch.controlplane.desc": { "message": "Backend FastAPI para RBAC, configuraciones, orquestación Docker, ciclo de vida de módulos, infraestructura de agentes y gestión de stacks Compose con seguimiento de revisiones." },
+  "gtc.label": { "message": "GTC 2026" },
+  "gtc.heading": { "message": "Infraestructura de Inferencia para la Empresa" },
+  "gtc.body": { "message": "Los equipos que despliegan los modelos y arquitecturas de aceleradores presentados en GTC 2026 necesitan más que un runtime — necesitan un gateway seguro. llm.port proporciona la capa de producción que falta: un API gateway compatible con OpenAI con redacción PII integrada, RBAC y observabilidad completa — todo ejecutándose dentro de tu VPC privada. Ningún dato sale de tu perímetro." },
+  "gtc.feature.gateway": { "message": "Gateway API seguro con limitación de tasa, reintentos y enrutamiento de modelos basado en alias" },
+  "gtc.feature.pii": { "message": "Redacción PII antes del ingreso y egreso — basado en Microsoft Presidio" },
+  "gtc.feature.gpu": { "message": "Detección automática de GPU multi-fabricante (NVIDIA CUDA, AMD ROCm, Intel) con selección automática de imagen vLLM" },
+  "gtc.feature.observability": { "message": "Observabilidad empresarial: trazado LLM Langfuse, dashboards Grafana y OpenTelemetry" },
+  "gtc.feature.sovereign": { "message": "Despliegue soberano y aislado — sin dependencia de nube externa" },
+  "comparison.header.feature": { "message": "Funcionalidad" },
+  "comparison.gateway": { "message": "Gateway compatible con OpenAI" },
+  "comparison.pii": { "message": "Capa de redacción PII" },
+  "comparison.rag": { "message": "Pipeline RAG" },
+  "comparison.gpu": { "message": "Detección automática de GPU" },
+  "comparison.observability": { "message": "Trazado LLM" },
+  "comparison.rbac": { "message": "RBAC / multi-inquilino" },
+  "comparison.containerOps": { "message": "UI de operaciones de contenedores" },
+  "comparison.cli": { "message": "Herramientas CLI" },
+  "comparison.adminUi": { "message": "UI de administración" },
+  "comparison.chatUi": { "message": "UI de chat" },
+  "comparison.i18n": { "message": "i18n (4 idiomas)" },
+  "comparison.selfHosted": { "message": "Completamente auto-hospedado" },
+  "roadmap.docling.title": { "message": "OCR avanzado (Docling)" },
+  "roadmap.docling.desc": { "message": "IBM Docling para extracción enriquecida de documentos — tablas, imágenes, páginas. El servicio base existe; integración con pipeline RAG en progreso." },
+  "roadmap.status.inProgress": { "message": "En progreso" },
+  "roadmap.auth.title": { "message": "Servicio de autenticación (SSO / OIDC)" },
+  "roadmap.auth.desc": { "message": "Servicio dedicado de autenticación para gestión de proveedores de identidad externos. Framework y perfil Compose definidos." },
+  "roadmap.status.planned": { "message": "Planificado" },
+  "roadmap.mailer.title": { "message": "Servicio de correo" },
+  "roadmap.mailer.desc": { "message": "Servicio dedicado de envío de correos para restablecimiento de contraseñas, alertas de administración e invitaciones del sistema." },
+  "roadmap.ee.title": { "message": "Módulos Enterprise Pro" },
+  "roadmap.ee.desc": { "message": "Framework de licencias listo (Ed25519 JWT). Implementaciones Pro para PII, RAG y Gateway próximamente." },
+  "roadmap.runtimes.title": { "message": "Más runtimes" },
+  "roadmap.runtimes.desc": { "message": "TensorRT-LLM, SGLang y proveedores de API gestionados adicionales." },
+  "roadmap.costs.title": { "message": "Control de costes detallado" },
+  "roadmap.costs.desc": { "message": "Analíticas de uso por inquilino, modelo y usuario con límites de presupuesto y soporte de chargeback." },
+  "hero.description": {
+    "message": "Enruta, asegura y observa el tráfico entre runtimes LLM locales y proveedores remotos — brindando a los equipos un único lugar para gestionar servicios LLM de extremo a extremo."
+  },
+  "hero.getStarted": {
+    "message": "Comenzar"
+  },
+  "section.features.title": {
+    "message": "Funcionalidades"
+  },
+  "section.why.title": {
+    "message": "¿Por qué llm.port?"
+  },
+  "section.why.bold": {
+    "message": "IA soberana por defecto"
+  },
+  "section.why.text": {
+    "message": "mantén los datos on-prem cuando sea necesario, usa proveedores remotos cuando esté permitido, sin cambiar tus aplicaciones ni perder gobernanza y observabilidad. Una plataforma reemplaza un parche de proxies, dashboards y scripts."
+  },
+  "section.screenshots.title": {
+    "message": "Capturas de pantalla"
+  },
+  "section.enterprise.bold": {
+    "message": "Funciones enterprise disponibles"
+  },
+  "section.enterprise.text": {
+    "message": "para equipos que necesitan SSO, tokenización PII avanzada y gobernanza."
+  },
+  "section.enterprise.cta": {
+    "message": "Contáctanos →"
+  },
+  "theme.ErrorPageContent.title": {
+    "message": "Esta página ha fallado."
+  },
+  "theme.BackToTopButton.buttonAriaLabel": {
+    "message": "Volver arriba"
+  },
+  "theme.colorToggle.ariaLabel.mode.system": {
+    "message": "modo del sistema"
+  },
+  "theme.colorToggle.ariaLabel.mode.light": {
+    "message": "modo claro"
+  },
+  "theme.colorToggle.ariaLabel.mode.dark": {
+    "message": "modo oscuro"
+  },
+  "theme.colorToggle.ariaLabel": {
+    "message": "Cambiar entre modo oscuro y claro (actualmente {mode})"
+  },
+  "theme.docs.paginator.navAriaLabel": {
+    "message": "Páginas de documentación"
+  },
+  "theme.docs.paginator.previous": {
+    "message": "Anterior"
+  },
+  "theme.docs.paginator.next": {
+    "message": "Siguiente"
+  },
+  "theme.docs.versionBadge.label": {
+    "message": "Versión: {versionLabel}"
+  },
+  "theme.common.editThisPage": {
+    "message": "Editar esta página"
+  },
+  "theme.common.headingLinkTitle": {
+    "message": "Enlace directo a {heading}"
+  },
+  "theme.lastUpdated.atDate": {
+    "message": " el {date}"
+  },
+  "theme.lastUpdated.byUser": {
+    "message": " por {user}"
+  },
+  "theme.lastUpdated.lastUpdatedAtBy": {
+    "message": "Última actualización{atDate}{byUser}"
+  },
+  "theme.NotFound.title": {
+    "message": "Página no encontrada"
+  },
+  "theme.NotFound.p1": {
+    "message": "No pudimos encontrar lo que buscabas."
+  },
+  "theme.NotFound.p2": {
+    "message": "Contacta al propietario del sitio que te enlazó a la URL original y avísale que el enlace está roto."
+  },
+  "theme.admonition.caution": {
+    "message": "precaución"
+  },
+  "theme.admonition.danger": {
+    "message": "peligro"
+  },
+  "theme.admonition.info": {
+    "message": "información"
+  },
+  "theme.admonition.note": {
+    "message": "nota"
+  },
+  "theme.admonition.tip": {
+    "message": "consejo"
+  },
+  "theme.admonition.warning": {
+    "message": "advertencia"
+  },
+  "theme.CodeBlock.copy": {
+    "message": "Copiar"
+  },
+  "theme.CodeBlock.copied": {
+    "message": "Copiado"
+  },
+  "theme.CodeBlock.copyButtonAriaLabel": {
+    "message": "Copiar código al portapapeles"
+  },
+  "theme.docs.breadcrumbs.home": {
+    "message": "Página principal"
+  },
+  "theme.docs.sidebar.collapseButtonTitle": {
+    "message": "Contraer barra lateral"
+  },
+  "theme.docs.sidebar.collapseButtonAriaLabel": {
+    "message": "Contraer barra lateral"
+  },
+  "theme.docs.sidebar.expandButtonTitle": {
+    "message": "Expandir barra lateral"
+  },
+  "theme.docs.sidebar.expandButtonAriaLabel": {
+    "message": "Expandir barra lateral"
+  },
+  "theme.docs.sidebar.navAriaLabel": {
+    "message": "Barra lateral de documentación"
+  },
+  "theme.navbar.mobileLanguageDropdown.label": {
+    "message": "Idiomas"
+  },
+  "theme.TOCCollapsible.toggleButtonLabel": {
+    "message": "En esta página"
+  },
+  "theme.navbar.mobileSidebarSecondaryMenu.backButtonLabel": {
+    "message": "← Volver al menú principal"
+  },
+  "theme.common.skipToMainContent": {
+    "message": "Ir al contenido principal"
+  },
+  "theme.tags.tagsPageTitle": {
+    "message": "Etiquetas"
+  },
+  "theme.ErrorPageContent.tryAgain": {
+    "message": "Intentar de nuevo"
+  }
+}

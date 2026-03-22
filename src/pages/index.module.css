@@ -1,0 +1,538 @@
+/* ------------------------------------------------------------------ */
+/*  Hero                                                               */
+/* ------------------------------------------------------------------ */
+
+.hero {
+  --hero-bg-opacity: 0.18;
+  --hero-overlay-opacity: 0.1;
+  --hero-blur: 2px;
+
+  position: relative;
+  overflow: hidden;
+  padding: 4rem 0;
+  text-align: center;
+  background: var(--ifm-background-color);
+  color: #fff;
+}
+
+/* dashboard screenshot layer */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("/img/screenshots/dashboard.png") center / cover no-repeat;
+  opacity: var(--hero-bg-opacity);
+  filter: blur(var(--hero-blur));
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* dark wash for text legibility — always present */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 23, 42, 0.85) 0%,
+    rgba(15, 23, 42, 0.7) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* keep all hero content above the pseudo-layers */
+.hero > * {
+  position: relative;
+  z-index: 2;
+}
+
+.heroTitle {
+  font-size: 3.5rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+}
+
+.heroSubtitle {
+  font-size: 1.5rem;
+  font-weight: 400;
+  opacity: 0.95;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+}
+
+.heroDescription {
+  font-size: 1.1rem;
+  max-width: 640px;
+  margin: 0 auto 2rem;
+  opacity: 0.9;
+  line-height: 1.6;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.45);
+}
+
+.heroButtons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.heroButtons .button--outline {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.heroButtons .button--outline:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: #fff;
+}
+
+.starButton {
+  border: none;
+  vertical-align: middle;
+}
+
+.heroLangs {
+  margin-top: 1.25rem;
+  font-size: 0.9rem;
+  opacity: 0.7;
+  letter-spacing: 0.02em;
+}
+
+/* ------------------------------------------------------------------ */
+/*  GTC 2026 badge (hero)                                              */
+/* ------------------------------------------------------------------ */
+
+.gtcBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.4);
+  border-radius: 999px;
+  padding: 0.35rem 1.1rem;
+  margin-bottom: 1.25rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #86efac;
+  letter-spacing: 0.02em;
+}
+
+.gtcBadgeIcon {
+  font-size: 0.65rem;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Terminal block (hero)                                               */
+/* ------------------------------------------------------------------ */
+
+.terminalBlock {
+  max-width: 520px;
+  margin: 0 auto 2rem;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  text-align: left;
+}
+
+.terminalTitle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0.5rem 0.85rem;
+  background: #1e1e1e;
+}
+
+.terminalDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.terminalTitleText {
+  margin-left: 0.5rem;
+  font-size: 0.75rem;
+  opacity: 0.6;
+  font-family: monospace;
+}
+
+.terminalBody {
+  margin: 0;
+  padding: 1rem 1.2rem;
+  background: #0d1117;
+  color: #e6edf3;
+  font-size: 0.85rem;
+  line-height: 1.7;
+  overflow-x: auto;
+}
+
+.terminalBody code {
+  background: none;
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+}
+
+.terminalComment {
+  color: #8b949e;
+}
+
+.terminalPrompt {
+  color: #7ee787;
+  margin-right: 0.5rem;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Section headings                                                   */
+/* ------------------------------------------------------------------ */
+
+.sectionTitle {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Architecture — How it Works                                        */
+/* ------------------------------------------------------------------ */
+
+.architecture {
+  padding: 4rem 0;
+  background: var(--ifm-color-emphasis-100);
+}
+
+.archGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.25rem;
+}
+
+.archCard {
+  padding: 1.25rem;
+  border-radius: 8px;
+  background: var(--ifm-background-color);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.archCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.archCardIcon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.archCard h4 {
+  margin: 0 0 0.4rem;
+  font-size: 1.1rem;
+}
+
+.archCard p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  opacity: 0.85;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Features                                                           */
+/* ------------------------------------------------------------------ */
+
+.features {
+  padding: 4rem 0;
+}
+
+.featureCard {
+  padding: 1.5rem;
+  border-radius: 8px;
+  height: 100%;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.featureCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.featureIcon {
+  font-size: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.featureCard h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.featureCard p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  opacity: 0.85;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Comparison table                                                   */
+/* ------------------------------------------------------------------ */
+
+.comparison {
+  padding: 4rem 0;
+  background: var(--ifm-color-emphasis-100);
+}
+
+.tableWrapper {
+  overflow-x: auto;
+}
+
+.comparisonTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.comparisonTable th,
+.comparisonTable td {
+  padding: 0.65rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--ifm-color-emphasis-200);
+}
+
+.comparisonTable th {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.comparisonTable th.highlight,
+.comparisonTable td.highlight {
+  background: var(--ifm-color-primary-lightest);
+  color: var(--ifm-color-primary-darkest);
+  font-weight: 600;
+}
+
+[data-theme="dark"] .comparisonTable th.highlight,
+[data-theme="dark"] .comparisonTable td.highlight {
+  background: rgba(96, 165, 250, 0.12);
+  color: var(--ifm-color-primary-light);
+}
+
+.comparisonTable tbody tr:hover {
+  background: var(--ifm-color-emphasis-100);
+}
+
+/* ------------------------------------------------------------------ */
+/*  Why section                                                        */
+/* ------------------------------------------------------------------ */
+
+.whySection {
+  padding: 3rem 0;
+}
+
+.whyText {
+  font-size: 1.15rem;
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+  line-height: 1.7;
+}
+
+/* ------------------------------------------------------------------ */
+/*  GTC 2026 section                                                   */
+/* ------------------------------------------------------------------ */
+
+.gtcSection {
+  padding: 4rem 0;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  color: #f1f5f9;
+}
+
+.gtcContent {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.gtcText h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.gtcLabel {
+  display: inline-block;
+  background: #22c55e;
+  color: #0f172a;
+  padding: 0.15rem 0.65rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  vertical-align: middle;
+  margin-right: 0.35rem;
+}
+
+.gtcText p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  opacity: 0.9;
+}
+
+.gtcFeatures {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+}
+
+.gtcFeatures li {
+  padding: 0.3rem 0;
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
+
+.gtcFeatures li::before {
+  content: "✓ ";
+  color: #22c55e;
+  font-weight: 700;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Roadmap                                                            */
+/* ------------------------------------------------------------------ */
+
+.roadmap {
+  padding: 4rem 0;
+}
+
+.roadmapGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.25rem;
+}
+
+.roadmapCard {
+  padding: 1.25rem;
+  border-radius: 8px;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  background: var(--ifm-background-color);
+}
+
+.roadmapCard h4 {
+  margin: 0.5rem 0 0.4rem;
+  font-size: 1.05rem;
+}
+
+.roadmapCard p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  opacity: 0.85;
+}
+
+.roadmapBadge {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background: var(--ifm-color-emphasis-200);
+  color: var(--ifm-color-emphasis-700);
+}
+
+.roadmapInProgress {
+  background: rgba(59, 130, 246, 0.15);
+  color: #3b82f6;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Screenshots                                                        */
+/* ------------------------------------------------------------------ */
+
+.screenshots {
+  padding: 4rem 0;
+  background: var(--ifm-color-emphasis-100);
+}
+
+.screenshotGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.screenshotCard {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.screenshotCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.screenshotCard img {
+  width: 100%;
+  display: block;
+}
+
+.screenshotLabel {
+  display: block;
+  text-align: center;
+  padding: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  opacity: 0.7;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Enterprise call-out                                                */
+/* ------------------------------------------------------------------ */
+
+.enterprise {
+  padding: 2rem 0 3rem;
+  text-align: center;
+}
+
+.enterpriseText {
+  font-size: 1.05rem;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  background: var(--ifm-color-emphasis-100);
+  display: inline-block;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Responsive                                                         */
+/* ------------------------------------------------------------------ */
+
+@media (max-width: 768px) {
+  .heroTitle {
+    font-size: 2.5rem;
+  }
+  .heroSubtitle {
+    font-size: 1.2rem;
+  }
+  .screenshotGrid {
+    grid-template-columns: 1fr;
+  }
+  .archGrid,
+  .roadmapGrid {
+    grid-template-columns: 1fr;
+  }
+  .terminalBlock {
+    max-width: 100%;
+  }
+}
