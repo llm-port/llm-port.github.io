@@ -2,8 +2,9 @@ import { themes as prismThemes } from "prism-react-renderer";
 import type { Config } from "@docusaurus/types";
 import type * as Preset from "@docusaurus/preset-classic";
 
-const organizationName = process.env.GITHUB_ORG ?? "llm-port";
-const projectName = process.env.GITHUB_PROJECT ?? "github.io";
+const [repoOwnerFromEnv, repoNameFromEnv] = (process.env.GITHUB_REPOSITORY ?? "").split("/");
+const organizationName = process.env.GITHUB_ORG ?? repoOwnerFromEnv ?? "llm-port";
+const projectName = process.env.GITHUB_PROJECT ?? repoNameFromEnv ?? "github.io";
 const isUserSite = projectName === `${organizationName}.github.io`;
 const docsUrl = process.env.DOCS_URL ?? `https://${organizationName}.github.io`;
 const docsBaseUrl =
