@@ -29,3 +29,11 @@ llm.port supports Retrieval-Augmented Generation (RAG) for document-grounded res
 ## Notes
 
 The public docs describe RAG at capability level. Deep indexing and processing internals remain internal.
+
+## Screenshots
+
+![RAG Knowledge Base](/img/screenshots/rag_kb.png)
+
+![RAG Collectors](/img/screenshots/rag_collectors.png)
+
+![Scheduled Publishing](/img/screenshots/scheduler.png)

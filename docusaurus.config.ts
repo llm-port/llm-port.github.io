@@ -38,9 +38,12 @@ const config: Config = {
 
   i18n: {
     defaultLocale: "en",
-    locales: ["en"],
+    locales: ["en", "de", "zh-Hans", "es"],
     localeConfigs: {
       en: { label: "English", htmlLang: "en-US" },
+      de: { label: "Deutsch", htmlLang: "de-DE" },
+      "zh-Hans": { label: "简体中文", htmlLang: "zh-Hans" },
+      es: { label: "Español", htmlLang: "es-ES" },
     },
   },
 
@@ -86,6 +89,10 @@ const config: Config = {
         {
           href: `https://github.com/${organizationName}`,
           label: "GitHub",
+          position: "right",
+        },
+        {
+          type: "localeDropdown",
           position: "right",
         },
       ],

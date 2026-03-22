@@ -25,3 +25,7 @@ Skills help standardize how assistants handle recurring task types.
 Treat skills as governed operational assets with ownership, review, and versioning.
 
 This public page avoids internal prompt-composition and matching internals.
+
+## Screenshot
+
+![Skills Hub](/img/screenshots/skills.png)

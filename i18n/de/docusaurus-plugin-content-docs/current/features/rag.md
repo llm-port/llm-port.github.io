@@ -1,87 +1,36 @@
 ---
-sidebar_position: 5
+sidebar_position: 4
+title: RAG Workflows
 ---
 
-# RAG (Retrieval-Augmented Generation)
+# RAG Workflows
 
-Das **RAG-Modul** (`llm_port_rag`) bietet eine vollständige Pipeline für Dokumentenerfassung und -abruf.
+llm.port supports Retrieval-Augmented Generation (RAG) for document-grounded responses.
 
-## Wissenssuche
+## What RAG enables
 
-Drei Suchstrategien mit automatischer Bewertung:
+- Ingest enterprise documents
+- Search relevant context at query time
+- Improve answer quality with controlled knowledge sources
 
-| Strategie         | Funktionsweise                                                   |
-| ----------------- | ---------------------------------------------------------------- |
-| **Vektor**        | Kosinus-Ähnlichkeit auf pgvector-Embeddings                      |
-| **Schlüsselwort** | Volltextsuche mit ts_rank-Bewertung                              |
-| **Hybrid**        | Gewichtete Kombination von Vektor + Schlüsselwort mit RRF-Fusion |
+## Typical lifecycle
 
-Alle Suchen erzwingen:
+1. Upload and organize source documents
+2. Publish or activate knowledge for use
+3. Query through the Gateway or chat experiences
+4. Monitor usage and quality outcomes
 
-- **Tenant-Isolation** — Partitionierung nach Tenant + optionalem Workspace
-- **ACL-Durchsetzung** — Chunk-Level-Zugriffssteuerung
-- **Filter-Unterstützung** — Metadaten-Filter für Container, Asset und benutzerdefinierte Felder
+## Public deployment guidance
 
-## Dokumenten-Pipeline
+- Start with a focused knowledge scope
+- Define content ownership and refresh cadence
+- Validate permission boundaries before broader rollout
 
-Die Erfassungspipeline verarbeitet Uploads durch eine Reihe von Stufen:
+## Notes
 
-```
-Upload → MinIO → Extrahieren → Normalisieren → Chunking → Embedding → Indexierung (pgvector)
-```
+The public docs describe RAG at capability level. Deep indexing and processing internals remain internal.
 
-### Upload
-
-- **Presigned URLs** — Browser-Uploads direkt zu MinIO via presigned PUT
-- **SHA-256-Deduplizierung** — unveränderte Dateien beim Neu-Veröffentlichen überspringen
-
-### Extraktion & Chunking
-
-- Konfigurierbare Chunk-Größe und Überlappung
-- Laufzeit-Embedding-Konfiguration vom Control Plane
-- Unterstützung für gängige Dokumentformate (PDF, DOCX, TXT, HTML, Markdown)
-
-### Embedding
-
-- Anbieter und Modell pro Deployment konfigurierbar
-- Embedding-Anfragen werden durch den eigenen Provider-Pool des Gateways geleitet
-- Batch-Embedding für Effizienz
-
-## Virtuelle Container
-
-Ein N-Level-Container-Baum für die Wissensorganisation:
-
-- **Container** enthalten Assets (Dokumente)
-- **Assets** haben Versionen mit Entwurf/Veröffentlichungs-Workflow
-- **Entwurf → Veröffentlichung**-Modell mit optionaler Zeitplanung
-
-## Collector-Plugins
-
-Pluggable Connectors für automatische Inhaltssynchronisierung:
-
-| Connector            | Status                                |
-| -------------------- | ------------------------------------- |
-| Lokaler Ordner / SMB | Verfügbar                             |
-| SharePoint           | Stub (erweiterbar)                    |
-| _Benutzerdefiniert_  | Plugin-Registry für eigene Connectors |
-
-Collectors laufen auf konfigurierbaren Zeitplänen über Taskiq + RabbitMQ.
-
-## Asynchrone Verarbeitung
-
-- **Taskiq** Task-Runner mit RabbitMQ als Message-Broker
-- Background-Worker für Erfassung, Veröffentlichung und geplante Operationen
-- Job-Tracking mit Status-Events und Fortschrittsberichten
-
-## RAG Lite
-
-Wenn das vollständige RAG-Modul nicht aktiviert ist, bietet das Gateway einen integrierten **RAG Lite**-Modus:
-
-- **pgvector-basierter Abruf** direkt aus der Gateway-Datenbank
-- Semantische Suche über Sitzungsanhänge und hochgeladene Dokumente
-- Kein separater RAG-Service erforderlich — ideal für leichtgewichtige Deployments
-
-Siehe auch: [Gateway — RAG Lite](/docs/features/gateway)
+## Screenshots
 
 ![RAG Knowledge Base](/img/screenshots/rag_kb.png)
 

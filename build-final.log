@@ -1,0 +1,38 @@
+
+> llm-port-github-io@0.0.0 build
+> docusaurus build
+
+[INFO] Website will be built for all these locales: 
+- en
+- de
+- zh-Hans
+- es
+[INFO] [en] Creating an optimized production build...
+[90m[[90mwebpackbar[90m][39m [36mℹ[39m Compiling Client
+[90m[[90mwebpackbar[90m][39m [36mℹ[39m Compiling Server
+[90m[[90mwebpackbar[90m][39m [32m✔[39m Server: Compiled successfully in 3.45s
+[90m[[90mwebpackbar[90m][39m [32m✔[39m Client: Compiled successfully in 3.93s
+[WARNING] {"moduleIdentifier":"C:\\101_CodeProjects\\llm-port\\github.io\\node_modules\\vscode-languageserver-types\\lib\\umd\\main.js","moduleName":"./node_modules/vscode-languageserver-types/lib/umd/main.js","loc":"3:24-31","message":"Critical dependency: require function is used in a way in which dependencies cannot be statically extracted","compilerPath":"server"}
+[SUCCESS] Generated static files in "build".
+[INFO] [de] Creating an optimized production build...
+[90m[[90mwebpackbar[90m][39m [36mℹ[39m Compiling Client
+[90m[[90mwebpackbar[90m][39m [36mℹ[39m Compiling Server
+[90m[[90mwebpackbar[90m][39m [32m✔[39m Server: Compiled successfully in 2.97s
+[90m[[90mwebpackbar[90m][39m [32m✔[39m Client: Compiled successfully in 3.60s
+[WARNING] {"moduleIdentifier":"C:\\101_CodeProjects\\llm-port\\github.io\\node_modules\\vscode-languageserver-types\\lib\\umd\\main.js","moduleName":"./node_modules/vscode-languageserver-types/lib/umd/main.js","loc":"3:24-31","message":"Critical dependency: require function is used in a way in which dependencies cannot be statically extracted","compilerPath":"server"}
+[SUCCESS] Generated static files in "build\de".
+[INFO] [zh-Hans] Creating an optimized production build...
+[90m[[90mwebpackbar[90m][39m [36mℹ[39m Compiling Client
+[90m[[90mwebpackbar[90m][39m [36mℹ[39m Compiling Server
+[90m[[90mwebpackbar[90m][39m [32m✔[39m Server: Compiled successfully in 2.92s
+[90m[[90mwebpackbar[90m][39m [32m✔[39m Client: Compiled successfully in 3.40s
+[WARNING] {"moduleIdentifier":"C:\\101_CodeProjects\\llm-port\\github.io\\node_modules\\vscode-languageserver-types\\lib\\umd\\main.js","moduleName":"./node_modules/vscode-languageserver-types/lib/umd/main.js","loc":"3:24-31","message":"Critical dependency: require function is used in a way in which dependencies cannot be statically extracted","compilerPath":"server"}
+[SUCCESS] Generated static files in "build\zh-Hans".
+[INFO] [es] Creating an optimized production build...
+[90m[[90mwebpackbar[90m][39m [36mℹ[39m Compiling Client
+[90m[[90mwebpackbar[90m][39m [36mℹ[39m Compiling Server
+[90m[[90mwebpackbar[90m][39m [32m✔[39m Server: Compiled successfully in 2.83s
+[90m[[90mwebpackbar[90m][39m [32m✔[39m Client: Compiled successfully in 3.41s
+[WARNING] {"moduleIdentifier":"C:\\101_CodeProjects\\llm-port\\github.io\\node_modules\\vscode-languageserver-types\\lib\\umd\\main.js","moduleName":"./node_modules/vscode-languageserver-types/lib/umd/main.js","loc":"3:24-31","message":"Critical dependency: require function is used in a way in which dependencies cannot be statically extracted","compilerPath":"server"}
+[SUCCESS] Generated static files in "build\es".
+[INFO] Use `npm run serve` command to test your build locally.

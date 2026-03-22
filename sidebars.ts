@@ -8,6 +8,7 @@ const sidebars: SidebarsConfig = {
       items: [
         "overview/intro",
         "overview/platform-overview",
+        "overview/architecture",
         "overview/modules-and-editions",
       ],
     },
@@ -23,10 +24,7 @@ const sidebars: SidebarsConfig = {
     {
       type: "category",
       label: "Integrate",
-      items: [
-        "integrate/api-gateway",
-        "integrate/mcp-tools",
-      ],
+      items: ["integrate/api-gateway", "integrate/mcp-tools"],
     },
     {
       type: "category",
@@ -53,11 +51,7 @@ const sidebars: SidebarsConfig = {
     {
       type: "category",
       label: "Community",
-      items: [
-        "community/contributing",
-        "community/internal-only-handling",
-        "community/migration-map",
-      ],
+      items: ["community/contributing"],
     },
   ],
 };

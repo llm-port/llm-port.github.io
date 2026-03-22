@@ -1,59 +1,34 @@
 ---
-sidebar_position: 4
+sidebar_position: 3
+title: Observability
 ---
 
 # Observability
 
-**llm.Port** bietet Full-Stack-Observability für Gateway, Backend und alle Module.
+llm.port provides visibility into usage, performance, and operational behavior.
 
-## Langfuse Tracing
+## What you can observe
 
-LLM-spezifisches Tracing über [Langfuse](https://langfuse.com):
+- Request activity and outcome trends
+- Latency and throughput indicators
+- System health and service behavior
+- Administrative action trails
 
-- **Trace- und Generations-Events** für jede Gateway-Anfrage
-- Token-Usage-Tracking mit Eingabe-/Ausgabe-Token-Anzahl
-- Latenzmetriken einschließlich TTFT (Time-to-First-Token)
-- Fehlerstatus und Upstream-Provider-Metadaten
+## Why this matters
 
-### Datenschutzmodi
+- Faster incident detection and troubleshooting
+- Better governance and compliance reporting
+- Data for capacity planning and optimization
 
-Drei konfigurierbare Datenschutzstufen:
+## Recommended operating practice
 
-| Modus           | Was gespeichert wird                       |
-| --------------- | ------------------------------------------ |
-| `full`          | Vollständige Request/Response-Payloads     |
-| `redacted`      | Payloads mit maskierten PII-Entities       |
-| `metadata_only` | Token-Anzahl, Latenz, Status — kein Inhalt |
+- Define alert thresholds for key service indicators
+- Review usage and access trends regularly
+- Keep retention policies aligned with compliance requirements
 
-## Zentralisiertes Logging
+Public docs focus on observable outcomes and operating guidance, not internal telemetry plumbing.
 
-- **Loki + Alloy** Log-Erfassung aller Service-Container
-- Strukturierte Log-Streams mit Labels (Service, Level, Tenant)
-- Abfragbar über Grafana und die Admin-API
-- Konfigurierbare Log-Retention-Richtlinien pro Umgebung
-
-## Audit-Logging
-
-Jede wichtige Aktion wird auditgeloggt:
-
-- **Gateway-Anfragen**: Modell, Tenant, Tokens, Latenz, Status, trace_id
-- **Admin-Operationen**: Container-Aktionen, Einstellungsänderungen, Benutzerverwaltung
-- **Root-Modus**: Start/Ende erhöhter Sitzungen mit vollständigem Aktionspfad
-
-## OpenTelemetry
-
-- OpenTelemetry Collector Integration
-- Jaeger-Unterstützung für verteiltes Tracing über Services hinweg
-- Korrelations-IDs, die durch alle Service-Aufrufe propagiert werden
-
-## Dashboard
-
-Die Admin-Konsole enthält:
-
-- Systemübersicht mit Health-Checks und Container-Statistiken
-- **Grafana-Panel-Einbettungen** für Echtzeit-Metriken und Log-Abfragen
-- LLM-Topologie-Graph mit Live-Trace-Streaming (SSE)
-- Token-Nutzungszusammenfassungen pro Tenant, Modell und Zeitfenster
+## Screenshots
 
 ![Dashboard](/img/screenshots/dashboard.png)
 

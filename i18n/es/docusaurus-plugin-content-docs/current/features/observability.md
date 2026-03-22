@@ -1,59 +1,34 @@
 ---
-sidebar_position: 4
+sidebar_position: 3
+title: Observability
 ---
 
-# Observabilidad
+# Observability
 
-**llm.Port** provee observabilidad de pila completa para el gateway, backend y todos los módulos.
+llm.port provides visibility into usage, performance, and operational behavior.
 
-## Trazado con Langfuse
+## What you can observe
 
-Trazado específico para LLM vía [Langfuse](https://langfuse.com):
+- Request activity and outcome trends
+- Latency and throughput indicators
+- System health and service behavior
+- Administrative action trails
 
-- **Eventos de traza y generación** para cada solicitud del gateway
-- Seguimiento del uso de tokens con recuentos de tokens de entrada/salida
-- Métricas de latencia incluyendo TTFT (tiempo al primer token)
-- Estado de errores y metadatos del proveedor upstream
+## Why this matters
 
-### Modos de Privacidad
+- Faster incident detection and troubleshooting
+- Better governance and compliance reporting
+- Data for capacity planning and optimization
 
-Tres niveles de privacidad configurables:
+## Recommended operating practice
 
-| Modo            | Qué se almacena                                       |
-| --------------- | ----------------------------------------------------- |
-| `full`          | Payloads completos de solicitud/respuesta             |
-| `redacted`      | Payloads con entidades PII enmascaradas               |
-| `metadata_only` | Recuentos de tokens, latencia, estado — sin contenido |
+- Define alert thresholds for key service indicators
+- Review usage and access trends regularly
+- Keep retention policies aligned with compliance requirements
 
-## Registro Centralizado
+Public docs focus on observable outcomes and operating guidance, not internal telemetry plumbing.
 
-- Recolección de logs **Loki + Alloy** de todos los contenedores de servicio
-- Flujos de logs estructurados con etiquetas (servicio, nivel, tenant)
-- Consultable vía Grafana y la API de administración
-- Políticas de retención de logs configurables por entorno
-
-## Registro de Auditoría
-
-Cada acción significativa se registra en auditoría:
-
-- **Solicitudes del gateway**: modelo, tenant, tokens, latencia, estado, trace_id
-- **Operaciones de administración**: acciones en contenedores, cambios de configuración, gestión de usuarios
-- **Modo root**: inicio/fin de sesiones elevadas con rastro completo de acciones
-
-## OpenTelemetry
-
-- Integración con el colector de OpenTelemetry
-- Soporte de Jaeger para trazado distribuido entre servicios
-- IDs de correlación propagados a través de todas las llamadas de servicio
-
-## Dashboard
-
-La consola de administración incluye:
-
-- Vista general del sistema con comprobaciones de salud y estadísticas de contenedores
-- **Paneles de Grafana incrustados** para métricas en tiempo real y consultas de logs
-- Grafo de topología LLM con streaming de trazas en vivo (SSE)
-- Resúmenes de uso de tokens por tenant, modelo y ventana de tiempo
+## Screenshots
 
 ![Dashboard](/img/screenshots/dashboard.png)
 

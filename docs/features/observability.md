@@ -27,3 +27,11 @@ llm.port provides visibility into usage, performance, and operational behavior.
 - Keep retention policies aligned with compliance requirements
 
 Public docs focus on observable outcomes and operating guidance, not internal telemetry plumbing.
+
+## Screenshots
+
+![Dashboard](/img/screenshots/dashboard.png)
+
+![Trace Viewer](/img/screenshots/trace.png)
+
+![Logging](/img/screenshots/logging.png)

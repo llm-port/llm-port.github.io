@@ -4,10 +4,11 @@ import type { Props } from "@theme/Root";
 import Root from "@theme-original/Root";
 
 const disclaimerByLocale: Record<string, string> = {
-  en: "AI-generated documentation. Might not be 100% accurate.",
-  de: "KI-generierte Dokumentation. Möglicherweise nicht zu 100 % korrekt.",
-  "zh-Hans": "本文档由 AI 生成，可能无法保证 100% 准确。",
-  es: "Documentación generada por IA. Puede que no sea 100% precisa.",
+  en: "This documentation is generated with AI assistance and may contain inaccuracies. Please validate critical details before production use.",
+  de: "Diese Dokumentation wurde mit KI-Unterstützung erstellt und kann Ungenauigkeiten enthalten. Bitte prüfen Sie kritische Details vor dem Produktionseinsatz.",
+  "zh-Hans":
+    "本文档由 AI 辅助生成，可能存在不准确之处。请在生产使用前核验关键细节。",
+  es: "Esta documentación se genera con asistencia de IA y puede contener imprecisiones. Valide los detalles críticos antes de usarla en producción.",
 };
 
 export default function RootWrapper(props: Props): JSX.Element {
@@ -17,27 +18,10 @@ export default function RootWrapper(props: Props): JSX.Element {
 
   return (
     <>
-      <div
-        className="alert alert--warning"
-        style={{
-          height: 25,
-          position: "fixed",
-          left: 0,
-          right: 0,
-          bottom: 0,
-          display: "flex",
-          alignItems: "center",
-          padding: "0 12px",
-          margin: 0,
-          zIndex: 1000,
-          borderRadius: 0,
-          backgroundColor: "#2b0a3d",
-          color: "#ffffff",
-        }}
-      >
+      <Root {...props} />
+      <div className="llmport-ai-disclaimer" role="status" aria-live="polite">
         {disclaimer}
       </div>
-      <Root {...props} />
     </>
   );
 }
