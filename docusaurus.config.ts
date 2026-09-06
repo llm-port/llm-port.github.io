@@ -118,7 +118,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Emagin8 UG i.G. Licensed under Apache 2.0.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Emagin8 UG Licensed under Apache 2.0.`,
     },
     prism: {
       theme: prismThemes.github,
